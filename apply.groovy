@@ -1,11 +1,11 @@
 freeStyleJob('maintenance-apply-dsl') {
     displayName('apply-dsl')
-    description('Applies all the Jenkins DSLs in the configs repository.')
+    description('Applies all the Jenkins DSLs in the jenkins-dsl repository.')
 
     checkoutRetryCount(3)
 
     properties {
-        githubProjectUrl('https://github.com/jessfraz/configs')
+        githubProjectUrl('https://github.com/jessfraz/jenkins-dsl')
     }
 
     logRotator {
@@ -16,8 +16,8 @@ freeStyleJob('maintenance-apply-dsl') {
     scm {
         git {
             remote {
-                url('git@github.com:jessfraz/configs.git')
-                credentials('configs-deploy-key')
+                url('git@github.com:jessfraz/jenkins-dsl.git')
+                credentials('jenkins-dsl-deploy-key')
             }
             branches('*/master')
             extensions {

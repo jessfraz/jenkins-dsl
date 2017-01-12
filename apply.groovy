@@ -36,7 +36,7 @@ freeStyleJob('maintenance-apply-dsl') {
 
     steps {
         dsl {
-            external('dsl/**/*.groovy')
+            external('**/*.groovy')
             removeAction('DELETE')
             removeViewAction('DELETE')
             additionalClasspath('.')

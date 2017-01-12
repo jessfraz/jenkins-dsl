@@ -1,0 +1,9 @@
+Required Plugins:
+- ANSI Color
+- Build Blocker
+- Build Timeout
+- Email Extension
+- GitHub
+- PostBuildScript
+- View Job Filters
+- Sidebar Links

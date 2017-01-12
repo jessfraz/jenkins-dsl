@@ -51,7 +51,7 @@ freeStyleJob('mirror_s3server') {
             }
         }
 
-extendedEmail {
+        extendedEmail {
             recipientList('$DEFAULT_RECIPIENTS')
             contentType('text/plain')
             triggers {

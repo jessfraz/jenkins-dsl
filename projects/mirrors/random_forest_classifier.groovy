@@ -51,7 +51,7 @@ freeStyleJob('mirror_random_forest_classifier') {
             }
         }
 
-extendedEmail {
+        extendedEmail {
             recipientList('$DEFAULT_RECIPIENTS')
             contentType('text/plain')
             triggers {

@@ -51,7 +51,7 @@ freeStyleJob('mirror_contained_af') {
             }
         }
 
-extendedEmail {
+        extendedEmail {
             recipientList('$DEFAULT_RECIPIENTS')
             contentType('text/plain')
             triggers {

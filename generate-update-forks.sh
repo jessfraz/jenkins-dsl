@@ -99,7 +99,7 @@ freeStyleJob('update_fork_${rname//./_}') {
             }
         }
 
-		extendedEmail {
+        extendedEmail {
             recipientList('\$DEFAULT_RECIPIENTS')
             contentType('text/plain')
             triggers {

@@ -51,7 +51,7 @@ freeStyleJob('mirror_notorious_svg') {
             }
         }
 
-extendedEmail {
+        extendedEmail {
             recipientList('$DEFAULT_RECIPIENTS')
             contentType('text/plain')
             triggers {

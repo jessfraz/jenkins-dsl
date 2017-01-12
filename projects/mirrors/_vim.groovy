@@ -51,7 +51,7 @@ freeStyleJob('mirror__vim') {
             }
         }
 
-extendedEmail {
+        extendedEmail {
             recipientList('$DEFAULT_RECIPIENTS')
             contentType('text/plain')
             triggers {

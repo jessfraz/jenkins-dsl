@@ -51,7 +51,7 @@ freeStyleJob('mirror_apk_file') {
             }
         }
 
-extendedEmail {
+        extendedEmail {
             recipientList('$DEFAULT_RECIPIENTS')
             contentType('text/plain')
             triggers {

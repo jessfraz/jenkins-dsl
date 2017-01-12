@@ -55,7 +55,7 @@ freeStyleJob('update_fork_mesos') {
             }
         }
 
-extendedEmail {
+        extendedEmail {
             recipientList('$DEFAULT_RECIPIENTS')
             contentType('text/plain')
             triggers {

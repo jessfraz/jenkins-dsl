@@ -51,7 +51,7 @@ freeStyleJob('mirror_magneto') {
             }
         }
 
-extendedEmail {
+        extendedEmail {
             recipientList('$DEFAULT_RECIPIENTS')
             contentType('text/plain')
             triggers {

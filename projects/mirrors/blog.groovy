@@ -51,7 +51,7 @@ freeStyleJob('mirror_blog') {
             }
         }
 
-extendedEmail {
+        extendedEmail {
             recipientList('$DEFAULT_RECIPIENTS')
             contentType('text/plain')
             triggers {

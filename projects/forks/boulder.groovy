@@ -55,7 +55,7 @@ freeStyleJob('update_fork_boulder') {
             }
         }
 
-extendedEmail {
+        extendedEmail {
             recipientList('$DEFAULT_RECIPIENTS')
             contentType('text/plain')
             triggers {

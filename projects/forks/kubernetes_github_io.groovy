@@ -55,7 +55,7 @@ freeStyleJob('update_fork_kubernetes_github_io') {
             }
         }
 
-extendedEmail {
+        extendedEmail {
             recipientList('$DEFAULT_RECIPIENTS')
             contentType('text/plain')
             triggers {

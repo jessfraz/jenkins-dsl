@@ -55,7 +55,7 @@ freeStyleJob('update_fork_registry_ui') {
             }
         }
 
-extendedEmail {
+        extendedEmail {
             recipientList('$DEFAULT_RECIPIENTS')
             contentType('text/plain')
             triggers {

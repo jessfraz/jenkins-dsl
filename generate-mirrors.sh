@@ -1,5 +1,6 @@
 #!/bin/bash
 
+
 # This script generates DSLs for mirroring repositories. It used to do a
 # real `git {clone,push} --mirror`, but since you need creds for it and the Git
 # Plugin no longer saves the credentials in the workspace we can't call out to
@@ -10,8 +11,8 @@ set -o pipefail
 
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}"  )" && pwd  )"
 
-if [[ -z "$GITHUB_USERNAME" ]]; then
-	echo "Set the GITHUB_USERNAME env variable."
+if [[ -z "$GITHUB_USER" ]]; then
+	echo "Set the GITHUB_USER env variable."
 	exit 1
 fi
 
@@ -36,7 +37,7 @@ generate_dsl(){
 	rname=${name//-/_}
 	file="${DIR}/projects/mirrors/${rname//./_}.groovy"
 
-	if [[ "$GITHUB_USERNAME" == "$user" ]]; then
+	if [[ "$GITHUB_USER" == "$user" ]]; then
 		dest="$repo"
 	else
 		dest="$orig"
@@ -117,7 +118,7 @@ EOF
 main(){
 	# send the request
 	local response
-	response=$(curl -sSL -H "${AUTH_HEADER}" -H "${API_HEADER}" "${URI}/users/${GITHUB_USERNAME}/repos?per_page=${DEFAULT_PER_PAGE}&type=public")
+	response=$(curl -sSL -H "${AUTH_HEADER}" -H "${API_HEADER}" "${URI}/users/${GITHUB_USER}/repos?per_page=${DEFAULT_PER_PAGE}&type=public")
 	local repos
 	repos=$(echo "$response" | jq --raw-output '.[] | {fullname:.full_name,repo:.name,fork:.fork,description:.description} | @base64')
 

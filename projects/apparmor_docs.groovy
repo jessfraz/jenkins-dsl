@@ -34,6 +34,7 @@ freeStyleJob('apparmor_docs') {
 
     wrappers { colorizeOutput() }
 
+    environmentVariables(DOCKER_CONTENT_TRUST: '1')
     steps {
         shell('if [ ! -f /usr/bin/make ] ; then docker exec -u root jenkins apk add --no-cache make; fi')
             shell('make')

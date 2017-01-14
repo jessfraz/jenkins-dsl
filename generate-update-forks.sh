@@ -7,8 +7,8 @@ set -o pipefail
 
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}"  )" && pwd  )"
 
-if [[ -z "$GITHUB_USERNAME" ]]; then
-	echo "Set the GITHUB_USERNAME env variable."
+if [[ -z "$GITHUB_USER" ]]; then
+	echo "Set the GITHUB_USER env variable."
 	exit 1
 fi
 
@@ -118,7 +118,7 @@ EOF
 main(){
 	# send the request
 	local response
-	response=$(curl -sSL -H "${AUTH_HEADER}" -H "${API_HEADER}" "${URI}/users/${GITHUB_USERNAME}/repos?per_page=${DEFAULT_PER_PAGE}")
+	response=$(curl -sSL -H "${AUTH_HEADER}" -H "${API_HEADER}" "${URI}/users/${GITHUB_USER}/repos?per_page=${DEFAULT_PER_PAGE}")
 	local repos
 	repos=$(echo "$response" | jq --raw-output '.[] | {fullname:.full_name,repo:.name,fork:.fork} | @base64')
 

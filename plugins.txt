@@ -7,3 +7,4 @@ Required Plugins:
 - PostBuildScript
 - View Job Filters
 - Sidebar Links
+- EnvInject Plugin

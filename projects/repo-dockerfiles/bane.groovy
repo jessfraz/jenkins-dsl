@@ -36,6 +36,7 @@ branches('*/master')
 
     wrappers { colorizeOutput() }
 
+    environmentVariables(DOCKER_CONTENT_TRUST: '1')
     steps {
         shell('docker build --rm --force-rm -t r.j3ss.co/bane:latest .')
         shell('docker tag r.j3ss.co/bane:latest jess/bane:latest')

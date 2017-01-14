@@ -40,6 +40,7 @@ freeStyleJob('tor') {
 
     wrappers { colorizeOutput() }
 
+    environmentVariables(DOCKER_CONTENT_TRUST: '1')
     steps {
         shell('git checkout origin/add-dockerfile -b add-dockerfile')
         shell('git rebase upstream/master')

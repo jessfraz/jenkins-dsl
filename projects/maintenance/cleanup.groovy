@@ -2,6 +2,8 @@ freeStyleJob('maintenance_cleanup') {
     displayName('cleanup')
     description('Purge all of the Docker cache.')
 
+    weight(5)
+
     checkoutRetryCount(3)
 
     properties {

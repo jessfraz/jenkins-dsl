@@ -4,6 +4,7 @@ Required Plugins:
 - Email Extension
 - EnvInject
 - GitHub
+- Heavy Job
 - Job DSL
 - PostBuildScript
 - Sidebar Links

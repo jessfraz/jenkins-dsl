@@ -57,5 +57,7 @@ freeStyleJob('toybox') {
                 }
             }
         }
+
+        wsCleanup()
     }
 }

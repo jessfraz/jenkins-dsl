@@ -108,6 +108,8 @@ freeStyleJob('mirror_${rname//./_}') {
                 }
             }
         }
+
+        wsCleanup()
     }
 }
 EOF

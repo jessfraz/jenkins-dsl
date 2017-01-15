@@ -60,5 +60,7 @@ freeStyleJob('mirror_apparmor_docs') {
                 }
             }
         }
+
+        wsCleanup()
     }
 }

@@ -60,5 +60,7 @@ freeStyleJob('mirror__vim') {
                 }
             }
         }
+
+        wsCleanup()
     }
 }

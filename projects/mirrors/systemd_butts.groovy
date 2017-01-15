@@ -60,5 +60,7 @@ freeStyleJob('mirror_systemd_butts') {
                 }
             }
         }
+
+        wsCleanup()
     }
 }

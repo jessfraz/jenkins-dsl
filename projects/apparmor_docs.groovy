@@ -67,5 +67,7 @@ freeStyleJob('apparmor_docs') {
                 }
             }
         }
+
+        wsCleanup()
     }
 }

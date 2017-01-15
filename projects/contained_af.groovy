@@ -67,5 +67,7 @@ freeStyleJob('contained_af') {
                 }
             }
         }
+
+        wsCleanup()
     }
 }

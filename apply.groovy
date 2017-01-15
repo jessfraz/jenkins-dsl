@@ -53,5 +53,7 @@ freeStyleJob('maintenance-apply-dsl') {
                 }
             }
         }
+
+        wsCleanup()
     }
 }

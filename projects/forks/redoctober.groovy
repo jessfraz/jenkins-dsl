@@ -64,5 +64,7 @@ freeStyleJob('update_fork_redoctober') {
                 }
             }
         }
+
+        wsCleanup()
     }
 }

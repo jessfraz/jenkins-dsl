@@ -67,5 +67,7 @@ branches('*/master')
                 }
             }
         }
+
+        wsCleanup()
     }
 }

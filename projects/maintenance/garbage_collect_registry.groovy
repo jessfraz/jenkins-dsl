@@ -2,8 +2,6 @@ freeStyleJob('maintenance_garbage_collect_registry') {
     displayName('garbage-collect-registry')
     description('Run garbage collection on the docker-registry.')
 
-    blockOn('.*')
-
     logRotator {
         numToKeep(2)
         daysToKeep(2)

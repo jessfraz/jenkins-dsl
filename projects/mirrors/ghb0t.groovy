@@ -60,5 +60,7 @@ freeStyleJob('mirror_ghb0t') {
                 }
             }
         }
+
+        wsCleanup()
     }
 }

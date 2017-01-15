@@ -64,5 +64,7 @@ freeStyleJob('update_fork_wee_slack') {
                 }
             }
         }
+
+        wsCleanup()
     }
 }

@@ -61,5 +61,7 @@ freeStyleJob('update_fork_tor') {
                 }
             }
         }
+
+        wsCleanup()
     }
 }

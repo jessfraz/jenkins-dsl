@@ -60,5 +60,7 @@ freeStyleJob('mirror_random_forest_classifier') {
                 }
             }
         }
+
+        wsCleanup()
     }
 }

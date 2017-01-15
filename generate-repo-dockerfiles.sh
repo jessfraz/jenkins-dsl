@@ -112,6 +112,8 @@ EOF
                 }
             }
         }
+
+        wsCleanup()
     }
 }
 EOF

@@ -60,5 +60,7 @@ freeStyleJob('mirror_present_j3ss_co') {
                 }
             }
         }
+
+        wsCleanup()
     }
 }

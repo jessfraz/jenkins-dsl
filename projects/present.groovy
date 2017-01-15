@@ -64,5 +64,7 @@ freeStyleJob('present') {
                 }
             }
         }
+
+        wsCleanup()
     }
 }

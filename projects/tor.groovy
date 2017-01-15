@@ -74,5 +74,7 @@ freeStyleJob('tor') {
                 }
             }
         }
+
+        wsCleanup()
     }
 }

@@ -63,5 +63,7 @@ freeStyleJob('j3ssb0t') {
                 }
             }
         }
+
+        wsCleanup()
     }
 }

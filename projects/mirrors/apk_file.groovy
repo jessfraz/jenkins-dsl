@@ -60,5 +60,7 @@ freeStyleJob('mirror_apk_file') {
                 }
             }
         }
+
+        wsCleanup()
     }
 }

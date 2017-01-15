@@ -1,10 +1,11 @@
 Required Plugins:
 - ANSI Color
-- Build Blocker
 - Build Timeout
 - Email Extension
+- EnvInject
 - GitHub
+- Job DSL
 - PostBuildScript
-- View Job Filters
 - Sidebar Links
-- EnvInject Plugin
+- Workspace Cleanup
+- View Job Filters

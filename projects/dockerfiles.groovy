@@ -2,8 +2,6 @@ freeStyleJob('dockerfiles') {
     displayName('dockerfiles')
     description('Build all the Dockerfiles in jessfraz/dockerfiles repo and pushes them to r.j3ss.co.')
 
-    blockOn('^docker_hub_dockerfiles.*')
-
     checkoutRetryCount(3)
 
     properties {
@@ -77,5 +75,7 @@ freeStyleJob('dockerfiles') {
                 }
             }
         }
+
+        wsCleanup()
     }
 }

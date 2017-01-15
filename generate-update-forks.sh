@@ -108,6 +108,8 @@ freeStyleJob('update_fork_${rname//./_}') {
                 }
             }
         }
+
+        wsCleanup()
     }
 }
 EOF

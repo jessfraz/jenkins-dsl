@@ -46,6 +46,9 @@ freeStyleJob('dockerfiles') {
     // TODO: enable this when alpine:v3.5 is signed
     environmentVariables(DOCKER_CONTENT_TRUST: '0')
     steps {
+        // remove this after alpine:v3.5 is signed
+        shell('docker pull alpine:latest')
+
         shell('if [ ! -f /usr/bin/parallel ] ; then docker exec -u root jenkins apk add --no-cache parallel; fi')
 
         shell('./build-all.sh')

@@ -2,6 +2,8 @@ freeStyleJob('docker_hub_dockerfiles') {
     displayName('docker-hub-dockerfiles')
     description('Build all the Dockerfiles in jessfraz/dockerfiles repo and push them to Docker Hub.')
 
+    weight(3)
+
     checkoutRetryCount(3)
 
     properties {

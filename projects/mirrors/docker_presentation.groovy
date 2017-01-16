@@ -32,6 +32,7 @@ freeStyleJob('mirror_docker_presentation') {
             }
             branches('master')
             extensions {
+                disableRemotePoll()
                 wipeOutWorkspace()
                 cleanAfterCheckout()
             }

@@ -32,6 +32,7 @@ freeStyleJob('mirror_contained_af') {
             }
             branches('master')
             extensions {
+                disableRemotePoll()
                 wipeOutWorkspace()
                 cleanAfterCheckout()
             }

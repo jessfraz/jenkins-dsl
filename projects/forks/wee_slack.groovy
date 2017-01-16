@@ -31,6 +31,7 @@ freeStyleJob('update_fork_wee_slack') {
             }
             branches('master', 'upstream/master')
             extensions {
+                disableRemotePoll()
                 wipeOutWorkspace()
                 cleanAfterCheckout()
             }

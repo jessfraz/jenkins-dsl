@@ -32,6 +32,7 @@ freeStyleJob('mirror_libyubikey') {
             }
             branches('master')
             extensions {
+                disableRemotePoll()
                 wipeOutWorkspace()
                 cleanAfterCheckout()
             }

@@ -32,6 +32,7 @@ freeStyleJob('mirror_weather') {
             }
             branches('master')
             extensions {
+                disableRemotePoll()
                 wipeOutWorkspace()
                 cleanAfterCheckout()
             }

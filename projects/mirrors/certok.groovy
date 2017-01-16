@@ -32,6 +32,7 @@ freeStyleJob('mirror_certok') {
             }
             branches('master')
             extensions {
+                disableRemotePoll()
                 wipeOutWorkspace()
                 cleanAfterCheckout()
             }

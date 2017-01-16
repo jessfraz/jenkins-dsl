@@ -32,6 +32,7 @@ freeStyleJob('mirror_random_forest_classifier') {
             }
             branches('master')
             extensions {
+                disableRemotePoll()
                 wipeOutWorkspace()
                 cleanAfterCheckout()
             }

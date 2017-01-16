@@ -32,6 +32,7 @@ freeStyleJob('mirror_blog') {
             }
             branches('master')
             extensions {
+                disableRemotePoll()
                 wipeOutWorkspace()
                 cleanAfterCheckout()
             }

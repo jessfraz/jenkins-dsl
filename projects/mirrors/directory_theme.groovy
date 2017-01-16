@@ -32,6 +32,7 @@ freeStyleJob('mirror_directory_theme') {
             }
             branches('master')
             extensions {
+                disableRemotePoll()
                 wipeOutWorkspace()
                 cleanAfterCheckout()
             }

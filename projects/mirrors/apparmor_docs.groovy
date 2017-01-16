@@ -32,6 +32,7 @@ freeStyleJob('mirror_apparmor_docs') {
             }
             branches('master')
             extensions {
+                disableRemotePoll()
                 wipeOutWorkspace()
                 cleanAfterCheckout()
             }

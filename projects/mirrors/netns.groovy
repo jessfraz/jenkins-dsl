@@ -32,6 +32,7 @@ freeStyleJob('mirror_netns') {
             }
             branches('master')
             extensions {
+                disableRemotePoll()
                 wipeOutWorkspace()
                 cleanAfterCheckout()
             }

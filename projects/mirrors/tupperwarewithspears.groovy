@@ -32,6 +32,7 @@ freeStyleJob('mirror_tupperwarewithspears') {
             }
             branches('master')
             extensions {
+                disableRemotePoll()
                 wipeOutWorkspace()
                 cleanAfterCheckout()
             }

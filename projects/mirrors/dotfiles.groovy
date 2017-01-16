@@ -32,6 +32,7 @@ freeStyleJob('mirror_dotfiles') {
             }
             branches('master')
             extensions {
+                disableRemotePoll()
                 wipeOutWorkspace()
                 cleanAfterCheckout()
             }

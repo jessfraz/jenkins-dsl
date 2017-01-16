@@ -32,6 +32,7 @@ freeStyleJob('mirror_snippetlib') {
             }
             branches('master')
             extensions {
+                disableRemotePoll()
                 wipeOutWorkspace()
                 cleanAfterCheckout()
             }

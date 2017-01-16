@@ -32,6 +32,7 @@ freeStyleJob('mirror_dockerfiles') {
             }
             branches('master')
             extensions {
+                disableRemotePoll()
                 wipeOutWorkspace()
                 cleanAfterCheckout()
             }

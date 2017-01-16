@@ -32,6 +32,7 @@ freeStyleJob('mirror_dockfmt') {
             }
             branches('master')
             extensions {
+                disableRemotePoll()
                 wipeOutWorkspace()
                 cleanAfterCheckout()
             }

@@ -32,6 +32,7 @@ freeStyleJob('mirror_ghb0t') {
             }
             branches('master')
             extensions {
+                disableRemotePoll()
                 wipeOutWorkspace()
                 cleanAfterCheckout()
             }

@@ -31,6 +31,7 @@ freeStyleJob('update_fork_mesos') {
             }
             branches('master', 'upstream/master')
             extensions {
+                disableRemotePoll()
                 wipeOutWorkspace()
                 cleanAfterCheckout()
             }

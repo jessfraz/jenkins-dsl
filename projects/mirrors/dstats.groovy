@@ -32,6 +32,7 @@ freeStyleJob('mirror_dstats') {
             }
             branches('master')
             extensions {
+                disableRemotePoll()
                 wipeOutWorkspace()
                 cleanAfterCheckout()
             }

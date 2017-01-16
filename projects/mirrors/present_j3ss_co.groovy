@@ -32,6 +32,7 @@ freeStyleJob('mirror_present_j3ss_co') {
             }
             branches('master')
             extensions {
+                disableRemotePoll()
                 wipeOutWorkspace()
                 cleanAfterCheckout()
             }

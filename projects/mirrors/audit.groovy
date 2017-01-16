@@ -32,6 +32,7 @@ freeStyleJob('mirror_audit') {
             }
             branches('master')
             extensions {
+                disableRemotePoll()
                 wipeOutWorkspace()
                 cleanAfterCheckout()
             }

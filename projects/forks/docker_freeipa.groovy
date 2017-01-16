@@ -31,6 +31,7 @@ freeStyleJob('update_fork_docker_freeipa') {
             }
             branches('master', 'upstream/master')
             extensions {
+                disableRemotePoll()
                 wipeOutWorkspace()
                 cleanAfterCheckout()
             }

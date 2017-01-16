@@ -32,6 +32,7 @@ freeStyleJob('mirror_battery') {
             }
             branches('master')
             extensions {
+                disableRemotePoll()
                 wipeOutWorkspace()
                 cleanAfterCheckout()
             }

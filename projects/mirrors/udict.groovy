@@ -32,6 +32,7 @@ freeStyleJob('mirror_udict') {
             }
             branches('master')
             extensions {
+                disableRemotePoll()
                 wipeOutWorkspace()
                 cleanAfterCheckout()
             }

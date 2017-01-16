@@ -32,6 +32,7 @@ freeStyleJob('mirror_jenkins_dsl') {
             }
             branches('master')
             extensions {
+                disableRemotePoll()
                 wipeOutWorkspace()
                 cleanAfterCheckout()
             }

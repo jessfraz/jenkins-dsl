@@ -32,6 +32,7 @@ freeStyleJob('mirror_riddler') {
             }
             branches('master')
             extensions {
+                disableRemotePoll()
                 wipeOutWorkspace()
                 cleanAfterCheckout()
             }

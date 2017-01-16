@@ -32,6 +32,7 @@ freeStyleJob('mirror_s3server') {
             }
             branches('master')
             extensions {
+                disableRemotePoll()
                 wipeOutWorkspace()
                 cleanAfterCheckout()
             }

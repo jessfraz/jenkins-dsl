@@ -32,6 +32,7 @@ freeStyleJob('mirror_pastebinit') {
             }
             branches('master')
             extensions {
+                disableRemotePoll()
                 wipeOutWorkspace()
                 cleanAfterCheckout()
             }

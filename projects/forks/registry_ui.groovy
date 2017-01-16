@@ -31,6 +31,7 @@ freeStyleJob('update_fork_registry_ui') {
             }
             branches('master', 'upstream/master')
             extensions {
+                disableRemotePoll()
                 wipeOutWorkspace()
                 cleanAfterCheckout()
             }

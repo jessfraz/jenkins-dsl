@@ -80,6 +80,7 @@ freeStyleJob('mirror_${rname//./_}') {
             }
             branches('${primary_branch}')
             extensions {
+                disableRemotePoll()
                 wipeOutWorkspace()
                 cleanAfterCheckout()
             }

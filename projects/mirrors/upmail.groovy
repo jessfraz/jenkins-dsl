@@ -32,6 +32,7 @@ freeStyleJob('mirror_upmail') {
             }
             branches('master')
             extensions {
+                disableRemotePoll()
                 wipeOutWorkspace()
                 cleanAfterCheckout()
             }

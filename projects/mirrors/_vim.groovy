@@ -32,6 +32,7 @@ freeStyleJob('mirror__vim') {
             }
             branches('master')
             extensions {
+                disableRemotePoll()
                 wipeOutWorkspace()
                 cleanAfterCheckout()
             }

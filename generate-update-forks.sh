@@ -75,6 +75,7 @@ freeStyleJob('update_fork_${rname//./_}') {
             }
             branches('${primary_branch}', 'upstream/${primary_branch}')
             extensions {
+                disableRemotePoll()
                 wipeOutWorkspace()
                 cleanAfterCheckout()
             }

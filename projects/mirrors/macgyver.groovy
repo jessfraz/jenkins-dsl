@@ -32,6 +32,7 @@ freeStyleJob('mirror_macgyver') {
             }
             branches('master')
             extensions {
+                disableRemotePoll()
                 wipeOutWorkspace()
                 cleanAfterCheckout()
             }

@@ -32,6 +32,7 @@ freeStyleJob('mirror_strace2elastic') {
             }
             branches('master')
             extensions {
+                disableRemotePoll()
                 wipeOutWorkspace()
                 cleanAfterCheckout()
             }

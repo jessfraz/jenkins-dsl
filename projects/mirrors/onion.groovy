@@ -32,6 +32,7 @@ freeStyleJob('mirror_onion') {
             }
             branches('master')
             extensions {
+                disableRemotePoll()
                 wipeOutWorkspace()
                 cleanAfterCheckout()
             }

@@ -32,6 +32,7 @@ freeStyleJob('mirror_bane') {
             }
             branches('master')
             extensions {
+                disableRemotePoll()
                 wipeOutWorkspace()
                 cleanAfterCheckout()
             }

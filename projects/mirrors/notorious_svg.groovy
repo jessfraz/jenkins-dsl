@@ -32,6 +32,7 @@ freeStyleJob('mirror_notorious_svg') {
             }
             branches('master')
             extensions {
+                disableRemotePoll()
                 wipeOutWorkspace()
                 cleanAfterCheckout()
             }

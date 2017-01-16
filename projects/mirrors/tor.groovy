@@ -32,6 +32,7 @@ freeStyleJob('mirror_tor') {
             }
             branches('master')
             extensions {
+                disableRemotePoll()
                 wipeOutWorkspace()
                 cleanAfterCheckout()
             }

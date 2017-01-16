@@ -32,6 +32,7 @@ freeStyleJob('mirror_generator_xbars') {
             }
             branches('master')
             extensions {
+                disableRemotePoll()
                 wipeOutWorkspace()
                 cleanAfterCheckout()
             }

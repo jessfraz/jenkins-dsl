@@ -16,8 +16,7 @@ freeStyleJob('maintenance-apply-dsl') {
     scm {
         git {
             remote {
-                url('git@github.com:jessfraz/jenkins-dsl.git')
-                credentials('jenkins-dsl-deploy-key')
+                url('https://github.com/jessfraz/jenkins-dsl.git')
             }
             branches('*/master')
             extensions {
@@ -28,7 +27,7 @@ freeStyleJob('maintenance-apply-dsl') {
     }
 
     triggers {
-        scm('H/30 * * * *')
+        cron('H/30 * * * *')
         githubPush()
     }
 

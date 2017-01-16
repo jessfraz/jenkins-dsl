@@ -27,7 +27,7 @@ freeStyleJob('docker_hub_dockerfiles') {
     }
 
     triggers {
-        cron('H H/5 * * *')
+        cron('H H * * *')
         githubPush()
     }
 

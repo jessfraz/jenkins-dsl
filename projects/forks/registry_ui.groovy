@@ -38,7 +38,7 @@ freeStyleJob('update_fork_registry_ui') {
     }
 
     triggers {
-        cron('H H/5 * * *')
+        cron('H H * * *')
     }
 
     wrappers { colorizeOutput() }

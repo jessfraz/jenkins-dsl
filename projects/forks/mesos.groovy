@@ -38,7 +38,7 @@ freeStyleJob('update_fork_mesos') {
     }
 
     triggers {
-        cron('H H/5 * * *')
+        cron('H H * * *')
     }
 
     wrappers { colorizeOutput() }

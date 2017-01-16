@@ -39,7 +39,7 @@ freeStyleJob('mirror_irssi') {
     }
 
     triggers {
-        cron('H H/5 * * *')
+        cron('H H * * *')
     }
 
     wrappers { colorizeOutput() }

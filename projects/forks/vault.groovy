@@ -38,7 +38,7 @@ freeStyleJob('update_fork_vault') {
     }
 
     triggers {
-        cron('H H/5 * * *')
+        cron('H H * * *')
     }
 
     wrappers { colorizeOutput() }

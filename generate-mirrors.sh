@@ -87,7 +87,7 @@ freeStyleJob('mirror_${rname//./_}') {
     }
 
     triggers {
-        cron('H H/5 * * *')
+        cron('H H * * *')
     }
 
     wrappers { colorizeOutput() }

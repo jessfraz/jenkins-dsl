@@ -39,7 +39,7 @@ freeStyleJob('mirror_present_j3ss_co') {
     }
 
     triggers {
-        cron('H H/5 * * *')
+        cron('H H * * *')
     }
 
     wrappers { colorizeOutput() }

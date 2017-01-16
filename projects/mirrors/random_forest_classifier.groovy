@@ -39,7 +39,7 @@ freeStyleJob('mirror_random_forest_classifier') {
     }
 
     triggers {
-        cron('H H/5 * * *')
+        cron('H H * * *')
     }
 
     wrappers { colorizeOutput() }

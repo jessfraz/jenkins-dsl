@@ -38,7 +38,7 @@ freeStyleJob('update_fork_notary') {
     }
 
     triggers {
-        cron('H H/5 * * *')
+        cron('H H * * *')
     }
 
     wrappers { colorizeOutput() }

@@ -39,6 +39,11 @@ freeStyleJob('kali_linux') {
         shell('docker push --disable-content-trust=false r.j3ss.co/kalilinux:latest')
 		shell('docker tag r.j3ss.co/kalilinux:latest jess/kalilinux:latest')
         shell('docker push --disable-content-trust=false jess/kalilinux:latest')
+        shell('docker run --rm r.j3ss.co/kalilinux awk \'{print $NF}\' /etc/debian_version | sed \'s/\r$//\' | tr \'[:upper:]\' \'[:lower:]\' > tag')
+		shell('docker tag r.j3ss.co/kalilinux:latest r.j3ss.co/kalilinux:$(cat tag)')
+        shell('docker push --disable-content-trust=false r.j3ss.co/kalilinux:$(cat tag)')
+		shell('docker tag r.j3ss.co/kalilinux:latest jess/kalilinux:$(cat tag)')
+        shell('docker push --disable-content-trust=false jess/kalilinux:$(cat tag)')
     }
 
     publishers {

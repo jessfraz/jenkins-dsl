@@ -1,11 +1,11 @@
-freeStyleJob('contained_af') {
-    displayName('contained.af')
-    description('Build Dockerfiles for contained.af.')
+freeStyleJob('kali_linux') {
+    displayName('kali-linux')
+    description('Build Docker images for kali-linux.')
 
     checkoutRetryCount(3)
 
     properties {
-        githubProjectUrl('https://github.com/jessfraz/contained.af')
+        githubProjectUrl('https://github.com/jessfraz/kali-linux-docker')
     }
 
     logRotator {
@@ -15,8 +15,10 @@ freeStyleJob('contained_af') {
 
     scm {
         git {
-            remote { url('https://github.com/jessfraz/contained.af.git') }
-            branches('*/master')
+            remote {
+                url('https://github.com/jessfraz/kali-linux-docker.git')
+            }
+            branches('updates')
             extensions {
                 wipeOutWorkspace()
                 cleanAfterCheckout()
@@ -33,15 +35,10 @@ freeStyleJob('contained_af') {
 
     environmentVariables(DOCKER_CONTENT_TRUST: '1')
     steps {
-        shell('docker build --rm --force-rm -t r.j3ss.co/contained:latest .')
-        shell('docker tag r.j3ss.co/contained:latest jess/contained:latest')
-        shell('docker push --disable-content-trust=false r.j3ss.co/contained:latest')
-        shell('docker push --disable-content-trust=false jess/contained:latest')
-
-        shell('docker build --rm --force-rm -f Dockerfile.dind -t r.j3ss.co/docker:userns .')
-        shell('docker tag r.j3ss.co/docker:userns jess/docker:userns')
-        shell('docker push --disable-content-trust=false r.j3ss.co/docker:userns')
-        shell('docker push --disable-content-trust=false jess/docker:userns')
+        shell('docker run --rm -it --privileged -v $(which docker):/usr/bin/docker:ro -v $(pwd | sed \'s#/var/jenkins_home/#/var/lib/docker/jenkins/#\')/build.sh:/usr/bin/build.sh:ro -v /var/run/docker.sock:/var/run/docker.sock debian build.sh')
+        shell('docker push --disable-content-trust=false r.j3ss.co/kalilinux:latest')
+		shell('docker tag r.j3ss.co/kalilinux:latest jess/kalilinux:latest')
+        shell('docker push --disable-content-trust=false jess/kalilinux:latest')
     }
 
     publishers {
@@ -51,11 +48,6 @@ freeStyleJob('contained_af') {
                 shell('docker rmi $(docker images --filter dangling=true -q 2>/dev/null) 2> /dev/null || true')
             }
             onlyIfBuildSucceeds(false)
-        }
-
-        retryBuild {
-            retryLimit(3)
-            fixedDelay(15)
         }
 
         extendedEmail {

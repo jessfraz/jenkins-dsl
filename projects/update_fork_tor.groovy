@@ -35,7 +35,7 @@ freeStyleJob('update_fork_tor') {
     }
 
     triggers {
-        cron('H H/5 * * *')
+        cron('H H * * *')
     }
 
     wrappers { colorizeOutput() }

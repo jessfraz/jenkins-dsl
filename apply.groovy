@@ -27,7 +27,6 @@ freeStyleJob('maintenance-apply-dsl') {
     }
 
     triggers {
-        cron('H/30 * * * *')
         githubPush()
     }
 

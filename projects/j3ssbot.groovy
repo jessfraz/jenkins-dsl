@@ -28,7 +28,7 @@ freeStyleJob('j3ssb0t') {
     }
 
     triggers {
-        cron('H H/4 * * *')
+        cron('H H * * *')
         githubPush()
     }
 

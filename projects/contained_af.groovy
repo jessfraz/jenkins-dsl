@@ -54,7 +54,7 @@ freeStyleJob('contained_af') {
         }
 
         retryBuild {
-            retryLimit(3)
+            retryLimit(2)
             fixedDelay(15)
         }
 

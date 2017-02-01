@@ -59,7 +59,7 @@ branches('*/master')
         }
 
         retryBuild {
-            retryLimit(3)
+            retryLimit(2)
             fixedDelay(15)
         }
 

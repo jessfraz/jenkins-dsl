@@ -1,13 +1,13 @@
-freeStyleJob('update_fork_wee_slack') {
-    displayName('update-fork-wee-slack')
-    description('Rebase the primary branch (master) in jessfraz/wee-slack fork.')
+freeStyleJob('update_fork_coreos_overlay') {
+    displayName('update-fork-coreos-overlay')
+    description('Rebase the primary branch (master) in jessfraz/coreos-overlay fork.')
 
     checkoutRetryCount(3)
 
     properties {
-        githubProjectUrl('https://github.com/jessfraz/wee-slack')
+        githubProjectUrl('https://github.com/jessfraz/coreos-overlay')
         sidebarLinks {
-            link('https://github.com/wee-slack/wee-slack', 'UPSTREAM: wee-slack/wee-slack', 'notepad.png')
+            link('https://github.com/coreos/coreos-overlay', 'UPSTREAM: coreos/coreos-overlay', 'notepad.png')
         }
     }
 
@@ -19,13 +19,13 @@ freeStyleJob('update_fork_wee_slack') {
     scm {
         git {
             remote {
-                url('git@github.com:jessfraz/wee-slack.git')
+                url('git@github.com:jessfraz/coreos-overlay.git')
                 name('origin')
                 credentials('ssh-github-key')
                 refspec('+refs/heads/master:refs/remotes/origin/master')
             }
             remote {
-                url('https://github.com/wee-slack/wee-slack.git')
+                url('https://github.com/coreos/coreos-overlay.git')
                 name('upstream')
                 refspec('+refs/heads/master:refs/remotes/upstream/master')
             }

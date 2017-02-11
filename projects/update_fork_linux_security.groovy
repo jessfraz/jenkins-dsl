@@ -28,6 +28,9 @@ freeStyleJob('update_fork_linux_next_security') {
             }
             branches('linux-security', 'upstream/master')
             extensions {
+                cloneOptions {
+                    shallow(true)
+                }
                 wipeOutWorkspace()
                 cleanAfterCheckout()
             }

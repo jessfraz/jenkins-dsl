@@ -11,3 +11,8 @@ Required Plugins:
 - Sidebar Links
 - Workspace Cleanup
 - View Job Filters
+
+Nice to have:
+- Green Balls
+- Simple Theme Plugin: https://misc.j3ss.co/binaries/material-indigo.css
+  from: http://afonsof.com/jenkins-material-theme/

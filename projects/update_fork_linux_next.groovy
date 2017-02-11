@@ -8,7 +8,7 @@ freeStyleJob('update_fork_linux_next') {
         githubProjectUrl('https://github.com/jessfraz/linux')
     }
 
-    logRotalinux {
+    logRotator {
         numToKeep(2)
         daysToKeep(2)
     }

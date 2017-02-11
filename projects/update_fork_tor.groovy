@@ -18,7 +18,7 @@ freeStyleJob('update_fork_tor') {
             remote {
                 url('git@github.com:jessfraz/tor.git')
                 name('origin')
-                credentials('tor-deploy-key')
+                credentials('ssh-github-key')
                 refspec('+refs/heads/master:refs/remotes/origin/master')
             }
             remote {

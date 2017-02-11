@@ -18,7 +18,7 @@ freeStyleJob('apparmor_docs') {
             remote {
                 url('git@github.com:jessfraz/apparmor-docs.git')
                 name('origin')
-                credentials('apparmor-docs-deploy-key')
+                credentials('ssh-github-key')
             }
             branches('*/master')
             extensions {

@@ -47,5 +47,7 @@ freeStyleJob('maintenance_garbage_collect_registry') {
                 }
             }
         }
+
+        wsCleanup()
     }
 }

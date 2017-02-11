@@ -46,5 +46,7 @@ freeStyleJob('maintenance_cleanup') {
                 }
             }
         }
+
+        wsCleanup()
     }
 }

@@ -1,13 +1,13 @@
-freeStyleJob('mirror_docker_presentation') {
-    displayName('mirror-docker-presentation')
-    description('Mirror github.com/jessfraz/docker-presentation to g.j3ss.co/docker-presentation.')
+freeStyleJob('mirror_cliaoke') {
+    displayName('mirror-cliaoke')
+    description('Mirror github.com/jessfraz/cliaoke to g.j3ss.co/cliaoke.')
 
     checkoutRetryCount(3)
 
     properties {
-        githubProjectUrl('https://github.com/jessfraz/docker-presentation')
+        githubProjectUrl('https://github.com/jessfraz/cliaoke')
         sidebarLinks {
-            link('https://git.j3ss.co/docker-presentation', 'git.j3ss.co/docker-presentation', 'notepad.png')
+            link('https://git.j3ss.co/cliaoke', 'git.j3ss.co/cliaoke', 'notepad.png')
         }
     }
 
@@ -19,13 +19,13 @@ freeStyleJob('mirror_docker_presentation') {
     scm {
         git {
             remote {
-                url('git@github.com:jessfraz/docker-presentation.git')
+                url('git@github.com:jessfraz/cliaoke.git')
                 name('origin')
                 credentials('ssh-github-key')
                 refspec('+refs/heads/master:refs/remotes/origin/master')
             }
             remote {
-                url('ssh://git@g.j3ss.co:2200/~/docker-presentation.git')
+                url('ssh://git@g.j3ss.co:2200/~/cliaoke.git')
                 name('mirror')
                 credentials('ssh-github-key')
                 refspec('+refs/heads/master:refs/remotes/upstream/master')

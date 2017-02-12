@@ -32,7 +32,13 @@ freeStyleJob('mirror_audit') {
             }
             branches('master')
             extensions {
+                ignoreNotifyCommit()
                 disableRemotePoll()
+
+                submoduleOptions {
+                    recursive()
+                }
+
                 wipeOutWorkspace()
                 cleanAfterCheckout()
             }

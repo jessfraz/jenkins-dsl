@@ -32,7 +32,13 @@ freeStyleJob('mirror_directory_theme') {
             }
             branches('master')
             extensions {
+                ignoreNotifyCommit()
                 disableRemotePoll()
+
+                submoduleOptions {
+                    recursive()
+                }
+
                 wipeOutWorkspace()
                 cleanAfterCheckout()
             }

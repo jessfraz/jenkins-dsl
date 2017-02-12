@@ -1,13 +1,13 @@
-freeStyleJob('mirror_docker_presentation') {
-    displayName('mirror-docker-presentation')
-    description('Mirror github.com/jessfraz/docker-presentation to g.j3ss.co/docker-presentation.')
+freeStyleJob('mirror_apparmor_docs') {
+    displayName('mirror-apparmor-docs')
+    description('Mirror github.com/jessfraz/apparmor-docs to g.j3ss.co/apparmor-docs.')
 
     checkoutRetryCount(3)
 
     properties {
-        githubProjectUrl('https://github.com/jessfraz/docker-presentation')
+        githubProjectUrl('https://github.com/jessfraz/apparmor-docs')
         sidebarLinks {
-            link('https://git.j3ss.co/docker-presentation', 'git.j3ss.co/docker-presentation', 'notepad.png')
+            link('https://git.j3ss.co/apparmor-docs', 'git.j3ss.co/apparmor-docs', 'notepad.png')
         }
     }
 
@@ -19,13 +19,13 @@ freeStyleJob('mirror_docker_presentation') {
     scm {
         git {
             remote {
-                url('git@github.com:jessfraz/docker-presentation.git')
+                url('git@github.com:jessfraz/apparmor-docs.git')
                 name('origin')
                 credentials('ssh-github-key')
                 refspec('+refs/heads/master:refs/remotes/origin/master')
             }
             remote {
-                url('ssh://git@g.j3ss.co:2200/~/docker-presentation.git')
+                url('ssh://git@g.j3ss.co:2200/~/apparmor-docs.git')
                 name('mirror')
                 credentials('ssh-github-key')
                 refspec('+refs/heads/master:refs/remotes/upstream/master')

@@ -29,7 +29,7 @@ freeStyleJob('update_fork_linux') {
             branches('master', 'upstream/master')
             extensions {
                 cloneOptions {
-                    shallow(true)
+                    timeout(20)
                 }
                 wipeOutWorkspace()
                 cleanAfterCheckout()

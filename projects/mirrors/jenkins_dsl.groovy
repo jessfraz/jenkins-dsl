@@ -1,13 +1,13 @@
-freeStyleJob('mirror_docker_presentation') {
-    displayName('mirror-docker-presentation')
-    description('Mirror github.com/jessfraz/docker-presentation to g.j3ss.co/docker-presentation.')
+freeStyleJob('mirror_jenkins_dsl') {
+    displayName('mirror-jenkins-dsl')
+    description('Mirror github.com/jessfraz/jenkins-dsl to g.j3ss.co/jenkins-dsl.')
 
     checkoutRetryCount(3)
 
     properties {
-        githubProjectUrl('https://github.com/jessfraz/docker-presentation')
+        githubProjectUrl('https://github.com/jessfraz/jenkins-dsl')
         sidebarLinks {
-            link('https://git.j3ss.co/docker-presentation', 'git.j3ss.co/docker-presentation', 'notepad.png')
+            link('https://git.j3ss.co/jenkins-dsl', 'git.j3ss.co/jenkins-dsl', 'notepad.png')
         }
     }
 
@@ -19,13 +19,13 @@ freeStyleJob('mirror_docker_presentation') {
     scm {
         git {
             remote {
-                url('git@github.com:jessfraz/docker-presentation.git')
+                url('git@github.com:jessfraz/jenkins-dsl.git')
                 name('origin')
                 credentials('ssh-github-key')
                 refspec('+refs/heads/master:refs/remotes/origin/master')
             }
             remote {
-                url('ssh://git@g.j3ss.co:2200/~/docker-presentation.git')
+                url('ssh://git@g.j3ss.co:2200/~/jenkins-dsl.git')
                 name('mirror')
                 credentials('ssh-github-key')
                 refspec('+refs/heads/master:refs/remotes/upstream/master')

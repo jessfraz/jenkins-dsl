@@ -44,7 +44,7 @@ freeStyleJob('update_fork_linux_next') {
     wrappers { colorizeOutput() }
 
     steps {
-        shell('git rebase upstream/master')
+        shell('git reset --hard upstream/master')
     }
 
     publishers {

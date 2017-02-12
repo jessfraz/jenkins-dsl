@@ -52,6 +52,7 @@ freeStyleJob('update_fork_linux_next') {
             git {
                 branch('origin', 'linux-next')
                 pushOnlyIfSuccess()
+                forcePush()
             }
         }
 

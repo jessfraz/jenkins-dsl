@@ -16,48 +16,18 @@ freeStyleJob('mirror_magneto') {
         daysToKeep(2)
     }
 
-    scm {
-        git {
-            remote {
-                url('git@github.com:jessfraz/magneto.git')
-                name('origin')
-                credentials('ssh-github-key')
-                refspec('+refs/heads/master:refs/remotes/origin/master')
-            }
-            remote {
-                url('ssh://git@g.j3ss.co:2200/~/magneto.git')
-                name('mirror')
-                credentials('ssh-github-key')
-                refspec('+refs/heads/master:refs/remotes/upstream/master')
-            }
-            branches('master')
-            extensions {
-                ignoreNotifyCommit()
-                disableRemotePoll()
-
-                submoduleOptions {
-                    recursive()
-                }
-
-                wipeOutWorkspace()
-                cleanAfterCheckout()
-            }
-        }
-    }
-
     triggers {
         cron('H H * * *')
     }
 
     wrappers { colorizeOutput() }
 
-    publishers {
-        postBuildScripts {
-            git {
-                branch('mirror', 'master')
-            }
-        }
+    steps {
+        shell('git clone --mirror git@github.com:jessfraz/magneto.git repo')
+        shell('cd repo && git push --mirror ssh://git@g.j3ss.co:2200/~/magneto.git')
+    }
 
+    publishers {
         extendedEmail {
             recipientList('$DEFAULT_RECIPIENTS')
             contentType('text/plain')

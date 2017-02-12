@@ -32,7 +32,6 @@ generate_dsl(){
 	local orig=$1
 	local user=${orig%/*}
 	local name=${orig#*/}
-	local primary_branch=$2
 
 	rname=${name//-/_}
 	file="${DIR}/projects/mirrors/${rname//./_}.groovy"
@@ -64,48 +63,18 @@ freeStyleJob('mirror_${rname//./_}') {
         daysToKeep(2)
     }
 
-    scm {
-        git {
-            remote {
-                url('git@github.com:${orig}.git')
-                name('origin')
-                credentials('ssh-github-key')
-                refspec('+refs/heads/${primary_branch}:refs/remotes/origin/${primary_branch}')
-            }
-            remote {
-                url('ssh://git@g.j3ss.co:2200/~/${dest}.git')
-                name('mirror')
-                credentials('ssh-github-key')
-                refspec('+refs/heads/${primary_branch}:refs/remotes/upstream/${primary_branch}')
-            }
-            branches('${primary_branch}')
-            extensions {
-                ignoreNotifyCommit()
-                disableRemotePoll()
-
-                submoduleOptions {
-                    recursive()
-                }
-
-                wipeOutWorkspace()
-                cleanAfterCheckout()
-            }
-        }
-    }
-
     triggers {
         cron('H H * * *')
     }
 
     wrappers { colorizeOutput() }
 
-    publishers {
-        postBuildScripts {
-            git {
-                branch('mirror', '${primary_branch}')
-            }
-        }
+    steps {
+        shell('git clone --mirror git@github.com:${orig}.git repo')
+        shell('cd repo && git push --mirror ssh://git@g.j3ss.co:2200/~/${dest}.git')
+    }
 
+    publishers {
         extendedEmail {
             recipientList('\$DEFAULT_RECIPIENTS')
             contentType('text/plain')
@@ -148,8 +117,6 @@ main(){
 		response=$(curl -sSL -H "${AUTH_HEADER}" -H "${API_HEADER}" "${URI}/repos/${fullname}")
 		local user
 		user=$(echo "$response" | jq --raw-output '.parent.owner.login')
-		local primary_branch
-		primary_branch=$(echo "$response" | jq --raw-output '.default_branch')
 
 		if [[ "$fork" == "true" ]]; then
 			if [[ -z "$INCLUDE_FORKS" ]]; then
@@ -158,7 +125,7 @@ main(){
 				generate_dsl "${user}/${repo}"
 			fi
 		else
-			generate_dsl "${fullname}" "${primary_branch}"
+			generate_dsl "${fullname}"
 		fi
 	done
 }

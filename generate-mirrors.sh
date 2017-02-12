@@ -118,6 +118,10 @@ main(){
 		local user
 		user=$(echo "$response" | jq --raw-output '.parent.owner.login')
 
+		if [[ "$fullname" == "jessfraz/linux" ]]; then
+			continue
+		fi
+
 		if [[ "$fork" == "true" ]]; then
 			if [[ -z "$INCLUDE_FORKS" ]]; then
 				continue

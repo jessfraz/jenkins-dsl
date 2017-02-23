@@ -17,6 +17,9 @@ generate_dsl(){
 		"kylemanna/docker-openvpn")
 			name=openvpn-server
 			;;
+		"rroemhild/docker-ejabberd")
+			name=ejabberd
+			;;
 		*) ;;
 	esac
 
@@ -145,6 +148,7 @@ jessfraz/udict
 jessfraz/upmail
 jessfraz/weather
 kylemanna/docker-openvpn
+rroemhild/docker-ejabberd
 )
 
 main(){

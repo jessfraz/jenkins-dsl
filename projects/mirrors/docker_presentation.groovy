@@ -23,7 +23,7 @@ freeStyleJob('mirror_docker_presentation') {
     wrappers { colorizeOutput() }
 
     steps {
-        shell('git clone --mirror git@github.com:jessfraz/docker-presentation.git repo')
+        shell('git clone --mirror https://github.com/jessfraz/docker-presentation.git repo')
         shell('cd repo && git push --mirror ssh://git@g.j3ss.co:2200/~/docker-presentation.git')
     }
 

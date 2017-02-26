@@ -23,7 +23,7 @@ freeStyleJob('mirror_cliaoke') {
     wrappers { colorizeOutput() }
 
     steps {
-        shell('git clone --mirror git@github.com:jessfraz/cliaoke.git repo')
+        shell('git clone --mirror https://github.com/jessfraz/cliaoke.git repo')
         shell('cd repo && git push --mirror ssh://git@g.j3ss.co:2200/~/cliaoke.git')
     }
 

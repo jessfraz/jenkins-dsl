@@ -23,7 +23,7 @@ freeStyleJob('mirror_strace2elastic') {
     wrappers { colorizeOutput() }
 
     steps {
-        shell('git clone --mirror git@github.com:jessfraz/strace2elastic.git repo')
+        shell('git clone --mirror https://github.com/jessfraz/strace2elastic.git repo')
         shell('cd repo && git push --mirror ssh://git@g.j3ss.co:2200/~/strace2elastic.git')
     }
 

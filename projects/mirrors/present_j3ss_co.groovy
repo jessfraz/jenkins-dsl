@@ -23,7 +23,7 @@ freeStyleJob('mirror_present_j3ss_co') {
     wrappers { colorizeOutput() }
 
     steps {
-        shell('git clone --mirror git@github.com:jessfraz/present.j3ss.co.git repo')
+        shell('git clone --mirror https://github.com/jessfraz/present.j3ss.co.git repo')
         shell('cd repo && git push --mirror ssh://git@g.j3ss.co:2200/~/present.j3ss.co.git')
     }
 

@@ -70,7 +70,7 @@ freeStyleJob('mirror_${rname//./_}') {
     wrappers { colorizeOutput() }
 
     steps {
-        shell('git clone --mirror git@github.com:${orig}.git repo')
+        shell('git clone --mirror https://github.com/${orig}.git repo')
         shell('cd repo && git push --mirror ssh://git@g.j3ss.co:2200/~/${dest}.git')
     }
 

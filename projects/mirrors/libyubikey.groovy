@@ -23,7 +23,7 @@ freeStyleJob('mirror_libyubikey') {
     wrappers { colorizeOutput() }
 
     steps {
-        shell('git clone --mirror git@github.com:jessfraz/libyubikey.git repo')
+        shell('git clone --mirror https://github.com/jessfraz/libyubikey.git repo')
         shell('cd repo && git push --mirror ssh://git@g.j3ss.co:2200/~/libyubikey.git')
     }
 

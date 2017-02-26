@@ -23,7 +23,7 @@ freeStyleJob('mirror_apparmor_docs') {
     wrappers { colorizeOutput() }
 
     steps {
-        shell('git clone --mirror git@github.com:jessfraz/apparmor-docs.git repo')
+        shell('git clone --mirror https://github.com/jessfraz/apparmor-docs.git repo')
         shell('cd repo && git push --mirror ssh://git@g.j3ss.co:2200/~/apparmor-docs.git')
     }
 

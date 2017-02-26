@@ -23,7 +23,7 @@ freeStyleJob('mirror_certok') {
     wrappers { colorizeOutput() }
 
     steps {
-        shell('git clone --mirror git@github.com:jessfraz/certok.git repo')
+        shell('git clone --mirror https://github.com/jessfraz/certok.git repo')
         shell('cd repo && git push --mirror ssh://git@g.j3ss.co:2200/~/certok.git')
     }
 

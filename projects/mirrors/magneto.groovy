@@ -23,7 +23,7 @@ freeStyleJob('mirror_magneto') {
     wrappers { colorizeOutput() }
 
     steps {
-        shell('git clone --mirror git@github.com:jessfraz/magneto.git repo')
+        shell('git clone --mirror https://github.com/jessfraz/magneto.git repo')
         shell('cd repo && git push --mirror ssh://git@g.j3ss.co:2200/~/magneto.git')
     }
 

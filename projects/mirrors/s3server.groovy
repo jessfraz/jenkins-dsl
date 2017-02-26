@@ -23,7 +23,7 @@ freeStyleJob('mirror_s3server') {
     wrappers { colorizeOutput() }
 
     steps {
-        shell('git clone --mirror git@github.com:jessfraz/s3server.git repo')
+        shell('git clone --mirror https://github.com/jessfraz/s3server.git repo')
         shell('cd repo && git push --mirror ssh://git@g.j3ss.co:2200/~/s3server.git')
     }
 

@@ -23,7 +23,7 @@ freeStyleJob('mirror_apk_file') {
     wrappers { colorizeOutput() }
 
     steps {
-        shell('git clone --mirror git@github.com:jessfraz/apk-file.git repo')
+        shell('git clone --mirror https://github.com/jessfraz/apk-file.git repo')
         shell('cd repo && git push --mirror ssh://git@g.j3ss.co:2200/~/apk-file.git')
     }
 

@@ -31,6 +31,7 @@ freeStyleJob('update_fork_linux_next') {
                 cloneOptions {
                     timeout(20)
                     shallow(true)
+                    honorRefspec(true)
                 }
                 wipeOutWorkspace()
                 cleanAfterCheckout()

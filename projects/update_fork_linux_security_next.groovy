@@ -29,7 +29,7 @@ freeStyleJob('update_fork_linux_security_next') {
             branches('linux-security-next', 'upstream/next')
             extensions {
                 cloneOptions {
-                    timeout(20)
+                    timeout(40)
                     shallow(true)
                     honorRefspec(true)
                 }

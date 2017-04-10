@@ -30,6 +30,7 @@ freeStyleJob('update_fork_linux') {
             extensions {
                 cloneOptions {
                     timeout(20)
+                    shallow(true)
                 }
                 wipeOutWorkspace()
                 cleanAfterCheckout()

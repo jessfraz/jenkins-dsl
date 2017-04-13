@@ -2,7 +2,7 @@ freeStyleJob('maintenance_garbage_collect_registry') {
     displayName('garbage-collect-registry')
     description('Run garbage collection on the docker-registry.')
 
-    weight(3)
+    weight(4)
 
     logRotator {
         numToKeep(2)

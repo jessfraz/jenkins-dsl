@@ -49,11 +49,9 @@ freeStyleJob('update_fork_universe') {
     }
 
     publishers {
-        postBuildScripts {
-            git {
-                branch('origin', 'version-3.x')
-                pushOnlyIfSuccess()
-            }
+        git {
+            branch('origin', 'version-3.x')
+            pushOnlyIfSuccess()
         }
 
         extendedEmail {

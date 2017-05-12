@@ -44,17 +44,11 @@ freeStyleJob('kali_linux') {
         shell('docker push --disable-content-trust=false r.j3ss.co/kalilinux:$(cat tag)')
 		shell('docker tag r.j3ss.co/kalilinux:latest jess/kalilinux:$(cat tag)')
         shell('docker push --disable-content-trust=false jess/kalilinux:$(cat tag)')
+        shell('docker rm $(docker ps --filter status=exited -q 2>/dev/null) 2> /dev/null || true')
+        shell('docker rmi $(docker images --filter dangling=true -q 2>/dev/null) 2> /dev/null || true')
     }
 
     publishers {
-        postBuildScripts {
-            steps {
-                shell('docker rm $(docker ps --filter status=exited -q 2>/dev/null) 2> /dev/null || true')
-                shell('docker rmi $(docker images --filter dangling=true -q 2>/dev/null) 2> /dev/null || true')
-            }
-            onlyIfBuildSucceeds(false)
-        }
-
         extendedEmail {
             recipientList('$DEFAULT_RECIPIENTS')
             contentType('text/plain')

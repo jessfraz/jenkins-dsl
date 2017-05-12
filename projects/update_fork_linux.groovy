@@ -50,11 +50,9 @@ freeStyleJob('update_fork_linux') {
     }
 
     publishers {
-        postBuildScripts {
-            git {
-                branch('origin', 'master')
-                pushOnlyIfSuccess()
-            }
+        git {
+            branch('origin', 'master')
+            pushOnlyIfSuccess()
         }
 
         extendedEmail {

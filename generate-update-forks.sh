@@ -93,11 +93,9 @@ freeStyleJob('update_fork_${rname//./_}') {
     }
 
     publishers {
-        postBuildScripts {
-            git {
-                branch('origin', '${primary_branch}')
-                pushOnlyIfSuccess()
-            }
+        git {
+            branch('origin', '${primary_branch}')
+            pushOnlyIfSuccess()
         }
 
         extendedEmail {

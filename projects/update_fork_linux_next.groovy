@@ -50,12 +50,10 @@ freeStyleJob('update_fork_linux_next') {
     }
 
     publishers {
-        postBuildScripts {
-            git {
-                branch('origin', 'linux-next')
-                pushOnlyIfSuccess()
-                forcePush()
-            }
+        git {
+            branch('origin', 'linux-next')
+            pushOnlyIfSuccess()
+            forcePush()
         }
 
         extendedEmail {

@@ -49,17 +49,11 @@ freeStyleJob('docker_hub_dockerfiles') {
         shell('if [ ! -f /usr/bin/parallel ] ; then docker exec -u root jenkins apk add --no-cache parallel; fi')
 
         shell('REPO_URL=jess ./build-all.sh')
+        shell('docker rm $(docker ps --filter status=exited -q 2>/dev/null) 2> /dev/null || true')
+        shell('docker rmi $(docker images --filter dangling=true -q 2>/dev/null) 2> /dev/null || true')
     }
 
     publishers {
-        postBuildScripts {
-            steps {
-                shell('docker rm $(docker ps --filter status=exited -q 2>/dev/null) 2> /dev/null || true')
-                shell('docker rmi $(docker images --filter dangling=true -q 2>/dev/null) 2> /dev/null || true')
-            }
-            onlyIfBuildSucceeds(false)
-        }
-
         retryBuild {
             retryLimit(2)
             fixedDelay(15)

@@ -7,7 +7,6 @@ Required Plugins:
 - Heavy Job
 - Job DSL
 - Naginator
-- PostBuildScript
 - Sidebar Links
 - Workspace Cleanup
 - View Job Filters

@@ -49,11 +49,9 @@ freeStyleJob('update_fork_wee_slack') {
     }
 
     publishers {
-        postBuildScripts {
-            git {
-                branch('origin', 'master')
-                pushOnlyIfSuccess()
-            }
+        git {
+            branch('origin', 'master')
+            pushOnlyIfSuccess()
         }
 
         extendedEmail {

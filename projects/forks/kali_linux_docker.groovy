@@ -49,11 +49,9 @@ freeStyleJob('update_fork_kali_linux_docker') {
     }
 
     publishers {
-        postBuildScripts {
-            git {
-                branch('origin', 'master')
-                pushOnlyIfSuccess()
-            }
+        git {
+            branch('origin', 'master')
+            pushOnlyIfSuccess()
         }
 
         extendedEmail {

@@ -41,18 +41,11 @@ freeStyleJob('apparmor_docs') {
             shell('make')
 
             shell('git diff-index --quiet HEAD || git add . && git commit -am "Update docs"')
-
+            shell('docker rm $(docker ps --filter status=exited -q 2>/dev/null) 2> /dev/null || true')
+            shell('docker rmi $(docker images --filter dangling=true -q 2>/dev/null) 2> /dev/null || true')
     }
 
     publishers {
-        postBuildScripts {
-            steps {
-                shell('docker rm $(docker ps --filter status=exited -q 2>/dev/null) 2> /dev/null || true')
-                shell('docker rmi $(docker images --filter dangling=true -q 2>/dev/null) 2> /dev/null || true')
-            }
-            onlyIfBuildSucceeds(false)
-        }
-
         git {
             branch('origin', 'master')
             pushOnlyIfSuccess()

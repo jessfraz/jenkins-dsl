@@ -50,11 +50,9 @@ freeStyleJob('update_fork_linux_security_next') {
     }
 
     publishers {
-        postBuildScripts {
-            git {
-                branch('origin', 'linux-security-next')
-                pushOnlyIfSuccess()
-            }
+        git {
+            branch('origin', 'linux-security-next')
+            pushOnlyIfSuccess()
         }
 
         extendedEmail {

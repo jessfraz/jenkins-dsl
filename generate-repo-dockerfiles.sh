@@ -90,17 +90,11 @@ EOF
 	fi
 
 	cat <<-EOF >> $file
+        shell('docker rm \$(docker ps --filter status=exited -q 2>/dev/null) 2> /dev/null || true')
+        shell('docker rmi \$(docker images --filter dangling=true -q 2>/dev/null) 2> /dev/null || true')
     }
 
     publishers {
-	    postBuildScripts {
-            steps {
-                shell('docker rm \$(docker ps --filter status=exited -q 2>/dev/null) 2> /dev/null || true')
-                shell('docker rmi \$(docker images --filter dangling=true -q 2>/dev/null) 2> /dev/null || true')
-            }
-            onlyIfBuildSucceeds(false)
-        }
-
         retryBuild {
             retryLimit(2)
             fixedDelay(15)

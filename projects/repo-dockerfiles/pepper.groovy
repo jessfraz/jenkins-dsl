@@ -42,17 +42,11 @@ branches('*/master')
         shell('docker tag r.j3ss.co/pepper:latest jess/pepper:latest')
         shell('docker push --disable-content-trust=false r.j3ss.co/pepper:latest')
         shell('docker push --disable-content-trust=false jess/pepper:latest')
+        shell('docker rm $(docker ps --filter status=exited -q 2>/dev/null) 2> /dev/null || true')
+        shell('docker rmi $(docker images --filter dangling=true -q 2>/dev/null) 2> /dev/null || true')
     }
 
     publishers {
-    postBuildScripts {
-            steps {
-                shell('docker rm $(docker ps --filter status=exited -q 2>/dev/null) 2> /dev/null || true')
-                shell('docker rmi $(docker images --filter dangling=true -q 2>/dev/null) 2> /dev/null || true')
-            }
-            onlyIfBuildSucceeds(false)
-        }
-
         retryBuild {
             retryLimit(2)
             fixedDelay(15)

@@ -48,21 +48,15 @@ freeStyleJob('tor') {
         shell('docker tag jess/tor:latest r.j3ss.co/tor:latest')
         shell('docker push --disable-content-trust=false jess/tor:latest')
         shell('docker push --disable-content-trust=false r.j3ss.co/tor:latest')
+        shell('docker rm $(docker ps --filter status=exited -q 2>/dev/null) 2> /dev/null || true')
+        shell('docker rmi $(docker images --filter dangling=true -q 2>/dev/null) 2> /dev/null || true')
     }
 
     publishers {
-        postBuildScripts {
-            git {
-                branch('origin', 'add-dockerfile')
-                forcePush()
-                pushOnlyIfSuccess()
-            }
-
-            steps {
-                shell('docker rm $(docker ps --filter status=exited -q 2>/dev/null) 2> /dev/null || true')
-                shell('docker rmi $(docker images --filter dangling=true -q 2>/dev/null) 2> /dev/null || true')
-            }
-            onlyIfBuildSucceeds(false)
+        git {
+            branch('origin', 'add-dockerfile')
+            forcePush()
+            pushOnlyIfSuccess()
         }
 
         extendedEmail {

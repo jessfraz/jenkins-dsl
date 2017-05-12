@@ -7,7 +7,7 @@ freeStyleJob('update_fork_docker') {
     properties {
         githubProjectUrl('https://github.com/jessfraz/docker')
         sidebarLinks {
-            link('https://github.com/docker/docker', 'UPSTREAM: docker/docker', 'notepad.png')
+            link('https://github.com/moby/moby', 'UPSTREAM: moby/moby', 'notepad.png')
         }
     }
 
@@ -25,7 +25,7 @@ freeStyleJob('update_fork_docker') {
                 refspec('+refs/heads/master:refs/remotes/origin/master')
             }
             remote {
-                url('https://github.com/docker/docker.git')
+                url('https://github.com/moby/moby.git')
                 name('upstream')
                 refspec('+refs/heads/master:refs/remotes/upstream/master')
             }

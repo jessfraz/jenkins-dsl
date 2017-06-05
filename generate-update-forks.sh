@@ -36,6 +36,10 @@ generate_dsl(){
 		return
 	fi
 
+	if [[ "${upstream_repo}" == "moby/docker" ]]; then
+		upstream_repo="moby/moby"
+	fi
+
 	rname=${name//-/_}
 	file="${DIR}/projects/forks/${rname//./_}.groovy"
 

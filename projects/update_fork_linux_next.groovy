@@ -34,6 +34,11 @@ freeStyleJob('update_fork_linux_next') {
                 wipeOutWorkspace()
                 cleanAfterCheckout()
             }
+            configure { node ->
+                node / 'extensions' / 'hudson.plugins.git.extensions.impl.CloneOption' {
+                    noTags 'true'
+                }
+            }
         }
     }
 

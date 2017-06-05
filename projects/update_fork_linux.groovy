@@ -35,8 +35,8 @@ freeStyleJob('update_fork_linux') {
                 cleanAfterCheckout()
             }
             configure { node ->
-                node / 'extensions' / 'hudson.plugins.git.extensions.impl.CloneOption.noTags' {
-                    'switch'('true')
+                node / 'extensions' / 'hudson.plugins.git.extensions.impl.CloneOption' {
+                    noTags 'true'
                 }
             }
         }

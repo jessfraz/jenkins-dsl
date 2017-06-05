@@ -28,15 +28,13 @@ freeStyleJob('update_fork_linux_next') {
             }
             branches('linux-next', 'upstream/master')
             extensions {
-                cloneOptions {
-                    timeout(40)
-                }
                 wipeOutWorkspace()
                 cleanAfterCheckout()
             }
             configure { node ->
                 node / 'extensions' / 'hudson.plugins.git.extensions.impl.CloneOption' {
                     noTags 'true'
+                    timeout '40'
                 }
             }
         }

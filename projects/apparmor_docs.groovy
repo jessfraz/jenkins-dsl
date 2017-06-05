@@ -38,11 +38,11 @@ freeStyleJob('apparmor_docs') {
     environmentVariables(DOCKER_CONTENT_TRUST: '0')
     steps {
         shell('if [ ! -f /usr/bin/make ] ; then docker exec -u root jenkins apk add --no-cache make; fi')
-            shell('make')
+        shell('make')
 
-            shell('git diff-index --quiet HEAD || git add . && git commit -am "Update docs"')
-            shell('docker rm $(docker ps --filter status=exited -q 2>/dev/null) 2> /dev/null || true')
-            shell('docker rmi $(docker images --filter dangling=true -q 2>/dev/null) 2> /dev/null || true')
+        shell('git diff-index --quiet HEAD || git add . && git commit -am "Update docs"')
+        shell('docker rm $(docker ps --filter status=exited -q 2>/dev/null) 2> /dev/null || true')
+        shell('docker rmi $(docker images --filter dangling=true -q 2>/dev/null) 2> /dev/null || true')
     }
 
     publishers {

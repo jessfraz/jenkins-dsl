@@ -36,8 +36,8 @@ freeStyleJob('configs') {
 
     environmentVariables(DOCKER_CONTENT_TRUST: '1')
     steps {
-        shell('docker run --rm -it -v $(pwd | sed \'s#/var/jenkins_home/#/mnt/disks/jenkins/#\')/nginx:/etc/nginx:ro r.j3ss.co/gixy /etc/nginx/nginx.conf')
-        shell('docker run --rm -it -v $(pwd | sed \'s#/var/jenkins_home/#/mnt/disks/jenkins/#\')/telize/nginx.conf:/etc/nginx/nginx.conf:ro -v $(pwd | sed \'s#/var/jenkins_home/#/mnt/disks/jenkins/#\')/telize/telize.conf:/etc/nginx/conf.d/telize.conf:ro r.j3ss.co/gixy /etc/nginx/nginx.conf')
+        shell('if [ ! -f /usr/bin/make ] ; then docker exec -u root jenkins apk add --no-cache make; fi')
+        shell('make')
     }
 
     publishers {

@@ -1,6 +1,7 @@
 Required Plugins:
 - ANSI Color
 - Build Timeout
+- Credentials Binding
 - Email Extension
 - EnvInject
 - GitHub

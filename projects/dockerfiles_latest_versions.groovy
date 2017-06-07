@@ -34,6 +34,10 @@ freeStyleJob('dockerfiles_latest_versions') {
     wrappers {
         colorizeOutput()
 
+        credentialsBinding {
+            text('GITHUB_TOKEN', 'github-token')
+        }
+
         // timeout if there has been no activity for 180 seconds
         // then fail the build and set a build description
         timeout {

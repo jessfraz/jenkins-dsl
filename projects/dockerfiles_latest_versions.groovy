@@ -2,8 +2,6 @@ freeStyleJob('dockerfiles_latest_versions') {
     displayName('dockerfiles-latest-versions')
     description('Version check for all the Dockerfiles in jessfraz/dockerfiles repo.')
 
-    weight(4)
-
     checkoutRetryCount(3)
 
     properties {
@@ -48,6 +46,8 @@ freeStyleJob('dockerfiles_latest_versions') {
     }
 
     steps {
+        shell('if [ ! -f /usr/bin/jq ] ; then docker exec -u root jenkins apk add --no-cache jq; fi')
+
         shell('./latest-versions.sh')
     }
 

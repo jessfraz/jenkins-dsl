@@ -35,7 +35,7 @@ freeStyleJob('dockerfiles_latest_versions') {
         colorizeOutput()
 
         credentialsBinding {
-            text('GITHUB_TOKEN', 'github-token')
+            string('GITHUB_TOKEN', 'github-token')
         }
 
         // timeout if there has been no activity for 180 seconds

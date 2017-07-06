@@ -12,8 +12,8 @@ freeStyleJob('update_fork_baselayout') {
     }
 
     logRotator {
-        numToKeep(2)
-        daysToKeep(2)
+        numToKeep(100)
+        daysToKeep(15)
     }
 
     scm {

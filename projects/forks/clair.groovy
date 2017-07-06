@@ -12,8 +12,8 @@ freeStyleJob('update_fork_clair') {
     }
 
     logRotator {
-        numToKeep(2)
-        daysToKeep(2)
+        numToKeep(100)
+        daysToKeep(15)
     }
 
     scm {

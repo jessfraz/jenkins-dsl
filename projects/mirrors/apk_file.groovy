@@ -12,8 +12,8 @@ freeStyleJob('mirror_apk_file') {
     }
 
     logRotator {
-        numToKeep(2)
-        daysToKeep(2)
+        numToKeep(100)
+        daysToKeep(15)
     }
 
     triggers {

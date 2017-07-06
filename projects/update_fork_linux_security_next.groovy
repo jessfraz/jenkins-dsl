@@ -9,8 +9,8 @@ freeStyleJob('update_fork_linux_security_next') {
     }
 
     logRotator {
-        numToKeep(2)
-        daysToKeep(2)
+        numToKeep(100)
+        daysToKeep(15)
     }
 
     scm {

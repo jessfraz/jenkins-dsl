@@ -12,8 +12,8 @@ freeStyleJob('mirror_ghb0t') {
     }
 
     logRotator {
-        numToKeep(2)
-        daysToKeep(2)
+        numToKeep(100)
+        daysToKeep(15)
     }
 
     triggers {

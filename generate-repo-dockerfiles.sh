@@ -118,6 +118,7 @@ EOF
 }
 
 repos=(
+jessfraz/amicontained
 jessfraz/apk-file
 jessfraz/audit
 jessfraz/bane

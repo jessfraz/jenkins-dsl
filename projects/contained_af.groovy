@@ -38,6 +38,11 @@ freeStyleJob('contained_af') {
         shell('docker push --disable-content-trust=false r.j3ss.co/contained:latest')
         shell('docker push --disable-content-trust=false jess/contained:latest')
 
+        shell('docker build --rm --force-rm -f Dockerfile.dind -t r.j3ss.co/docker:userns .')
+        shell('docker tag r.j3ss.co/docker:userns jess/docker:userns')
+        shell('docker push --disable-content-trust=false r.j3ss.co/docker:userns')
+        shell('docker push --disable-content-trust=false jess/docker:userns')
+
         shell('docker rm $(docker ps --filter status=exited -q 2>/dev/null) 2> /dev/null || true')
         shell('docker rmi $(docker images --filter dangling=true -q 2>/dev/null) 2> /dev/null || true')
     }

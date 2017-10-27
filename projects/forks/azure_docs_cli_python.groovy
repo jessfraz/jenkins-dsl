@@ -1,13 +1,13 @@
-freeStyleJob('update_fork_notary') {
-    displayName('update-fork-notary')
-    description('Rebase the primary branch (master) in jessfraz/notary fork.')
+freeStyleJob('update_fork_azure_docs_cli_python') {
+    displayName('update-fork-azure-docs-cli-python')
+    description('Rebase the primary branch (master) in jessfraz/azure-docs-cli-python fork.')
 
     checkoutRetryCount(3)
 
     properties {
-        githubProjectUrl('https://github.com/jessfraz/notary')
+        githubProjectUrl('https://github.com/jessfraz/azure-docs-cli-python')
         sidebarLinks {
-            link('https://github.com/theupdateframework/notary', 'UPSTREAM: theupdateframework/notary', 'notepad.png')
+            link('https://github.com/Azure/azure-docs-cli-python', 'UPSTREAM: Azure/azure-docs-cli-python', 'notepad.png')
         }
     }
 
@@ -19,13 +19,13 @@ freeStyleJob('update_fork_notary') {
     scm {
         git {
             remote {
-                url('git@github.com:jessfraz/notary.git')
+                url('git@github.com:jessfraz/azure-docs-cli-python.git')
                 name('origin')
                 credentials('ssh-github-key')
                 refspec('+refs/heads/master:refs/remotes/origin/master')
             }
             remote {
-                url('https://github.com/theupdateframework/notary.git')
+                url('https://github.com/Azure/azure-docs-cli-python.git')
                 name('upstream')
                 refspec('+refs/heads/master:refs/remotes/upstream/master')
             }

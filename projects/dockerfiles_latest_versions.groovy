@@ -46,8 +46,6 @@ freeStyleJob('dockerfiles_latest_versions') {
     }
 
     steps {
-        shell('if [ ! -f /usr/bin/jq ] ; then docker exec -u root jenkins apk add --no-cache jq; fi')
-
         shell('./latest-versions.sh')
     }
 

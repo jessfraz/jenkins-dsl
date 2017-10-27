@@ -37,7 +37,6 @@ freeStyleJob('apparmor_docs') {
     // unset trust so we can run the image locally
     environmentVariables(DOCKER_CONTENT_TRUST: '0')
     steps {
-        shell('if [ ! -f /usr/bin/make ] ; then docker exec -u root jenkins apk add --no-cache make; fi')
         shell('make')
 
         shell('git diff-index --quiet HEAD || git add . && git commit -am "Update docs"')

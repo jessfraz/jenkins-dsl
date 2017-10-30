@@ -27,7 +27,7 @@ freeStyleJob('maintenance_garbage_collect_registry') {
 
     steps {
         shell("echo 'Running clean registry'")
-        shell('docker run --rm --disable-content-trust=false --name clean-registry -v /home/jessfraz/.gsutil:/root/.gsutil:ro -v /home/jessfraz/.gcloud:/root/.config/gcloud:ro -v /var/jenkins_home/.docker:/root/.docker:ro r.j3ss.co/clean-registry')
+        shell('docker run --rm --disable-content-trust=false --name clean-registry -v /home/jessfraz/.gsutil:/root/.gsutil -v /home/jessfraz/.gcloud:/root/.config/gcloud:ro -v /var/jenkins_home/.docker:/root/.docker:ro r.j3ss.co/clean-registry')
         shell("echo 'Running garbage collection'")
         shell("rm -rf *")
         shell('curl -sSL https://misc.j3ss.co/binaries/registry > $(pwd)/registry')

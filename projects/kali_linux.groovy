@@ -35,7 +35,7 @@ freeStyleJob('kali_linux') {
 
     environmentVariables(DOCKER_CONTENT_TRUST: '1')
     steps {
-        shell('docker run --rm --privileged -v $(pwd)/build.sh:/usr/bin/build.sh:ro -v /var/run/docker.sock:/var/run/docker.sock r.j3ss.co/mesos-dev build.sh')
+        shell('docker run --rm --privileged -v $(pwd)/build.sh:/usr/bin/build.sh:ro --net host -e DOCKER_HOST=tcp://127.0.0.1:2375 r.j3ss.co/mesos-dev build.sh')
         shell('docker push --disable-content-trust=false r.j3ss.co/kalilinux:latest')
 		shell('docker tag r.j3ss.co/kalilinux:latest jess/kalilinux:latest')
         shell('docker push --disable-content-trust=false jess/kalilinux:latest')

@@ -34,7 +34,7 @@ freeStyleJob('maintenance_garbage_collect_registry') {
         shell('chmod +x $(pwd)/registry')
         shell('docker run --rm --disable-content-trust=false --name registry-garbage-collect -v /home/jessfraz/volumes/registry:/etc/docker/registry:ro -v $(pwd)/registry:/usr/bin/registry -v /etc/ssl/certs/ca-certificates.crt:/etc/ssl/certs/ca-certificates.crt:ro debian:jessie /usr/bin/registry garbage-collect /etc/docker/registry/config.yml')
         shell("echo 'Getting new bucket size'")
-        shell('docker run --rm --disable-content-trust=false --name gsutil -v /home/jessfraz/.gsutil:/root/.gsutil:ro -v /home/jessfraz/.gcloud:/root/.config/gcloud:ro --entrypoint gsutil r.j3ss.co/gcloud du -s -h gs://r.j3ss.co')
+        shell('docker run --rm --disable-content-trust=false --name gsutil -v /home/jessfraz/.gsutil:/root/.gsutil -v /home/jessfraz/.gcloud:/root/.config/gcloud:ro --entrypoint gsutil r.j3ss.co/gcloud du -s -h gs://r.j3ss.co')
     }
 
     publishers {

@@ -139,6 +139,7 @@ jessfraz/reg
 jessfraz/riddler
 jessfraz/s3server
 jessfraz/snippetlib
+jessfraz/sshb0t
 jessfraz/udict
 jessfraz/upmail
 jessfraz/weather

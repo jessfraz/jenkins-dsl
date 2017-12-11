@@ -1,13 +1,13 @@
-freeStyleJob('update_fork_foss_heartbeat') {
-    displayName('update-fork-foss-heartbeat')
-    description('Rebase the primary branch (master) in jessfraz/foss-heartbeat fork.')
+freeStyleJob('update_fork_toc') {
+    displayName('update-fork-toc')
+    description('Rebase the primary branch (master) in jessfraz/toc fork.')
 
     checkoutRetryCount(3)
 
     properties {
-        githubProjectUrl('https://github.com/jessfraz/foss-heartbeat')
+        githubProjectUrl('https://github.com/jessfraz/toc')
         sidebarLinks {
-            link('https://github.com/sagesharp/foss-heartbeat', 'UPSTREAM: sagesharp/foss-heartbeat', 'notepad.png')
+            link('https://github.com/cncf/toc', 'UPSTREAM: cncf/toc', 'notepad.png')
         }
     }
 
@@ -19,13 +19,13 @@ freeStyleJob('update_fork_foss_heartbeat') {
     scm {
         git {
             remote {
-                url('git@github.com:jessfraz/foss-heartbeat.git')
+                url('git@github.com:jessfraz/toc.git')
                 name('origin')
                 credentials('ssh-github-key')
                 refspec('+refs/heads/master:refs/remotes/origin/master')
             }
             remote {
-                url('https://github.com/sagesharp/foss-heartbeat.git')
+                url('https://github.com/cncf/toc.git')
                 name('upstream')
                 refspec('+refs/heads/master:refs/remotes/upstream/master')
             }

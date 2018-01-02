@@ -78,7 +78,7 @@ freeStyleJob('${rname//./_}') {
 EOF
 
 	# also push the weather-server & reg-server images
-	if [[ "${user}/${name}" == "jessfraz/weather" ]] || [[ "${user}/${name}" == "jessfraz/reg" ]]; then
+	if [[ "${user}/${name}" == "jessfraz/weather" ]] || [[ "${user}/${name}" == "jessfraz/reg" ]] || [[ "${user}/${name}" == "jessfraz/pastebinit" ]]; then
 		image=${name}-server:${suite}
 		cat <<-EOF >> $file
 

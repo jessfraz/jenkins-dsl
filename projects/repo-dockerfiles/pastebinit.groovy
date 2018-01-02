@@ -42,6 +42,11 @@ branches('*/master')
         shell('docker tag r.j3ss.co/pastebinit:latest jess/pastebinit:latest')
         shell('docker push --disable-content-trust=false r.j3ss.co/pastebinit:latest')
         shell('docker push --disable-content-trust=false jess/pastebinit:latest')
+
+        shell('docker build --rm --force-rm --no-cache -t r.j3ss.co/pastebinit-server:latest server')
+        shell('docker tag r.j3ss.co/pastebinit-server:latest jess/pastebinit-server:latest')
+        shell('docker push --disable-content-trust=false r.j3ss.co/pastebinit-server:latest')
+        shell('docker push --disable-content-trust=false jess/pastebinit-server:latest')
         shell('docker rm $(docker ps --filter status=exited -q 2>/dev/null) 2> /dev/null || true')
         shell('docker rmi $(docker images --filter dangling=true -q 2>/dev/null) 2> /dev/null || true')
     }

@@ -1,13 +1,13 @@
-freeStyleJob('update_fork_cri_containerd') {
-    displayName('update-fork-cri-containerd')
-    description('Rebase the primary branch (master) in jessfraz/cri-containerd fork.')
+freeStyleJob('update_fork_acs_ignite_demos') {
+    displayName('update-fork-acs-ignite-demos')
+    description('Rebase the primary branch (master) in jessfraz/acs-ignite-demos fork.')
 
     checkoutRetryCount(3)
 
     properties {
-        githubProjectUrl('https://github.com/jessfraz/cri-containerd')
+        githubProjectUrl('https://github.com/jessfraz/acs-ignite-demos')
         sidebarLinks {
-            link('https://github.com/containerd/cri-containerd', 'UPSTREAM: containerd/cri-containerd', 'notepad.png')
+            link('https://github.com/brendandburns/acs-ignite-demos', 'UPSTREAM: brendandburns/acs-ignite-demos', 'notepad.png')
         }
     }
 
@@ -19,13 +19,13 @@ freeStyleJob('update_fork_cri_containerd') {
     scm {
         git {
             remote {
-                url('git@github.com:jessfraz/cri-containerd.git')
+                url('git@github.com:jessfraz/acs-ignite-demos.git')
                 name('origin')
                 credentials('ssh-github-key')
                 refspec('+refs/heads/master:refs/remotes/origin/master')
             }
             remote {
-                url('https://github.com/containerd/cri-containerd.git')
+                url('https://github.com/brendandburns/acs-ignite-demos.git')
                 name('upstream')
                 refspec('+refs/heads/master:refs/remotes/upstream/master')
             }

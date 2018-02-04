@@ -47,6 +47,7 @@ freeStyleJob('docker_hub_dockerfiles') {
     environmentVariables(JOBS: '5')
     steps {
         shell('REPO_URL=jess ./build-all.sh')
+        shell('REPO_URL=jessfraz ./build-all.sh')
         shell('docker rm $(docker ps --filter status=exited -q 2>/dev/null) 2> /dev/null || true')
         shell('docker rmi $(docker images --filter dangling=true -q 2>/dev/null) 2> /dev/null || true')
     }

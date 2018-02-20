@@ -128,6 +128,7 @@ jessfraz/cliaoke
 jessfraz/dockfmt
 jessfraz/dstats
 jessfraz/ghb0t
+jessfraz/img
 jessfraz/magneto
 jessfraz/netns
 jessfraz/netscan

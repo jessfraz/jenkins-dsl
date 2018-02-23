@@ -82,8 +82,8 @@ EOF
 		image=${name}-server:${suite}
 		cat <<-EOF >> $file
 
-        shell('docker build --rm --force-rm --no-cache -t r.j3ss.co/${image} server')
-        shell('img build --rm --force-rm --no-cache -t r.j3ss.co/${image} server')
+        shell('docker build --rm --force-rm -t r.j3ss.co/${image} server')
+        shell('img build -t r.j3ss.co/${image} server')
         shell('docker tag r.j3ss.co/${image} jess/${image}')
         shell('docker tag r.j3ss.co/${image} jessfraz/${image}')
         shell('docker push --disable-content-trust=false r.j3ss.co/${image}')

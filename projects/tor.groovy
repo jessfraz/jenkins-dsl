@@ -44,10 +44,13 @@ freeStyleJob('tor') {
     steps {
         shell('git checkout origin/add-dockerfile -b add-dockerfile')
         shell('git rebase upstream/master')
-        shell('docker build --rm --force-rm -t jess/tor:latest .')
-        shell('docker tag jess/tor:latest r.j3ss.co/tor:latest')
-        shell('docker push --disable-content-trust=false jess/tor:latest')
+        shell('docker build --rm --force-rm -t r.j3ss.co/tor:latest .')
+        shell('img build --rm --force-rm -t r.j3ss.co/tor:latest .')
+        shell('docker tag r.j3ss.co/tor:latest jess/tor:latest')
+        shell('docker tag r.j3ss.co/tor:latest jessfraz/tor:latest')
         shell('docker push --disable-content-trust=false r.j3ss.co/tor:latest')
+        shell('docker push --disable-content-trust=false jess/tor:latest')
+        shell('docker push --disable-content-trust=false jessfraz/tor:latest')
         shell('docker rm $(docker ps --filter status=exited -q 2>/dev/null) 2> /dev/null || true')
         shell('docker rmi $(docker images --filter dangling=true -q 2>/dev/null) 2> /dev/null || true')
     }

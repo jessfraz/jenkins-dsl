@@ -148,6 +148,7 @@ jessfraz/sshb0t
 jessfraz/udict
 jessfraz/upmail
 jessfraz/weather
+kennethreitz/httpbin
 kylemanna/docker-openvpn
 rroemhild/docker-ejabberd
 )

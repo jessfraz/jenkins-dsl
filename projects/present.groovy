@@ -36,7 +36,6 @@ freeStyleJob('present') {
     environmentVariables(DOCKER_CONTENT_TRUST: '1')
     steps {
         shell('docker build --rm --force-rm -t r.j3ss.co/present:latest .')
-        shell('img build -t r.j3ss.co/present:latest .')
         shell('docker tag r.j3ss.co/present:latest jess/present:latest')
         shell('docker tag r.j3ss.co/present:latest jessfraz/present:latest')
         shell('docker push --disable-content-trust=false r.j3ss.co/present:latest')

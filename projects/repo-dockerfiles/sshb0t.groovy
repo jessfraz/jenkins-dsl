@@ -39,7 +39,6 @@ branches('*/master')
     environmentVariables(DOCKER_CONTENT_TRUST: '1')
     steps {
         shell('docker build --rm --force-rm -t r.j3ss.co/sshb0t:latest .')
-        shell('img build -t r.j3ss.co/sshb0t:latest .')
         shell('docker tag r.j3ss.co/sshb0t:latest jess/sshb0t:latest')
         shell('docker push --disable-content-trust=false r.j3ss.co/sshb0t:latest')
         shell('docker push --disable-content-trust=false jess/sshb0t:latest')

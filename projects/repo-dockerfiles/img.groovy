@@ -44,7 +44,6 @@ branches('*/master')
         shell('docker push --disable-content-trust=false jess/img:latest')
         shell('docker rm $(docker ps --filter status=exited -q 2>/dev/null) 2> /dev/null || true')
         shell('docker rmi $(docker images --filter dangling=true -q 2>/dev/null) 2> /dev/null || true')
-        shell('img build -t r.j3ss.co/img:latest .')
     }
 
     publishers {

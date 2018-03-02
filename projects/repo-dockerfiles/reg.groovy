@@ -39,13 +39,11 @@ branches('*/master')
     environmentVariables(DOCKER_CONTENT_TRUST: '1')
     steps {
         shell('docker build --rm --force-rm -t r.j3ss.co/reg:latest .')
-        shell('img build -t r.j3ss.co/reg:latest .')
         shell('docker tag r.j3ss.co/reg:latest jess/reg:latest')
         shell('docker push --disable-content-trust=false r.j3ss.co/reg:latest')
         shell('docker push --disable-content-trust=false jess/reg:latest')
 
         shell('docker build --rm --force-rm -t r.j3ss.co/reg-server:latest server')
-        shell('img build -t r.j3ss.co/reg-server:latest server')
         shell('docker tag r.j3ss.co/reg-server:latest jess/reg-server:latest')
         shell('docker tag r.j3ss.co/reg-server:latest jessfraz/reg-server:latest')
         shell('docker push --disable-content-trust=false r.j3ss.co/reg-server:latest')

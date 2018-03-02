@@ -72,7 +72,6 @@ freeStyleJob('${rname//./_}') {
     environmentVariables(DOCKER_CONTENT_TRUST: '1')
     steps {
         shell('docker build --rm --force-rm -t r.j3ss.co/${image} .')
-        shell('img build -t r.j3ss.co/${image} .')
         shell('docker tag r.j3ss.co/${image} jess/${image}')
         shell('docker push --disable-content-trust=false r.j3ss.co/${image}')
         shell('docker push --disable-content-trust=false jess/${image}')
@@ -84,7 +83,6 @@ EOF
 		cat <<-EOF >> $file
 
         shell('docker build --rm --force-rm -t r.j3ss.co/${image} server')
-        shell('img build -t r.j3ss.co/${image} server')
         shell('docker tag r.j3ss.co/${image} jess/${image}')
         shell('docker tag r.j3ss.co/${image} jessfraz/${image}')
         shell('docker push --disable-content-trust=false r.j3ss.co/${image}')

@@ -39,13 +39,11 @@ branches('*/master')
     environmentVariables(DOCKER_CONTENT_TRUST: '1')
     steps {
         shell('docker build --rm --force-rm -t r.j3ss.co/pastebinit:latest .')
-        shell('img build -t r.j3ss.co/pastebinit:latest .')
         shell('docker tag r.j3ss.co/pastebinit:latest jess/pastebinit:latest')
         shell('docker push --disable-content-trust=false r.j3ss.co/pastebinit:latest')
         shell('docker push --disable-content-trust=false jess/pastebinit:latest')
 
         shell('docker build --rm --force-rm -t r.j3ss.co/pastebinit-server:latest server')
-        shell('img build -t r.j3ss.co/pastebinit-server:latest server')
         shell('docker tag r.j3ss.co/pastebinit-server:latest jess/pastebinit-server:latest')
         shell('docker tag r.j3ss.co/pastebinit-server:latest jessfraz/pastebinit-server:latest')
         shell('docker push --disable-content-trust=false r.j3ss.co/pastebinit-server:latest')

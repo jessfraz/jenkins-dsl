@@ -38,6 +38,8 @@ generate_dsl(){
 
 	if [[ "${upstream_repo}" == "moby/docker" ]]; then
 		upstream_repo="moby/moby"
+	elif [[ "${upstream_repo}" == "kata-containers/kata-runtime" ]]; then
+		upstream_repo="kata-containers/runtime"
 	fi
 
 	rname=${name//-/_}

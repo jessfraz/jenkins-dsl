@@ -22,9 +22,18 @@ API_VERSION=v3
 API_HEADER="Accept: application/vnd.github.${API_VERSION}+json"
 AUTH_HEADER="Authorization: token ${GITHUB_TOKEN}"
 
-DEFAULT_PER_PAGE=100
+DEFAULT_PER_PAGE=20
+LAST_PAGE=1
 
 ignore_repos=( mac-dev-setup )
+
+# get the last page from the headers
+get_last_page(){
+	local header=${1%%" rel=\"last\""*}
+	header=${header#*"rel=\"next\""}
+	header=${header%%">;"*}
+	LAST_PAGE=$(echo "${header#*'&page='}" | bc 2>/dev/null)
+}
 
 generate_dsl(){
 	local forked_repo=$1
@@ -121,16 +130,33 @@ EOF
 
 }
 
+get_repos(){
+	local page=$1
 
-main(){
 	# send the request
 	local response
-	response=$(curl -sSL -H "${AUTH_HEADER}" -H "${API_HEADER}" "${URI}/users/${GITHUB_USER}/repos?per_page=${DEFAULT_PER_PAGE}")
-	local repos
-	repos=$(echo "$response" | jq --raw-output '.[] | {fullname:.full_name,repo:.name,fork:.fork} | @base64')
+	response=$(curl -i -sSL -H "${AUTH_HEADER}" -H "${API_HEADER}" "${URI}/users/${GITHUB_USER}/repos?per_page=${DEFAULT_PER_PAGE}&page=${page}")
 
-	mkdir -p $DIR/projects/forks
-	echo "FILE | FORK | UPSTREAM"
+	# seperate the headers and body into 2 variables
+	local head=true
+	local header
+	local body
+	while read -r line; do
+		if $head; then
+			if [[ $line = $'\r' ]]; then
+				head=false
+			else
+				header="$header"$'\n'"$line"
+			fi
+		else
+			body="$body"$'\n'"$line"
+		fi
+	done < <(echo "${response}")
+
+	get_last_page "${header}"
+
+	local repos
+	repos=$(echo "$body" | jq --raw-output '.[] | {fullname:.full_name,repo:.name,fork:.fork} | @base64')
 
 	for r in $repos; do
 		raw="$(echo "$r" | base64 -d)"
@@ -151,6 +177,22 @@ main(){
 			generate_dsl "${fullname}" "${upstream_user}/${repo}" "${primary_branch}"
 		fi
 	done
+}
+
+main(){
+	mkdir -p $DIR/projects/forks
+	echo "FILE | FORK | UPSTREAM"
+
+	local page=1
+
+	get_repos "$page"
+
+	if [ ! -z "$LAST_PAGE" ] && [ "$LAST_PAGE" -ge "$page" ]; then
+		for page in  $(seq $((page + 1)) 1 "${LAST_PAGE}"); do
+			# echo "[debug]: on repo page ${page} of ${LAST_PAGE}"
+			get_repos "${page}"
+		done
+	fi
 }
 
 main

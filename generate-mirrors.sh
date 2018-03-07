@@ -17,8 +17,8 @@ if [[ -z "$GITHUB_USER" ]]; then
 fi
 
 if [[ -z "$GITHUB_TOKEN" ]]; then
-    echo "Set the GITHUB_TOKEN env variable."
-    exit 1
+	echo "Set the GITHUB_TOKEN env variable."
+	exit 1
 fi
 
 URI=https://api.github.com
@@ -26,7 +26,16 @@ API_VERSION=v3
 API_HEADER="Accept: application/vnd.github.${API_VERSION}+json"
 AUTH_HEADER="Authorization: token ${GITHUB_TOKEN}"
 
-DEFAULT_PER_PAGE=100
+DEFAULT_PER_PAGE=20
+LAST_PAGE=1
+
+# get the last page from the headers
+get_last_page(){
+	local header=${1%%" rel=\"last\""*}
+	header=${header#*"rel=\"next\""}
+	header=${header%%">;"*}
+	LAST_PAGE=$(echo "${header#*'&page='}" | bc 2>/dev/null)
+}
 
 generate_dsl(){
 	local orig=$1
@@ -48,32 +57,25 @@ generate_dsl(){
 freeStyleJob('mirror_${rname//./_}') {
     displayName('mirror-${name}')
     description('Mirror github.com/${orig} to g.j3ss.co/${dest}.')
-
     checkoutRetryCount(3)
-
     properties {
         githubProjectUrl('https://github.com/${orig}')
         sidebarLinks {
             link('https://git.j3ss.co/${dest}', 'git.j3ss.co/${dest}', 'notepad.png')
         }
     }
-
     logRotator {
         numToKeep(100)
         daysToKeep(15)
     }
-
     triggers {
         cron('H H * * *')
     }
-
     wrappers { colorizeOutput() }
-
     steps {
         shell('git clone --mirror https://github.com/${orig}.git repo')
         shell('cd repo && git push --mirror ssh://git@g.j3ss.co:2200/~/${dest}.git')
     }
-
     publishers {
         extendedEmail {
             recipientList('\$DEFAULT_RECIPIENTS')
@@ -84,7 +86,6 @@ freeStyleJob('mirror_${rname//./_}') {
                 }
             }
         }
-
         wsCleanup()
     }
 }
@@ -92,16 +93,33 @@ EOF
 
 }
 
+get_repos(){
+	local page=$1
 
-main(){
 	# send the request
 	local response
-	response=$(curl -sSL -H "${AUTH_HEADER}" -H "${API_HEADER}" "${URI}/users/${GITHUB_USER}/repos?per_page=${DEFAULT_PER_PAGE}&type=public")
-	local repos
-	repos=$(echo "$response" | jq --raw-output '.[] | {fullname:.full_name,repo:.name,fork:.fork,description:.description} | @base64')
+	response=$(curl -i -sSL -H "${AUTH_HEADER}" -H "${API_HEADER}" "${URI}/users/${GITHUB_USER}/repos?per_page=${DEFAULT_PER_PAGE}&type=public&page=${page}")
 
-	mkdir -p $DIR/projects/mirrors
-	echo "FILE | REPO"
+	# seperate the headers and body into 2 variables
+	local head=true
+	local header
+	local body
+	while read -r line; do
+		if $head; then
+			if [[ $line = $'\r' ]]; then
+				head=false
+			else
+				header="$header"$'\n'"$line"
+			fi
+		else
+			body="$body"$'\n'"$line"
+		fi
+	done < <(echo "${response}")
+
+	get_last_page "${header}"
+
+	local repos
+	repos=$(echo "$body" | jq --raw-output '.[] | {fullname:.full_name,repo:.name,fork:.fork,description:.description} | @base64')
 
 	for r in $repos; do
 		raw="$(echo "$r" | base64 -d)"
@@ -132,6 +150,22 @@ main(){
 			generate_dsl "${fullname}"
 		fi
 	done
+}
+
+main(){
+	mkdir -p $DIR/projects/mirrors
+	echo "FILE | REPO"
+
+	local page=1
+
+	get_repos "$page"
+
+	if [ ! -z "$LAST_PAGE" ] && [ "$LAST_PAGE" -ge "$page" ]; then
+		for page in  $(seq $((page + 1)) 1 "${LAST_PAGE}"); do
+			# echo "[debug]: on repo page ${page} of ${LAST_PAGE}"
+			get_repos "${page}"
+		done
+	fi
 }
 
 main

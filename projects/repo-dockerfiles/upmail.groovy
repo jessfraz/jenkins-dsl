@@ -1,11 +1,11 @@
 freeStyleJob('upmail') {
     displayName('upmail')
-    description('Build Dockerfiles in jessfraz/upmail.')
+    description('Build Dockerfiles in genuinetools/upmail.')
 
     checkoutRetryCount(3)
 
     properties {
-        githubProjectUrl('https://github.com/jessfraz/upmail')
+        githubProjectUrl('https://github.com/genuinetools/upmail')
         sidebarLinks {
             link('https://hub.docker.com/r/jess/upmail', 'Docker Hub: jess/upmail', 'notepad.png')
         }
@@ -19,7 +19,7 @@ freeStyleJob('upmail') {
     scm {
         git {
             remote {
-                url('https://github.com/jessfraz/upmail.git')
+                url('https://github.com/genuinetools/upmail.git')
             }
 branches('*/master')
             extensions {

@@ -1,11 +1,11 @@
 freeStyleJob('netns') {
     displayName('netns')
-    description('Build Dockerfiles in jessfraz/netns.')
+    description('Build Dockerfiles in genuinetools/netns.')
 
     checkoutRetryCount(3)
 
     properties {
-        githubProjectUrl('https://github.com/jessfraz/netns')
+        githubProjectUrl('https://github.com/genuinetools/netns')
         sidebarLinks {
             link('https://hub.docker.com/r/jess/netns', 'Docker Hub: jess/netns', 'notepad.png')
         }
@@ -19,7 +19,7 @@ freeStyleJob('netns') {
     scm {
         git {
             remote {
-                url('https://github.com/jessfraz/netns.git')
+                url('https://github.com/genuinetools/netns.git')
             }
 branches('*/master')
             extensions {

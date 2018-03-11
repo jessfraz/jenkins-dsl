@@ -1,11 +1,11 @@
 freeStyleJob('mirror_netns') {
     displayName('mirror-netns')
-    description('Mirror github.com/jessfraz/netns to g.j3ss.co/netns.')
+    description('Mirror github.com/genuinetools/netns to g.j3ss.co/genuinetools/netns.')
     checkoutRetryCount(3)
     properties {
-        githubProjectUrl('https://github.com/jessfraz/netns')
+        githubProjectUrl('https://github.com/genuinetools/netns')
         sidebarLinks {
-            link('https://git.j3ss.co/netns', 'git.j3ss.co/netns', 'notepad.png')
+            link('https://git.j3ss.co/genuinetools/netns', 'git.j3ss.co/genuinetools/netns', 'notepad.png')
         }
     }
     logRotator {
@@ -17,8 +17,8 @@ freeStyleJob('mirror_netns') {
     }
     wrappers { colorizeOutput() }
     steps {
-        shell('git clone --mirror https://github.com/jessfraz/netns.git repo')
-        shell('cd repo && git push --mirror ssh://git@g.j3ss.co:2200/~/netns.git')
+        shell('git clone --mirror https://github.com/genuinetools/netns.git repo')
+        shell('cd repo && git push --mirror ssh://git@g.j3ss.co:2200/~/genuinetools/netns.git')
     }
     publishers {
         extendedEmail {

@@ -1,11 +1,11 @@
 freeStyleJob('mirror_magneto') {
     displayName('mirror-magneto')
-    description('Mirror github.com/jessfraz/magneto to g.j3ss.co/magneto.')
+    description('Mirror github.com/genuinetools/magneto to g.j3ss.co/genuinetools/magneto.')
     checkoutRetryCount(3)
     properties {
-        githubProjectUrl('https://github.com/jessfraz/magneto')
+        githubProjectUrl('https://github.com/genuinetools/magneto')
         sidebarLinks {
-            link('https://git.j3ss.co/magneto', 'git.j3ss.co/magneto', 'notepad.png')
+            link('https://git.j3ss.co/genuinetools/magneto', 'git.j3ss.co/genuinetools/magneto', 'notepad.png')
         }
     }
     logRotator {
@@ -17,8 +17,8 @@ freeStyleJob('mirror_magneto') {
     }
     wrappers { colorizeOutput() }
     steps {
-        shell('git clone --mirror https://github.com/jessfraz/magneto.git repo')
-        shell('cd repo && git push --mirror ssh://git@g.j3ss.co:2200/~/magneto.git')
+        shell('git clone --mirror https://github.com/genuinetools/magneto.git repo')
+        shell('cd repo && git push --mirror ssh://git@g.j3ss.co:2200/~/genuinetools/magneto.git')
     }
     publishers {
         extendedEmail {

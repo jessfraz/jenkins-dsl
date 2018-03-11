@@ -1,11 +1,11 @@
 freeStyleJob('mirror_riddler') {
     displayName('mirror-riddler')
-    description('Mirror github.com/jessfraz/riddler to g.j3ss.co/riddler.')
+    description('Mirror github.com/genuinetools/riddler to g.j3ss.co/genuinetools/riddler.')
     checkoutRetryCount(3)
     properties {
-        githubProjectUrl('https://github.com/jessfraz/riddler')
+        githubProjectUrl('https://github.com/genuinetools/riddler')
         sidebarLinks {
-            link('https://git.j3ss.co/riddler', 'git.j3ss.co/riddler', 'notepad.png')
+            link('https://git.j3ss.co/genuinetools/riddler', 'git.j3ss.co/genuinetools/riddler', 'notepad.png')
         }
     }
     logRotator {
@@ -17,8 +17,8 @@ freeStyleJob('mirror_riddler') {
     }
     wrappers { colorizeOutput() }
     steps {
-        shell('git clone --mirror https://github.com/jessfraz/riddler.git repo')
-        shell('cd repo && git push --mirror ssh://git@g.j3ss.co:2200/~/riddler.git')
+        shell('git clone --mirror https://github.com/genuinetools/riddler.git repo')
+        shell('cd repo && git push --mirror ssh://git@g.j3ss.co:2200/~/genuinetools/riddler.git')
     }
     publishers {
         extendedEmail {

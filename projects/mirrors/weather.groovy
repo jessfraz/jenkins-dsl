@@ -1,11 +1,11 @@
 freeStyleJob('mirror_weather') {
     displayName('mirror-weather')
-    description('Mirror github.com/jessfraz/weather to g.j3ss.co/weather.')
+    description('Mirror github.com/genuinetools/weather to g.j3ss.co/genuinetools/weather.')
     checkoutRetryCount(3)
     properties {
-        githubProjectUrl('https://github.com/jessfraz/weather')
+        githubProjectUrl('https://github.com/genuinetools/weather')
         sidebarLinks {
-            link('https://git.j3ss.co/weather', 'git.j3ss.co/weather', 'notepad.png')
+            link('https://git.j3ss.co/genuinetools/weather', 'git.j3ss.co/genuinetools/weather', 'notepad.png')
         }
     }
     logRotator {
@@ -17,8 +17,8 @@ freeStyleJob('mirror_weather') {
     }
     wrappers { colorizeOutput() }
     steps {
-        shell('git clone --mirror https://github.com/jessfraz/weather.git repo')
-        shell('cd repo && git push --mirror ssh://git@g.j3ss.co:2200/~/weather.git')
+        shell('git clone --mirror https://github.com/genuinetools/weather.git repo')
+        shell('cd repo && git push --mirror ssh://git@g.j3ss.co:2200/~/genuinetools/weather.git')
     }
     publishers {
         extendedEmail {

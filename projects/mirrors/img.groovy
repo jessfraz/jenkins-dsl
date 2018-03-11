@@ -1,11 +1,11 @@
 freeStyleJob('mirror_img') {
     displayName('mirror-img')
-    description('Mirror github.com/jessfraz/img to g.j3ss.co/img.')
+    description('Mirror github.com/genuinetools/img to g.j3ss.co/genuinetools/img.')
     checkoutRetryCount(3)
     properties {
-        githubProjectUrl('https://github.com/jessfraz/img')
+        githubProjectUrl('https://github.com/genuinetools/img')
         sidebarLinks {
-            link('https://git.j3ss.co/img', 'git.j3ss.co/img', 'notepad.png')
+            link('https://git.j3ss.co/genuinetools/img', 'git.j3ss.co/genuinetools/img', 'notepad.png')
         }
     }
     logRotator {
@@ -17,8 +17,8 @@ freeStyleJob('mirror_img') {
     }
     wrappers { colorizeOutput() }
     steps {
-        shell('git clone --mirror https://github.com/jessfraz/img.git repo')
-        shell('cd repo && git push --mirror ssh://git@g.j3ss.co:2200/~/img.git')
+        shell('git clone --mirror https://github.com/genuinetools/img.git repo')
+        shell('cd repo && git push --mirror ssh://git@g.j3ss.co:2200/~/genuinetools/img.git')
     }
     publishers {
         extendedEmail {

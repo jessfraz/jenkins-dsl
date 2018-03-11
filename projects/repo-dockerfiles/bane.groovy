@@ -1,11 +1,11 @@
 freeStyleJob('bane') {
     displayName('bane')
-    description('Build Dockerfiles in jessfraz/bane.')
+    description('Build Dockerfiles in genuinetools/bane.')
 
     checkoutRetryCount(3)
 
     properties {
-        githubProjectUrl('https://github.com/jessfraz/bane')
+        githubProjectUrl('https://github.com/genuinetools/bane')
         sidebarLinks {
             link('https://hub.docker.com/r/jess/bane', 'Docker Hub: jess/bane', 'notepad.png')
         }
@@ -19,7 +19,7 @@ freeStyleJob('bane') {
     scm {
         git {
             remote {
-                url('https://github.com/jessfraz/bane.git')
+                url('https://github.com/genuinetools/bane.git')
             }
 branches('*/master')
             extensions {

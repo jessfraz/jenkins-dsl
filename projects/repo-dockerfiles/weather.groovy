@@ -1,11 +1,11 @@
 freeStyleJob('weather') {
     displayName('weather')
-    description('Build Dockerfiles in jessfraz/weather.')
+    description('Build Dockerfiles in genuinetools/weather.')
 
     checkoutRetryCount(3)
 
     properties {
-        githubProjectUrl('https://github.com/jessfraz/weather')
+        githubProjectUrl('https://github.com/genuinetools/weather')
         sidebarLinks {
             link('https://hub.docker.com/r/jess/weather', 'Docker Hub: jess/weather', 'notepad.png')
         }
@@ -19,7 +19,7 @@ freeStyleJob('weather') {
     scm {
         git {
             remote {
-                url('https://github.com/jessfraz/weather.git')
+                url('https://github.com/genuinetools/weather.git')
             }
 branches('*/master')
             extensions {

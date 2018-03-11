@@ -1,11 +1,11 @@
 freeStyleJob('mirror_pepper') {
     displayName('mirror-pepper')
-    description('Mirror github.com/jessfraz/pepper to g.j3ss.co/pepper.')
+    description('Mirror github.com/genuinetools/pepper to g.j3ss.co/genuinetools/pepper.')
     checkoutRetryCount(3)
     properties {
-        githubProjectUrl('https://github.com/jessfraz/pepper')
+        githubProjectUrl('https://github.com/genuinetools/pepper')
         sidebarLinks {
-            link('https://git.j3ss.co/pepper', 'git.j3ss.co/pepper', 'notepad.png')
+            link('https://git.j3ss.co/genuinetools/pepper', 'git.j3ss.co/genuinetools/pepper', 'notepad.png')
         }
     }
     logRotator {
@@ -17,8 +17,8 @@ freeStyleJob('mirror_pepper') {
     }
     wrappers { colorizeOutput() }
     steps {
-        shell('git clone --mirror https://github.com/jessfraz/pepper.git repo')
-        shell('cd repo && git push --mirror ssh://git@g.j3ss.co:2200/~/pepper.git')
+        shell('git clone --mirror https://github.com/genuinetools/pepper.git repo')
+        shell('cd repo && git push --mirror ssh://git@g.j3ss.co:2200/~/genuinetools/pepper.git')
     }
     publishers {
         extendedEmail {

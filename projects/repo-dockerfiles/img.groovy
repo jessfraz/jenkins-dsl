@@ -1,11 +1,11 @@
 freeStyleJob('img') {
     displayName('img')
-    description('Build Dockerfiles in jessfraz/img.')
+    description('Build Dockerfiles in genuinetools/img.')
 
     checkoutRetryCount(3)
 
     properties {
-        githubProjectUrl('https://github.com/jessfraz/img')
+        githubProjectUrl('https://github.com/genuinetools/img')
         sidebarLinks {
             link('https://hub.docker.com/r/jess/img', 'Docker Hub: jess/img', 'notepad.png')
         }
@@ -19,7 +19,7 @@ freeStyleJob('img') {
     scm {
         git {
             remote {
-                url('https://github.com/jessfraz/img.git')
+                url('https://github.com/genuinetools/img.git')
             }
 branches('*/master')
             extensions {

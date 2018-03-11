@@ -1,11 +1,11 @@
 freeStyleJob('udict') {
     displayName('udict')
-    description('Build Dockerfiles in jessfraz/udict.')
+    description('Build Dockerfiles in genuinetools/udict.')
 
     checkoutRetryCount(3)
 
     properties {
-        githubProjectUrl('https://github.com/jessfraz/udict')
+        githubProjectUrl('https://github.com/genuinetools/udict')
         sidebarLinks {
             link('https://hub.docker.com/r/jess/udict', 'Docker Hub: jess/udict', 'notepad.png')
         }
@@ -19,7 +19,7 @@ freeStyleJob('udict') {
     scm {
         git {
             remote {
-                url('https://github.com/jessfraz/udict.git')
+                url('https://github.com/genuinetools/udict.git')
             }
 branches('*/master')
             extensions {

@@ -1,11 +1,11 @@
 freeStyleJob('pepper') {
     displayName('pepper')
-    description('Build Dockerfiles in jessfraz/pepper.')
+    description('Build Dockerfiles in genuinetools/pepper.')
 
     checkoutRetryCount(3)
 
     properties {
-        githubProjectUrl('https://github.com/jessfraz/pepper')
+        githubProjectUrl('https://github.com/genuinetools/pepper')
         sidebarLinks {
             link('https://hub.docker.com/r/jess/pepper', 'Docker Hub: jess/pepper', 'notepad.png')
         }
@@ -19,7 +19,7 @@ freeStyleJob('pepper') {
     scm {
         git {
             remote {
-                url('https://github.com/jessfraz/pepper.git')
+                url('https://github.com/genuinetools/pepper.git')
             }
 branches('*/master')
             extensions {

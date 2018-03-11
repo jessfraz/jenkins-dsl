@@ -1,11 +1,11 @@
 freeStyleJob('riddler') {
     displayName('riddler')
-    description('Build Dockerfiles in jessfraz/riddler.')
+    description('Build Dockerfiles in genuinetools/riddler.')
 
     checkoutRetryCount(3)
 
     properties {
-        githubProjectUrl('https://github.com/jessfraz/riddler')
+        githubProjectUrl('https://github.com/genuinetools/riddler')
         sidebarLinks {
             link('https://hub.docker.com/r/jess/riddler', 'Docker Hub: jess/riddler', 'notepad.png')
         }
@@ -19,7 +19,7 @@ freeStyleJob('riddler') {
     scm {
         git {
             remote {
-                url('https://github.com/jessfraz/riddler.git')
+                url('https://github.com/genuinetools/riddler.git')
             }
 branches('*/master')
             extensions {

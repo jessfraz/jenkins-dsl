@@ -1,11 +1,11 @@
 freeStyleJob('reg') {
     displayName('reg')
-    description('Build Dockerfiles in jessfraz/reg.')
+    description('Build Dockerfiles in genuinetools/reg.')
 
     checkoutRetryCount(3)
 
     properties {
-        githubProjectUrl('https://github.com/jessfraz/reg')
+        githubProjectUrl('https://github.com/genuinetools/reg')
         sidebarLinks {
             link('https://hub.docker.com/r/jess/reg', 'Docker Hub: jess/reg', 'notepad.png')
         }
@@ -19,7 +19,7 @@ freeStyleJob('reg') {
     scm {
         git {
             remote {
-                url('https://github.com/jessfraz/reg.git')
+                url('https://github.com/genuinetools/reg.git')
             }
 branches('*/master')
             extensions {

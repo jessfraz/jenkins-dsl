@@ -1,11 +1,11 @@
 freeStyleJob('mirror_audit') {
     displayName('mirror-audit')
-    description('Mirror github.com/jessfraz/audit to g.j3ss.co/audit.')
+    description('Mirror github.com/genuinetools/audit to g.j3ss.co/genuinetools/audit.')
     checkoutRetryCount(3)
     properties {
-        githubProjectUrl('https://github.com/jessfraz/audit')
+        githubProjectUrl('https://github.com/genuinetools/audit')
         sidebarLinks {
-            link('https://git.j3ss.co/audit', 'git.j3ss.co/audit', 'notepad.png')
+            link('https://git.j3ss.co/genuinetools/audit', 'git.j3ss.co/genuinetools/audit', 'notepad.png')
         }
     }
     logRotator {
@@ -17,8 +17,8 @@ freeStyleJob('mirror_audit') {
     }
     wrappers { colorizeOutput() }
     steps {
-        shell('git clone --mirror https://github.com/jessfraz/audit.git repo')
-        shell('cd repo && git push --mirror ssh://git@g.j3ss.co:2200/~/audit.git')
+        shell('git clone --mirror https://github.com/genuinetools/audit.git repo')
+        shell('cd repo && git push --mirror ssh://git@g.j3ss.co:2200/~/genuinetools/audit.git')
     }
     publishers {
         extendedEmail {

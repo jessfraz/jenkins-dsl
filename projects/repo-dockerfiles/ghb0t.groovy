@@ -1,11 +1,11 @@
 freeStyleJob('ghb0t') {
     displayName('ghb0t')
-    description('Build Dockerfiles in jessfraz/ghb0t.')
+    description('Build Dockerfiles in genuinetools/ghb0t.')
 
     checkoutRetryCount(3)
 
     properties {
-        githubProjectUrl('https://github.com/jessfraz/ghb0t')
+        githubProjectUrl('https://github.com/genuinetools/ghb0t')
         sidebarLinks {
             link('https://hub.docker.com/r/jess/ghb0t', 'Docker Hub: jess/ghb0t', 'notepad.png')
         }
@@ -19,7 +19,7 @@ freeStyleJob('ghb0t') {
     scm {
         git {
             remote {
-                url('https://github.com/jessfraz/ghb0t.git')
+                url('https://github.com/genuinetools/ghb0t.git')
             }
 branches('*/master')
             extensions {

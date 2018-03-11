@@ -1,11 +1,11 @@
 freeStyleJob('amicontained') {
     displayName('amicontained')
-    description('Build Dockerfiles in jessfraz/amicontained.')
+    description('Build Dockerfiles in genuinetools/amicontained.')
 
     checkoutRetryCount(3)
 
     properties {
-        githubProjectUrl('https://github.com/jessfraz/amicontained')
+        githubProjectUrl('https://github.com/genuinetools/amicontained')
         sidebarLinks {
             link('https://hub.docker.com/r/jess/amicontained', 'Docker Hub: jess/amicontained', 'notepad.png')
         }
@@ -19,7 +19,7 @@ freeStyleJob('amicontained') {
     scm {
         git {
             remote {
-                url('https://github.com/jessfraz/amicontained.git')
+                url('https://github.com/genuinetools/amicontained.git')
             }
 branches('*/master')
             extensions {

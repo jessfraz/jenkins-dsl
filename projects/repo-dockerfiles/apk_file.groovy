@@ -1,11 +1,11 @@
 freeStyleJob('apk_file') {
     displayName('apk-file')
-    description('Build Dockerfiles in jessfraz/apk-file.')
+    description('Build Dockerfiles in genuinetools/apk-file.')
 
     checkoutRetryCount(3)
 
     properties {
-        githubProjectUrl('https://github.com/jessfraz/apk-file')
+        githubProjectUrl('https://github.com/genuinetools/apk-file')
         sidebarLinks {
             link('https://hub.docker.com/r/jess/apk-file', 'Docker Hub: jess/apk-file', 'notepad.png')
         }
@@ -19,7 +19,7 @@ freeStyleJob('apk_file') {
     scm {
         git {
             remote {
-                url('https://github.com/jessfraz/apk-file.git')
+                url('https://github.com/genuinetools/apk-file.git')
             }
 branches('*/master')
             extensions {

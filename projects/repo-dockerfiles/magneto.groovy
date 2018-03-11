@@ -1,11 +1,11 @@
 freeStyleJob('magneto') {
     displayName('magneto')
-    description('Build Dockerfiles in jessfraz/magneto.')
+    description('Build Dockerfiles in genuinetools/magneto.')
 
     checkoutRetryCount(3)
 
     properties {
-        githubProjectUrl('https://github.com/jessfraz/magneto')
+        githubProjectUrl('https://github.com/genuinetools/magneto')
         sidebarLinks {
             link('https://hub.docker.com/r/jess/magneto', 'Docker Hub: jess/magneto', 'notepad.png')
         }
@@ -19,7 +19,7 @@ freeStyleJob('magneto') {
     scm {
         git {
             remote {
-                url('https://github.com/jessfraz/magneto.git')
+                url('https://github.com/genuinetools/magneto.git')
             }
 branches('*/master')
             extensions {

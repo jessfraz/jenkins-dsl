@@ -1,11 +1,11 @@
 freeStyleJob('audit') {
     displayName('audit')
-    description('Build Dockerfiles in jessfraz/audit.')
+    description('Build Dockerfiles in genuinetools/audit.')
 
     checkoutRetryCount(3)
 
     properties {
-        githubProjectUrl('https://github.com/jessfraz/audit')
+        githubProjectUrl('https://github.com/genuinetools/audit')
         sidebarLinks {
             link('https://hub.docker.com/r/jess/audit', 'Docker Hub: jess/audit', 'notepad.png')
         }
@@ -19,7 +19,7 @@ freeStyleJob('audit') {
     scm {
         git {
             remote {
-                url('https://github.com/jessfraz/audit.git')
+                url('https://github.com/genuinetools/audit.git')
             }
 branches('*/master')
             extensions {

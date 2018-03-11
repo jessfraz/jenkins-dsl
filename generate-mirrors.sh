@@ -95,10 +95,16 @@ EOF
 
 get_repos(){
 	local page=$1
+	local org=$2
 
 	# send the request
 	local response
-	response=$(curl -i -sSL -H "${AUTH_HEADER}" -H "${API_HEADER}" "${URI}/users/${GITHUB_USER}/repos?per_page=${DEFAULT_PER_PAGE}&type=public&page=${page}")
+	if [[ -z "$org" ]]; then
+		response=$(curl -i -sSL -H "${AUTH_HEADER}" -H "${API_HEADER}" "${URI}/users/${GITHUB_USER}/repos?per_page=${DEFAULT_PER_PAGE}&type=public&page=${page}")
+	else
+		response=$(curl -i -sSL -H "${AUTH_HEADER}" -H "${API_HEADER}" "${URI}/orgs/${2}/repos?per_page=${DEFAULT_PER_PAGE}&type=public&page=${page}")
+	fi
+
 
 	# seperate the headers and body into 2 variables
 	local head=true
@@ -136,7 +142,7 @@ get_repos(){
 		local user
 		user=$(echo "$response" | jq --raw-output '.parent.owner.login')
 
-		if [[ "$fullname" == "jessfraz/linux" ]]; then
+		if [[ "$fullname" == "${GITHUB_USER}/linux" ]]; then
 			continue
 		fi
 
@@ -156,6 +162,7 @@ main(){
 	mkdir -p $DIR/projects/mirrors
 	echo "FILE | REPO"
 
+	# Get the personal repos.
 	local page=1
 
 	get_repos "$page"
@@ -164,6 +171,19 @@ main(){
 		for page in  $(seq $((page + 1)) 1 "${LAST_PAGE}"); do
 			# echo "[debug]: on repo page ${page} of ${LAST_PAGE}"
 			get_repos "${page}"
+		done
+	fi
+
+	# Get the genuinetools organization repos.
+	LAST_PAGE=1
+	local page=1
+
+	get_repos "$page" "genuinetools"
+
+	if [ ! -z "$LAST_PAGE" ] && [ "$LAST_PAGE" -ge "$page" ]; then
+		for page in  $(seq $((page + 1)) 1 "${LAST_PAGE}"); do
+			# echo "[debug]: on repo page ${page} of ${LAST_PAGE}"
+			get_repos "${page}" "genuinetools"
 		done
 	fi
 }

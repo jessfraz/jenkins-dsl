@@ -1,11 +1,11 @@
 freeStyleJob('certok') {
     displayName('certok')
-    description('Build Dockerfiles in jessfraz/certok.')
+    description('Build Dockerfiles in genuinetools/certok.')
 
     checkoutRetryCount(3)
 
     properties {
-        githubProjectUrl('https://github.com/jessfraz/certok')
+        githubProjectUrl('https://github.com/genuinetools/certok')
         sidebarLinks {
             link('https://hub.docker.com/r/jess/certok', 'Docker Hub: jess/certok', 'notepad.png')
         }
@@ -19,7 +19,7 @@ freeStyleJob('certok') {
     scm {
         git {
             remote {
-                url('https://github.com/jessfraz/certok.git')
+                url('https://github.com/genuinetools/certok.git')
             }
 branches('*/master')
             extensions {

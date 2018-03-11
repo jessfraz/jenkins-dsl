@@ -78,7 +78,7 @@ freeStyleJob('${rname//./_}') {
 EOF
 
 	# also push the weather-server & reg-server images
-	if [[ "${user}/${name}" == "jessfraz/weather" ]] || [[ "${user}/${name}" == "jessfraz/reg" ]] || [[ "${user}/${name}" == "jessfraz/pastebinit" ]]; then
+	if [[ "${user}/${name}" == "genuinetools/weather" ]] || [[ "${user}/${name}" == "genuinetools/reg" ]] || [[ "${user}/${name}" == "jessfraz/pastebinit" ]]; then
 		image=${name}-server:${suite}
 		cat <<-EOF >> $file
 
@@ -120,32 +120,32 @@ EOF
 }
 
 repos=(
-jessfraz/amicontained
-jessfraz/apk-file
-jessfraz/audit
-jessfraz/bane
+genuinetools/amicontained
+genuinetools/apk-file
+genuinetools/audit
+genuinetools/bane
+genuinetools/certok
+genuinetools/ghb0t
+genuinetools/img
+genuinetools/magneto
+genuinetools/netns
+genuinetools/pepper
+genuinetools/reg
+genuinetools/riddler
+genuinetools/sshb0t
+genuinetools/udict
+genuinetools/upmail
+genuinetools/weather
 jessfraz/battery
-jessfraz/certok
 jessfraz/cliaoke
-jessfraz/dockfmt
 jessfraz/dstats
-jessfraz/ghb0t
-jessfraz/img
-jessfraz/magneto
-jessfraz/netns
+jessfraz/dockfmt
 jessfraz/netscan
 jessfraz/onion
 jessfraz/pastebinit
-jessfraz/pepper
 jessfraz/pony
-jessfraz/reg
-jessfraz/riddler
 jessfraz/s3server
 jessfraz/snippetlib
-jessfraz/sshb0t
-jessfraz/udict
-jessfraz/upmail
-jessfraz/weather
 kennethreitz/httpbin
 kylemanna/docker-openvpn
 rroemhild/docker-ejabberd

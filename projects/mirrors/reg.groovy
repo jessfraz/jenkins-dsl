@@ -1,11 +1,11 @@
 freeStyleJob('mirror_reg') {
     displayName('mirror-reg')
-    description('Mirror github.com/jessfraz/reg to g.j3ss.co/reg.')
+    description('Mirror github.com/genuinetools/reg to g.j3ss.co/genuinetools/reg.')
     checkoutRetryCount(3)
     properties {
-        githubProjectUrl('https://github.com/jessfraz/reg')
+        githubProjectUrl('https://github.com/genuinetools/reg')
         sidebarLinks {
-            link('https://git.j3ss.co/reg', 'git.j3ss.co/reg', 'notepad.png')
+            link('https://git.j3ss.co/genuinetools/reg', 'git.j3ss.co/genuinetools/reg', 'notepad.png')
         }
     }
     logRotator {
@@ -17,8 +17,8 @@ freeStyleJob('mirror_reg') {
     }
     wrappers { colorizeOutput() }
     steps {
-        shell('git clone --mirror https://github.com/jessfraz/reg.git repo')
-        shell('cd repo && git push --mirror ssh://git@g.j3ss.co:2200/~/reg.git')
+        shell('git clone --mirror https://github.com/genuinetools/reg.git repo')
+        shell('cd repo && git push --mirror ssh://git@g.j3ss.co:2200/~/genuinetools/reg.git')
     }
     publishers {
         extendedEmail {

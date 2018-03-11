@@ -1,11 +1,11 @@
-freeStyleJob('mirror_udict') {
-    displayName('mirror-udict')
-    description('Mirror github.com/genuinetools/udict to g.j3ss.co/genuinetools/udict.')
+freeStyleJob('mirror_www') {
+    displayName('mirror-www')
+    description('Mirror github.com/genuinetools/www to g.j3ss.co/genuinetools/www.')
     checkoutRetryCount(3)
     properties {
-        githubProjectUrl('https://github.com/genuinetools/udict')
+        githubProjectUrl('https://github.com/genuinetools/www')
         sidebarLinks {
-            link('https://git.j3ss.co/genuinetools/udict', 'git.j3ss.co/genuinetools/udict', 'notepad.png')
+            link('https://git.j3ss.co/genuinetools/www', 'git.j3ss.co/genuinetools/www', 'notepad.png')
         }
     }
     logRotator {
@@ -17,8 +17,8 @@ freeStyleJob('mirror_udict') {
     }
     wrappers { colorizeOutput() }
     steps {
-        shell('git clone --mirror https://github.com/genuinetools/udict.git repo')
-        shell('cd repo && git push --mirror ssh://git@g.j3ss.co:2200/~/genuinetools/udict.git')
+        shell('git clone --mirror https://github.com/genuinetools/www.git repo')
+        shell('cd repo && git push --mirror ssh://git@g.j3ss.co:2200/~/genuinetools/www.git')
     }
     publishers {
         extendedEmail {

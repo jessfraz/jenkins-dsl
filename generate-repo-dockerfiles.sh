@@ -140,6 +140,7 @@ jessfraz/battery
 jessfraz/cliaoke
 jessfraz/dstats
 jessfraz/dockfmt
+jessfraz/gitable
 jessfraz/netscan
 jessfraz/onion
 jessfraz/pastebinit

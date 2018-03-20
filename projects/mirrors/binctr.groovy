@@ -1,11 +1,11 @@
 freeStyleJob('mirror_binctr') {
     displayName('mirror-binctr')
-    description('Mirror github.com/jessfraz/binctr to g.j3ss.co/binctr.')
+    description('Mirror github.com/genuinetools/binctr to g.j3ss.co/genuinetools/binctr.')
     checkoutRetryCount(3)
     properties {
-        githubProjectUrl('https://github.com/jessfraz/binctr')
+        githubProjectUrl('https://github.com/genuinetools/binctr')
         sidebarLinks {
-            link('https://git.j3ss.co/binctr', 'git.j3ss.co/binctr', 'notepad.png')
+            link('https://git.j3ss.co/genuinetools/binctr', 'git.j3ss.co/genuinetools/binctr', 'notepad.png')
         }
     }
     logRotator {
@@ -17,8 +17,8 @@ freeStyleJob('mirror_binctr') {
     }
     wrappers { colorizeOutput() }
     steps {
-        shell('git clone --mirror https://github.com/jessfraz/binctr.git repo')
-        shell('cd repo && git push --mirror ssh://git@g.j3ss.co:2200/~/binctr.git')
+        shell('git clone --mirror https://github.com/genuinetools/binctr.git repo')
+        shell('cd repo && git push --mirror ssh://git@g.j3ss.co:2200/~/genuinetools/binctr.git')
     }
     publishers {
         extendedEmail {

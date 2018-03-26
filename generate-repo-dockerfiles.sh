@@ -147,6 +147,7 @@ jessfraz/pastebinit
 jessfraz/pony
 jessfraz/s3server
 jessfraz/snippetlib
+jessfraz/tdash
 kennethreitz/httpbin
 kylemanna/docker-openvpn
 rroemhild/docker-ejabberd

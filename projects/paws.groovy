@@ -19,7 +19,7 @@ freeStyleJob('paws') {
                 url('git@github.com:jessfraz/paws.git')
                 credentials('paws-deploy-key')
             }
-            branches('*/master')
+            branches('*/updates')
             extensions {
                 wipeOutWorkspace()
                 cleanAfterCheckout()
@@ -38,6 +38,7 @@ freeStyleJob('paws') {
     steps {
         shell('make build')
         shell('docker push --disable-content-trust=false r.j3ss.co/paws:latest')
+        shell('docker push --disable-content-trust=false r.j3ss.co/totessafe:latest')
         shell('docker rm $(docker ps --filter status=exited -q 2>/dev/null) 2> /dev/null || true')
         shell('docker rmi $(docker images --filter dangling=true -q 2>/dev/null) 2> /dev/null || true')
     }

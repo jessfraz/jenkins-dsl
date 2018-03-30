@@ -19,7 +19,7 @@ freeStyleJob('paws') {
                 url('git@github.com:jessfraz/paws.git')
                 credentials('paws-deploy-key')
             }
-            branches('*/updates')
+            branches('*/master')
             extensions {
                 wipeOutWorkspace()
                 cleanAfterCheckout()

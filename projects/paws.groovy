@@ -36,7 +36,7 @@ freeStyleJob('paws') {
 
     environmentVariables(DOCKER_CONTENT_TRUST: '1')
     steps {
-        shell('make build')
+        shell('make images')
         shell('docker push --disable-content-trust=false r.j3ss.co/paws:latest')
         shell('docker push --disable-content-trust=false r.j3ss.co/totessafe:latest')
         shell('docker rm $(docker ps --filter status=exited -q 2>/dev/null) 2> /dev/null || true')

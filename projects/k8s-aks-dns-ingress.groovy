@@ -1,4 +1,4 @@
-freeStyleJob('k8s-aks-dns-ingress') {
+freeStyleJob('k8s_aks_dns_ingress') {
     displayName('k8s-aks-dns-ingress')
     description('Build Dockerfiles for k8s-aks-dns-ingress.')
 

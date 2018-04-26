@@ -137,6 +137,7 @@ genuinetools/udict
 genuinetools/upmail
 genuinetools/weather
 jessfraz/battery
+jessfraz/bpfps
 jessfraz/cliaoke
 jessfraz/dstats
 jessfraz/dockfmt

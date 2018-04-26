@@ -1,11 +1,11 @@
 freeStyleJob('bpfps') {
     displayName('bpfps')
-    description('Build Dockerfiles in jessfraz/bpfps.')
+    description('Build Dockerfiles in genuinetools/bpfps.')
 
     checkoutRetryCount(3)
 
     properties {
-        githubProjectUrl('https://github.com/jessfraz/bpfps')
+        githubProjectUrl('https://github.com/genuinetools/bpfps')
         sidebarLinks {
             link('https://hub.docker.com/r/jess/bpfps', 'Docker Hub: jess/bpfps', 'notepad.png')
         }
@@ -19,7 +19,7 @@ freeStyleJob('bpfps') {
     scm {
         git {
             remote {
-                url('https://github.com/jessfraz/bpfps.git')
+                url('https://github.com/genuinetools/bpfps.git')
             }
 branches('*/master')
             extensions {

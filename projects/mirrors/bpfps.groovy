@@ -1,11 +1,11 @@
 freeStyleJob('mirror_bpfps') {
     displayName('mirror-bpfps')
-    description('Mirror github.com/jessfraz/bpfps to g.j3ss.co/bpfps.')
+    description('Mirror github.com/genuinetools/bpfps to g.j3ss.co/genuinetools/bpfps.')
     checkoutRetryCount(3)
     properties {
-        githubProjectUrl('https://github.com/jessfraz/bpfps')
+        githubProjectUrl('https://github.com/genuinetools/bpfps')
         sidebarLinks {
-            link('https://git.j3ss.co/bpfps', 'git.j3ss.co/bpfps', 'notepad.png')
+            link('https://git.j3ss.co/genuinetools/bpfps', 'git.j3ss.co/genuinetools/bpfps', 'notepad.png')
         }
     }
     logRotator {
@@ -17,8 +17,8 @@ freeStyleJob('mirror_bpfps') {
     }
     wrappers { colorizeOutput() }
     steps {
-        shell('git clone --mirror https://github.com/jessfraz/bpfps.git repo')
-        shell('cd repo && git push --mirror ssh://git@g.j3ss.co:2200/~/bpfps.git')
+        shell('git clone --mirror https://github.com/genuinetools/bpfps.git repo')
+        shell('cd repo && git push --mirror ssh://git@g.j3ss.co:2200/~/genuinetools/bpfps.git')
     }
     publishers {
         extendedEmail {

@@ -148,6 +148,7 @@ jessfraz/party-clippy
 jessfraz/pastebinit
 jessfraz/pony
 jessfraz/s3server
+jessfraz/secping
 jessfraz/snippetlib
 jessfraz/tdash
 jessfraz/tripitcalb0t

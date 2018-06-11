@@ -71,12 +71,11 @@ freeStyleJob('${rname//./_}') {
 
     environmentVariables(DOCKER_CONTENT_TRUST: '1')
     steps {
-        shell('export BRANCH=\$(git symbolic-ref -q --short HEAD || git describe --tags --exact-match)')
-        shell('if [[ "\$BRANCH" == "master" ]]; then export BRANCH="latest"; fi')
-        shell('docker build --rm --force-rm -t r.j3ss.co/${image}:\${BRANCH} .')
-        shell('docker tag r.j3ss.co/${image}:\${BRANCH} jess/${image}:\${BRANCH}')
-        shell('docker push --disable-content-trust=false r.j3ss.co/${image}:\${BRANCH}')
-        shell('docker push --disable-content-trust=false jess/${image}:\${BRANCH}')
+        shell('export BRANCH=\$(git symbolic-ref -q --short HEAD || git describe --tags --exact-match); if [[ "\$BRANCH" == "master" ]]; then export BRANCH="latest"; fi; echo "\$BRANCH" > .branch')
+        shell('docker build --rm --force-rm -t r.j3ss.co/${image}:\$(cat .branch) .')
+        shell('docker tag r.j3ss.co/${image}:\${BRANCH} jess/${image}:\$(cat .branch)')
+        shell('docker push --disable-content-trust=false r.j3ss.co/${image}:\$(cat .branch)')
+        shell('docker push --disable-content-trust=false jess/${image}:\$(cat .branch)')
 EOF
 
 	# also push the weather-server & reg-server images
@@ -84,12 +83,12 @@ EOF
 		image=${name}-server
 		cat <<-EOF >> $file
 
-        shell('docker build --rm --force-rm -t r.j3ss.co/${image}:\${BRANCH} server')
-        shell('docker tag r.j3ss.co/${image}:\${BRANCH} jess/${image}:\${BRANCH}')
-        shell('docker tag r.j3ss.co/${image}:\${BRANCH} jessfraz/${image}:\${BRANCH}')
-        shell('docker push --disable-content-trust=false r.j3ss.co/${image}:\${BRANCH}')
-        shell('docker push --disable-content-trust=false jess/${image}:\${BRANCH}')
-        shell('docker push --disable-content-trust=false jessfraz/${image}:\${BRANCH}')
+        shell('docker build --rm --force-rm -t r.j3ss.co/${image}:\$(cat .branch) server')
+        shell('docker tag r.j3ss.co/${image}:\${BRANCH} jess/${image}:\$(cat .branch)')
+        shell('docker tag r.j3ss.co/${image}:\${BRANCH} jessfraz/${image}:\$(cat .branch)')
+        shell('docker push --disable-content-trust=false r.j3ss.co/${image}:\$(cat .branch)')
+        shell('docker push --disable-content-trust=false jess/${image}:\$(cat .branch)')
+        shell('docker push --disable-content-trust=false jessfraz/${image}:\$(cat .branch)')
 EOF
 	fi
 

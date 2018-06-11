@@ -39,12 +39,11 @@ freeStyleJob('gitable') {
 
     environmentVariables(DOCKER_CONTENT_TRUST: '1')
     steps {
-        shell('export BRANCH=$(git symbolic-ref -q --short HEAD || git describe --tags --exact-match)')
-        shell('if [[ "$BRANCH" == "master" ]]; then export BRANCH="latest"; fi')
-        shell('docker build --rm --force-rm -t r.j3ss.co/gitable:${BRANCH} .')
-        shell('docker tag r.j3ss.co/gitable:${BRANCH} jess/gitable:${BRANCH}')
-        shell('docker push --disable-content-trust=false r.j3ss.co/gitable:${BRANCH}')
-        shell('docker push --disable-content-trust=false jess/gitable:${BRANCH}')
+        shell('export BRANCH=$(git symbolic-ref -q --short HEAD || git describe --tags --exact-match); if [[ "$BRANCH" == "master" ]]; then export BRANCH="latest"; fi; echo "$BRANCH" > .branch')
+        shell('docker build --rm --force-rm -t r.j3ss.co/gitable:$(cat .branch) .')
+        shell('docker tag r.j3ss.co/gitable:${BRANCH} jess/gitable:$(cat .branch)')
+        shell('docker push --disable-content-trust=false r.j3ss.co/gitable:$(cat .branch)')
+        shell('docker push --disable-content-trust=false jess/gitable:$(cat .branch)')
         shell('docker rm $(docker ps --filter status=exited -q 2>/dev/null) 2> /dev/null || true')
         shell('docker rmi $(docker images --filter dangling=true -q 2>/dev/null) 2> /dev/null || true')
     }

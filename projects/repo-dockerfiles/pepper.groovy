@@ -8,7 +8,7 @@ freeStyleJob('pepper') {
         githubProjectUrl('https://github.com/genuinetools/pepper')
         sidebarLinks {
             link('https://hub.docker.com/r/jess/pepper', 'Docker Hub: jess/pepper', 'notepad.png')
-            link('https://r.j3ss.co/pepper', 'Registry: r.j3ss.co/pepper', 'notepad.png')
+            link('https://r.j3ss.co/repo/pepper/tags', 'Registry: r.j3ss.co/pepper', 'notepad.png')
         }
     }
 

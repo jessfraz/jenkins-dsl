@@ -8,7 +8,7 @@ freeStyleJob('gitable') {
         githubProjectUrl('https://github.com/jessfraz/gitable')
         sidebarLinks {
             link('https://hub.docker.com/r/jess/gitable', 'Docker Hub: jess/gitable', 'notepad.png')
-            link('https://r.j3ss.co/gitable', 'Registry: r.j3ss.co/gitable', 'notepad.png')
+            link('https://r.j3ss.co/repo/gitable/tags', 'Registry: r.j3ss.co/gitable', 'notepad.png')
         }
     }
 

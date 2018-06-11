@@ -8,7 +8,7 @@ freeStyleJob('amicontained') {
         githubProjectUrl('https://github.com/genuinetools/amicontained')
         sidebarLinks {
             link('https://hub.docker.com/r/jess/amicontained', 'Docker Hub: jess/amicontained', 'notepad.png')
-            link('https://r.j3ss.co/amicontained', 'Registry: r.j3ss.co/amicontained', 'notepad.png')
+            link('https://r.j3ss.co/repo/amicontained/tags', 'Registry: r.j3ss.co/amicontained', 'notepad.png')
         }
     }
 

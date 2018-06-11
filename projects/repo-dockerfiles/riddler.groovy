@@ -8,7 +8,7 @@ freeStyleJob('riddler') {
         githubProjectUrl('https://github.com/genuinetools/riddler')
         sidebarLinks {
             link('https://hub.docker.com/r/jess/riddler', 'Docker Hub: jess/riddler', 'notepad.png')
-            link('https://r.j3ss.co/riddler', 'Registry: r.j3ss.co/riddler', 'notepad.png')
+            link('https://r.j3ss.co/repo/riddler/tags', 'Registry: r.j3ss.co/riddler', 'notepad.png')
         }
     }
 

@@ -8,7 +8,7 @@ freeStyleJob('pony') {
         githubProjectUrl('https://github.com/jessfraz/pony')
         sidebarLinks {
             link('https://hub.docker.com/r/jess/pony', 'Docker Hub: jess/pony', 'notepad.png')
-            link('https://r.j3ss.co/pony', 'Registry: r.j3ss.co/pony', 'notepad.png')
+            link('https://r.j3ss.co/repo/pony/tags', 'Registry: r.j3ss.co/pony', 'notepad.png')
         }
     }
 

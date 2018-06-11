@@ -8,7 +8,7 @@ freeStyleJob('cliaoke') {
         githubProjectUrl('https://github.com/jessfraz/cliaoke')
         sidebarLinks {
             link('https://hub.docker.com/r/jess/cliaoke', 'Docker Hub: jess/cliaoke', 'notepad.png')
-            link('https://r.j3ss.co/cliaoke', 'Registry: r.j3ss.co/cliaoke', 'notepad.png')
+            link('https://r.j3ss.co/repo/cliaoke/tags', 'Registry: r.j3ss.co/cliaoke', 'notepad.png')
         }
     }
 

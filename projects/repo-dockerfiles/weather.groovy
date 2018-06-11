@@ -8,7 +8,7 @@ freeStyleJob('weather') {
         githubProjectUrl('https://github.com/genuinetools/weather')
         sidebarLinks {
             link('https://hub.docker.com/r/jess/weather', 'Docker Hub: jess/weather', 'notepad.png')
-            link('https://r.j3ss.co/weather', 'Registry: r.j3ss.co/weather', 'notepad.png')
+            link('https://r.j3ss.co/repo/weather/tags', 'Registry: r.j3ss.co/weather', 'notepad.png')
         }
     }
 

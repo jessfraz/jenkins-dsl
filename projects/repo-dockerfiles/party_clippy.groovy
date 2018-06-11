@@ -8,7 +8,7 @@ freeStyleJob('party_clippy') {
         githubProjectUrl('https://github.com/jessfraz/party-clippy')
         sidebarLinks {
             link('https://hub.docker.com/r/jess/party-clippy', 'Docker Hub: jess/party-clippy', 'notepad.png')
-            link('https://r.j3ss.co/party-clippy', 'Registry: r.j3ss.co/party-clippy', 'notepad.png')
+            link('https://r.j3ss.co/repo/party-clippy/tags', 'Registry: r.j3ss.co/party-clippy', 'notepad.png')
         }
     }
 

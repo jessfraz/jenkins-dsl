@@ -8,7 +8,7 @@ freeStyleJob('openvpn_server') {
         githubProjectUrl('https://github.com/kylemanna/docker-openvpn')
         sidebarLinks {
             link('https://hub.docker.com/r/jess/openvpn-server', 'Docker Hub: jess/openvpn-server', 'notepad.png')
-            link('https://r.j3ss.co/openvpn-server', 'Registry: r.j3ss.co/openvpn-server', 'notepad.png')
+            link('https://r.j3ss.co/repo/openvpn-server/tags', 'Registry: r.j3ss.co/openvpn-server', 'notepad.png')
         }
     }
 

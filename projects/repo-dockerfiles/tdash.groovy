@@ -8,7 +8,7 @@ freeStyleJob('tdash') {
         githubProjectUrl('https://github.com/jessfraz/tdash')
         sidebarLinks {
             link('https://hub.docker.com/r/jess/tdash', 'Docker Hub: jess/tdash', 'notepad.png')
-            link('https://r.j3ss.co/tdash', 'Registry: r.j3ss.co/tdash', 'notepad.png')
+            link('https://r.j3ss.co/repo/tdash/tags', 'Registry: r.j3ss.co/tdash', 'notepad.png')
         }
     }
 

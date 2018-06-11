@@ -40,7 +40,7 @@ freeStyleJob('${rname//./_}') {
         githubProjectUrl('https://github.com/${orig}')
         sidebarLinks {
             link('https://hub.docker.com/r/jess/${name}', 'Docker Hub: jess/${name}', 'notepad.png')
-            link('https://r.j3ss.co/${name}', 'Registry: r.j3ss.co/${name}', 'notepad.png')
+            link('https://r.j3ss.co/repo/${name}/tags', 'Registry: r.j3ss.co/${name}', 'notepad.png')
         }
     }
 

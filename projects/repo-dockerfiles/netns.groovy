@@ -8,7 +8,7 @@ freeStyleJob('netns') {
         githubProjectUrl('https://github.com/genuinetools/netns')
         sidebarLinks {
             link('https://hub.docker.com/r/jess/netns', 'Docker Hub: jess/netns', 'notepad.png')
-            link('https://r.j3ss.co/netns', 'Registry: r.j3ss.co/netns', 'notepad.png')
+            link('https://r.j3ss.co/repo/netns/tags', 'Registry: r.j3ss.co/netns', 'notepad.png')
         }
     }
 

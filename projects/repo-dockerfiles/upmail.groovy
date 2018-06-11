@@ -8,7 +8,7 @@ freeStyleJob('upmail') {
         githubProjectUrl('https://github.com/genuinetools/upmail')
         sidebarLinks {
             link('https://hub.docker.com/r/jess/upmail', 'Docker Hub: jess/upmail', 'notepad.png')
-            link('https://r.j3ss.co/upmail', 'Registry: r.j3ss.co/upmail', 'notepad.png')
+            link('https://r.j3ss.co/repo/upmail/tags', 'Registry: r.j3ss.co/upmail', 'notepad.png')
         }
     }
 

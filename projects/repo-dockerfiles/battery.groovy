@@ -8,7 +8,7 @@ freeStyleJob('battery') {
         githubProjectUrl('https://github.com/jessfraz/battery')
         sidebarLinks {
             link('https://hub.docker.com/r/jess/battery', 'Docker Hub: jess/battery', 'notepad.png')
-            link('https://r.j3ss.co/battery', 'Registry: r.j3ss.co/battery', 'notepad.png')
+            link('https://r.j3ss.co/repo/battery/tags', 'Registry: r.j3ss.co/battery', 'notepad.png')
         }
     }
 

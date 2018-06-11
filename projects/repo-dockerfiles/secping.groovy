@@ -8,7 +8,7 @@ freeStyleJob('secping') {
         githubProjectUrl('https://github.com/jessfraz/secping')
         sidebarLinks {
             link('https://hub.docker.com/r/jess/secping', 'Docker Hub: jess/secping', 'notepad.png')
-            link('https://r.j3ss.co/secping', 'Registry: r.j3ss.co/secping', 'notepad.png')
+            link('https://r.j3ss.co/repo/secping/tags', 'Registry: r.j3ss.co/secping', 'notepad.png')
         }
     }
 

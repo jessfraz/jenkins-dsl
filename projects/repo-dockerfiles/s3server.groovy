@@ -8,7 +8,7 @@ freeStyleJob('s3server') {
         githubProjectUrl('https://github.com/jessfraz/s3server')
         sidebarLinks {
             link('https://hub.docker.com/r/jess/s3server', 'Docker Hub: jess/s3server', 'notepad.png')
-            link('https://r.j3ss.co/s3server', 'Registry: r.j3ss.co/s3server', 'notepad.png')
+            link('https://r.j3ss.co/repo/s3server/tags', 'Registry: r.j3ss.co/s3server', 'notepad.png')
         }
     }
 

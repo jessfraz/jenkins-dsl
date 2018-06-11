@@ -8,7 +8,7 @@ freeStyleJob('ghb0t') {
         githubProjectUrl('https://github.com/genuinetools/ghb0t')
         sidebarLinks {
             link('https://hub.docker.com/r/jess/ghb0t', 'Docker Hub: jess/ghb0t', 'notepad.png')
-            link('https://r.j3ss.co/ghb0t', 'Registry: r.j3ss.co/ghb0t', 'notepad.png')
+            link('https://r.j3ss.co/repo/ghb0t/tags', 'Registry: r.j3ss.co/ghb0t', 'notepad.png')
         }
     }
 

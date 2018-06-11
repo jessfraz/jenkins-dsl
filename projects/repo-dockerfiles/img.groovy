@@ -8,7 +8,7 @@ freeStyleJob('img') {
         githubProjectUrl('https://github.com/genuinetools/img')
         sidebarLinks {
             link('https://hub.docker.com/r/jess/img', 'Docker Hub: jess/img', 'notepad.png')
-            link('https://r.j3ss.co/img', 'Registry: r.j3ss.co/img', 'notepad.png')
+            link('https://r.j3ss.co/repo/img/tags', 'Registry: r.j3ss.co/img', 'notepad.png')
         }
     }
 

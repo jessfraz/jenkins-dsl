@@ -8,7 +8,7 @@ freeStyleJob('httpbin') {
         githubProjectUrl('https://github.com/kennethreitz/httpbin')
         sidebarLinks {
             link('https://hub.docker.com/r/jess/httpbin', 'Docker Hub: jess/httpbin', 'notepad.png')
-            link('https://r.j3ss.co/httpbin', 'Registry: r.j3ss.co/httpbin', 'notepad.png')
+            link('https://r.j3ss.co/repo/httpbin/tags', 'Registry: r.j3ss.co/httpbin', 'notepad.png')
         }
     }
 

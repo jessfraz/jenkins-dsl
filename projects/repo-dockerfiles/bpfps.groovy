@@ -8,7 +8,7 @@ freeStyleJob('bpfps') {
         githubProjectUrl('https://github.com/genuinetools/bpfps')
         sidebarLinks {
             link('https://hub.docker.com/r/jess/bpfps', 'Docker Hub: jess/bpfps', 'notepad.png')
-            link('https://r.j3ss.co/bpfps', 'Registry: r.j3ss.co/bpfps', 'notepad.png')
+            link('https://r.j3ss.co/repo/bpfps/tags', 'Registry: r.j3ss.co/bpfps', 'notepad.png')
         }
     }
 

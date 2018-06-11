@@ -8,7 +8,7 @@ freeStyleJob('onion') {
         githubProjectUrl('https://github.com/jessfraz/onion')
         sidebarLinks {
             link('https://hub.docker.com/r/jess/onion', 'Docker Hub: jess/onion', 'notepad.png')
-            link('https://r.j3ss.co/onion', 'Registry: r.j3ss.co/onion', 'notepad.png')
+            link('https://r.j3ss.co/repo/onion/tags', 'Registry: r.j3ss.co/onion', 'notepad.png')
         }
     }
 

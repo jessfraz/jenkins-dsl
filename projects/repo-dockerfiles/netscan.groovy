@@ -8,7 +8,7 @@ freeStyleJob('netscan') {
         githubProjectUrl('https://github.com/jessfraz/netscan')
         sidebarLinks {
             link('https://hub.docker.com/r/jess/netscan', 'Docker Hub: jess/netscan', 'notepad.png')
-            link('https://r.j3ss.co/netscan', 'Registry: r.j3ss.co/netscan', 'notepad.png')
+            link('https://r.j3ss.co/repo/netscan/tags', 'Registry: r.j3ss.co/netscan', 'notepad.png')
         }
     }
 

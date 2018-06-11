@@ -8,7 +8,7 @@ freeStyleJob('dstats') {
         githubProjectUrl('https://github.com/jessfraz/dstats')
         sidebarLinks {
             link('https://hub.docker.com/r/jess/dstats', 'Docker Hub: jess/dstats', 'notepad.png')
-            link('https://r.j3ss.co/dstats', 'Registry: r.j3ss.co/dstats', 'notepad.png')
+            link('https://r.j3ss.co/repo/dstats/tags', 'Registry: r.j3ss.co/dstats', 'notepad.png')
         }
     }
 

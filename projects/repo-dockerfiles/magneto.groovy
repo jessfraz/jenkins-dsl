@@ -8,7 +8,7 @@ freeStyleJob('magneto') {
         githubProjectUrl('https://github.com/genuinetools/magneto')
         sidebarLinks {
             link('https://hub.docker.com/r/jess/magneto', 'Docker Hub: jess/magneto', 'notepad.png')
-            link('https://r.j3ss.co/magneto', 'Registry: r.j3ss.co/magneto', 'notepad.png')
+            link('https://r.j3ss.co/repo/magneto/tags', 'Registry: r.j3ss.co/magneto', 'notepad.png')
         }
     }
 

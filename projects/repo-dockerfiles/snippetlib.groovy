@@ -8,7 +8,7 @@ freeStyleJob('snippetlib') {
         githubProjectUrl('https://github.com/jessfraz/snippetlib')
         sidebarLinks {
             link('https://hub.docker.com/r/jess/snippetlib', 'Docker Hub: jess/snippetlib', 'notepad.png')
-            link('https://r.j3ss.co/snippetlib', 'Registry: r.j3ss.co/snippetlib', 'notepad.png')
+            link('https://r.j3ss.co/repo/snippetlib/tags', 'Registry: r.j3ss.co/snippetlib', 'notepad.png')
         }
     }
 

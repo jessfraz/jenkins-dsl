@@ -8,7 +8,7 @@ freeStyleJob('reg') {
         githubProjectUrl('https://github.com/genuinetools/reg')
         sidebarLinks {
             link('https://hub.docker.com/r/jess/reg', 'Docker Hub: jess/reg', 'notepad.png')
-            link('https://r.j3ss.co/reg', 'Registry: r.j3ss.co/reg', 'notepad.png')
+            link('https://r.j3ss.co/repo/reg/tags', 'Registry: r.j3ss.co/reg', 'notepad.png')
         }
     }
 

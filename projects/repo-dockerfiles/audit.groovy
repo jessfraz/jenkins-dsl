@@ -8,7 +8,7 @@ freeStyleJob('audit') {
         githubProjectUrl('https://github.com/genuinetools/audit')
         sidebarLinks {
             link('https://hub.docker.com/r/jess/audit', 'Docker Hub: jess/audit', 'notepad.png')
-            link('https://r.j3ss.co/audit', 'Registry: r.j3ss.co/audit', 'notepad.png')
+            link('https://r.j3ss.co/repo/audit/tags', 'Registry: r.j3ss.co/audit', 'notepad.png')
         }
     }
 

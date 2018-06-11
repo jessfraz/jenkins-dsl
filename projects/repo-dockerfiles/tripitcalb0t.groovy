@@ -8,7 +8,7 @@ freeStyleJob('tripitcalb0t') {
         githubProjectUrl('https://github.com/jessfraz/tripitcalb0t')
         sidebarLinks {
             link('https://hub.docker.com/r/jess/tripitcalb0t', 'Docker Hub: jess/tripitcalb0t', 'notepad.png')
-            link('https://r.j3ss.co/tripitcalb0t', 'Registry: r.j3ss.co/tripitcalb0t', 'notepad.png')
+            link('https://r.j3ss.co/repo/tripitcalb0t/tags', 'Registry: r.j3ss.co/tripitcalb0t', 'notepad.png')
         }
     }
 

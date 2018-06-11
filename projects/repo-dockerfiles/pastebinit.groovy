@@ -8,7 +8,7 @@ freeStyleJob('pastebinit') {
         githubProjectUrl('https://github.com/jessfraz/pastebinit')
         sidebarLinks {
             link('https://hub.docker.com/r/jess/pastebinit', 'Docker Hub: jess/pastebinit', 'notepad.png')
-            link('https://r.j3ss.co/pastebinit', 'Registry: r.j3ss.co/pastebinit', 'notepad.png')
+            link('https://r.j3ss.co/repo/pastebinit/tags', 'Registry: r.j3ss.co/pastebinit', 'notepad.png')
         }
     }
 

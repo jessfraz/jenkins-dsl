@@ -8,7 +8,7 @@ freeStyleJob('udict') {
         githubProjectUrl('https://github.com/genuinetools/udict')
         sidebarLinks {
             link('https://hub.docker.com/r/jess/udict', 'Docker Hub: jess/udict', 'notepad.png')
-            link('https://r.j3ss.co/udict', 'Registry: r.j3ss.co/udict', 'notepad.png')
+            link('https://r.j3ss.co/repo/udict/tags', 'Registry: r.j3ss.co/udict', 'notepad.png')
         }
     }
 

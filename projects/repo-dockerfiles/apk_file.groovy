@@ -8,7 +8,7 @@ freeStyleJob('apk_file') {
         githubProjectUrl('https://github.com/genuinetools/apk-file')
         sidebarLinks {
             link('https://hub.docker.com/r/jess/apk-file', 'Docker Hub: jess/apk-file', 'notepad.png')
-            link('https://r.j3ss.co/apk-file', 'Registry: r.j3ss.co/apk-file', 'notepad.png')
+            link('https://r.j3ss.co/repo/apk-file/tags', 'Registry: r.j3ss.co/apk-file', 'notepad.png')
         }
     }
 

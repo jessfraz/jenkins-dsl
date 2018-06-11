@@ -8,7 +8,7 @@ freeStyleJob('ejabberd') {
         githubProjectUrl('https://github.com/rroemhild/docker-ejabberd')
         sidebarLinks {
             link('https://hub.docker.com/r/jess/ejabberd', 'Docker Hub: jess/ejabberd', 'notepad.png')
-            link('https://r.j3ss.co/ejabberd', 'Registry: r.j3ss.co/ejabberd', 'notepad.png')
+            link('https://r.j3ss.co/repo/ejabberd/tags', 'Registry: r.j3ss.co/ejabberd', 'notepad.png')
         }
     }
 

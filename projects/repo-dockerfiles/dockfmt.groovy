@@ -8,7 +8,7 @@ freeStyleJob('dockfmt') {
         githubProjectUrl('https://github.com/jessfraz/dockfmt')
         sidebarLinks {
             link('https://hub.docker.com/r/jess/dockfmt', 'Docker Hub: jess/dockfmt', 'notepad.png')
-            link('https://r.j3ss.co/dockfmt', 'Registry: r.j3ss.co/dockfmt', 'notepad.png')
+            link('https://r.j3ss.co/repo/dockfmt/tags', 'Registry: r.j3ss.co/dockfmt', 'notepad.png')
         }
     }
 

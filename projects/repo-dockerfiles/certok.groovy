@@ -8,7 +8,7 @@ freeStyleJob('certok') {
         githubProjectUrl('https://github.com/genuinetools/certok')
         sidebarLinks {
             link('https://hub.docker.com/r/jess/certok', 'Docker Hub: jess/certok', 'notepad.png')
-            link('https://r.j3ss.co/certok', 'Registry: r.j3ss.co/certok', 'notepad.png')
+            link('https://r.j3ss.co/repo/certok/tags', 'Registry: r.j3ss.co/certok', 'notepad.png')
         }
     }
 

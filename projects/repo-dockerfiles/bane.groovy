@@ -39,7 +39,7 @@ freeStyleJob('bane') {
 
     environmentVariables(DOCKER_CONTENT_TRUST: '1')
     steps {
-        shell('export BRANCH=$(git symbolic-ref -q --short HEAD || git describe --tags --exact-match); if [[ "$BRANCH" == "master" ]]; then export BRANCH="latest"; fi; echo "$BRANCH" > .branch')
+        shell('export BRANCH=$(git symbolic-ref -q --short HEAD || git describe --tags --exact-match || echo "master"); if [[ "$BRANCH" == "master" ]]; then export BRANCH="latest"; fi; echo "$BRANCH" > .branch')
         shell('docker build --rm --force-rm -t r.j3ss.co/bane:$(cat .branch) .')
 shell('docker tag r.j3ss.co/bane:$(cat .branch) jess/bane:$(cat .branch)')
         shell('docker push --disable-content-trust=false r.j3ss.co/bane:$(cat .branch)')

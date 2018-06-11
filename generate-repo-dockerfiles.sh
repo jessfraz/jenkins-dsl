@@ -157,7 +157,6 @@ jessfraz/secping
 jessfraz/snippetlib
 jessfraz/tdash
 jessfraz/tripitcalb0t
-kennethreitz/httpbin
 kylemanna/docker-openvpn
 rroemhild/docker-ejabberd
 )

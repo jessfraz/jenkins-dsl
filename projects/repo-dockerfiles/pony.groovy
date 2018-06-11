@@ -8,6 +8,7 @@ freeStyleJob('pony') {
         githubProjectUrl('https://github.com/jessfraz/pony')
         sidebarLinks {
             link('https://hub.docker.com/r/jess/pony', 'Docker Hub: jess/pony', 'notepad.png')
+            link('https://r.j3ss.co/pony', 'Registry: r.j3ss.co/pony', 'notepad.png')
         }
     }
 
@@ -21,7 +22,7 @@ freeStyleJob('pony') {
             remote {
                 url('https://github.com/jessfraz/pony.git')
             }
-branches('*/master')
+branches('*/master', '*/tags/*')
             extensions {
                 wipeOutWorkspace()
                 cleanAfterCheckout()
@@ -38,10 +39,12 @@ branches('*/master')
 
     environmentVariables(DOCKER_CONTENT_TRUST: '1')
     steps {
-        shell('docker build --rm --force-rm -t r.j3ss.co/pony:latest .')
-        shell('docker tag r.j3ss.co/pony:latest jess/pony:latest')
-        shell('docker push --disable-content-trust=false r.j3ss.co/pony:latest')
-        shell('docker push --disable-content-trust=false jess/pony:latest')
+        shell('export BRANCH=$(git symbolic-ref -q --short HEAD || git describe --tags --exact-match)')
+        shell('if [[ "$BRANCH" == "master" ]]; then export BRANCH="latest"; endif')
+        shell('docker build --rm --force-rm -t r.j3ss.co/pony:${BRANCH} .')
+        shell('docker tag r.j3ss.co/pony:${BRANCH} jess/pony:${BRANCH}')
+        shell('docker push --disable-content-trust=false r.j3ss.co/pony:${BRANCH}')
+        shell('docker push --disable-content-trust=false jess/pony:${BRANCH}')
         shell('docker rm $(docker ps --filter status=exited -q 2>/dev/null) 2> /dev/null || true')
         shell('docker rmi $(docker images --filter dangling=true -q 2>/dev/null) 2> /dev/null || true')
     }

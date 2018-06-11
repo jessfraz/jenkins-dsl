@@ -11,7 +11,6 @@ generate_dsl(){
 	local orig=$1
 	local user=${orig%/*}
 	local name=${orig#*/}
-	local suite=latest
 
 	case "${user}/${name}" in
 		"kylemanna/docker-openvpn")
@@ -23,7 +22,7 @@ generate_dsl(){
 		*) ;;
 	esac
 
-	local image=${name}:${suite}
+	local image=${name}
 
 	rname=${name//-/_}
 	file="${DIR}/projects/repo-dockerfiles/${rname//./_}.groovy"
@@ -41,6 +40,7 @@ freeStyleJob('${rname//./_}') {
         githubProjectUrl('https://github.com/${orig}')
         sidebarLinks {
             link('https://hub.docker.com/r/jess/${name}', 'Docker Hub: jess/${name}', 'notepad.png')
+            link('https://r.j3ss.co/${name}', 'Registry: r.j3ss.co/${name}', 'notepad.png')
         }
     }
 
@@ -54,7 +54,7 @@ freeStyleJob('${rname//./_}') {
             remote {
                 url('https://github.com/${orig}.git')
             }
-			branches('*/master')
+			branches('*/master', '*/tags/*')
             extensions {
                 wipeOutWorkspace()
                 cleanAfterCheckout()
@@ -71,23 +71,25 @@ freeStyleJob('${rname//./_}') {
 
     environmentVariables(DOCKER_CONTENT_TRUST: '1')
     steps {
-        shell('docker build --rm --force-rm -t r.j3ss.co/${image} .')
-        shell('docker tag r.j3ss.co/${image} jess/${image}')
-        shell('docker push --disable-content-trust=false r.j3ss.co/${image}')
-        shell('docker push --disable-content-trust=false jess/${image}')
+        shell('export BRANCH=\$(git symbolic-ref -q --short HEAD || git describe --tags --exact-match)')
+        shell('if [[ "\$BRANCH" == "master" ]]; then export BRANCH="latest"; endif')
+        shell('docker build --rm --force-rm -t r.j3ss.co/${image}:\${BRANCH} .')
+        shell('docker tag r.j3ss.co/${image}:\${BRANCH} jess/${image}:\${BRANCH}')
+        shell('docker push --disable-content-trust=false r.j3ss.co/${image}:\${BRANCH}')
+        shell('docker push --disable-content-trust=false jess/${image}:\${BRANCH}')
 EOF
 
 	# also push the weather-server & reg-server images
 	if [[ "${user}/${name}" == "genuinetools/weather" ]] || [[ "${user}/${name}" == "genuinetools/reg" ]] || [[ "${user}/${name}" == "jessfraz/pastebinit" ]]; then
-		image=${name}-server:${suite}
+		image=${name}-server
 		cat <<-EOF >> $file
 
-        shell('docker build --rm --force-rm -t r.j3ss.co/${image} server')
-        shell('docker tag r.j3ss.co/${image} jess/${image}')
-        shell('docker tag r.j3ss.co/${image} jessfraz/${image}')
-        shell('docker push --disable-content-trust=false r.j3ss.co/${image}')
-        shell('docker push --disable-content-trust=false jess/${image}')
-        shell('docker push --disable-content-trust=false jessfraz/${image}')
+        shell('docker build --rm --force-rm -t r.j3ss.co/${image}:\${BRANCH} server')
+        shell('docker tag r.j3ss.co/${image}:\${BRANCH} jess/${image}:\${BRANCH}')
+        shell('docker tag r.j3ss.co/${image}:\${BRANCH} jessfraz/${image}:\${BRANCH}')
+        shell('docker push --disable-content-trust=false r.j3ss.co/${image}:\${BRANCH}')
+        shell('docker push --disable-content-trust=false jess/${image}:\${BRANCH}')
+        shell('docker push --disable-content-trust=false jessfraz/${image}:\${BRANCH}')
 EOF
 	fi
 

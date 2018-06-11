@@ -8,6 +8,7 @@ freeStyleJob('netscan') {
         githubProjectUrl('https://github.com/jessfraz/netscan')
         sidebarLinks {
             link('https://hub.docker.com/r/jess/netscan', 'Docker Hub: jess/netscan', 'notepad.png')
+            link('https://r.j3ss.co/netscan', 'Registry: r.j3ss.co/netscan', 'notepad.png')
         }
     }
 
@@ -21,7 +22,7 @@ freeStyleJob('netscan') {
             remote {
                 url('https://github.com/jessfraz/netscan.git')
             }
-branches('*/master')
+branches('*/master', '*/tags/*')
             extensions {
                 wipeOutWorkspace()
                 cleanAfterCheckout()
@@ -38,10 +39,12 @@ branches('*/master')
 
     environmentVariables(DOCKER_CONTENT_TRUST: '1')
     steps {
-        shell('docker build --rm --force-rm -t r.j3ss.co/netscan:latest .')
-        shell('docker tag r.j3ss.co/netscan:latest jess/netscan:latest')
-        shell('docker push --disable-content-trust=false r.j3ss.co/netscan:latest')
-        shell('docker push --disable-content-trust=false jess/netscan:latest')
+        shell('export BRANCH=$(git symbolic-ref -q --short HEAD || git describe --tags --exact-match)')
+        shell('if [[ "$BRANCH" == "master" ]]; then export BRANCH="latest"; endif')
+        shell('docker build --rm --force-rm -t r.j3ss.co/netscan:${BRANCH} .')
+        shell('docker tag r.j3ss.co/netscan:${BRANCH} jess/netscan:${BRANCH}')
+        shell('docker push --disable-content-trust=false r.j3ss.co/netscan:${BRANCH}')
+        shell('docker push --disable-content-trust=false jess/netscan:${BRANCH}')
         shell('docker rm $(docker ps --filter status=exited -q 2>/dev/null) 2> /dev/null || true')
         shell('docker rmi $(docker images --filter dangling=true -q 2>/dev/null) 2> /dev/null || true')
     }

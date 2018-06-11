@@ -8,6 +8,7 @@ freeStyleJob('s3server') {
         githubProjectUrl('https://github.com/jessfraz/s3server')
         sidebarLinks {
             link('https://hub.docker.com/r/jess/s3server', 'Docker Hub: jess/s3server', 'notepad.png')
+            link('https://r.j3ss.co/s3server', 'Registry: r.j3ss.co/s3server', 'notepad.png')
         }
     }
 
@@ -21,7 +22,7 @@ freeStyleJob('s3server') {
             remote {
                 url('https://github.com/jessfraz/s3server.git')
             }
-branches('*/master')
+branches('*/master', '*/tags/*')
             extensions {
                 wipeOutWorkspace()
                 cleanAfterCheckout()
@@ -38,10 +39,12 @@ branches('*/master')
 
     environmentVariables(DOCKER_CONTENT_TRUST: '1')
     steps {
-        shell('docker build --rm --force-rm -t r.j3ss.co/s3server:latest .')
-        shell('docker tag r.j3ss.co/s3server:latest jess/s3server:latest')
-        shell('docker push --disable-content-trust=false r.j3ss.co/s3server:latest')
-        shell('docker push --disable-content-trust=false jess/s3server:latest')
+        shell('export BRANCH=$(git symbolic-ref -q --short HEAD || git describe --tags --exact-match)')
+        shell('if [[ "$BRANCH" == "master" ]]; then export BRANCH="latest"; endif')
+        shell('docker build --rm --force-rm -t r.j3ss.co/s3server:${BRANCH} .')
+        shell('docker tag r.j3ss.co/s3server:${BRANCH} jess/s3server:${BRANCH}')
+        shell('docker push --disable-content-trust=false r.j3ss.co/s3server:${BRANCH}')
+        shell('docker push --disable-content-trust=false jess/s3server:${BRANCH}')
         shell('docker rm $(docker ps --filter status=exited -q 2>/dev/null) 2> /dev/null || true')
         shell('docker rmi $(docker images --filter dangling=true -q 2>/dev/null) 2> /dev/null || true')
     }

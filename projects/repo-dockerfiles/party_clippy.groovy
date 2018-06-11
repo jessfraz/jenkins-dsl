@@ -8,6 +8,7 @@ freeStyleJob('party_clippy') {
         githubProjectUrl('https://github.com/jessfraz/party-clippy')
         sidebarLinks {
             link('https://hub.docker.com/r/jess/party-clippy', 'Docker Hub: jess/party-clippy', 'notepad.png')
+            link('https://r.j3ss.co/party-clippy', 'Registry: r.j3ss.co/party-clippy', 'notepad.png')
         }
     }
 
@@ -21,7 +22,7 @@ freeStyleJob('party_clippy') {
             remote {
                 url('https://github.com/jessfraz/party-clippy.git')
             }
-branches('*/master')
+branches('*/master', '*/tags/*')
             extensions {
                 wipeOutWorkspace()
                 cleanAfterCheckout()
@@ -38,10 +39,12 @@ branches('*/master')
 
     environmentVariables(DOCKER_CONTENT_TRUST: '1')
     steps {
-        shell('docker build --rm --force-rm -t r.j3ss.co/party-clippy:latest .')
-        shell('docker tag r.j3ss.co/party-clippy:latest jess/party-clippy:latest')
-        shell('docker push --disable-content-trust=false r.j3ss.co/party-clippy:latest')
-        shell('docker push --disable-content-trust=false jess/party-clippy:latest')
+        shell('export BRANCH=$(git symbolic-ref -q --short HEAD || git describe --tags --exact-match)')
+        shell('if [[ "$BRANCH" == "master" ]]; then export BRANCH="latest"; endif')
+        shell('docker build --rm --force-rm -t r.j3ss.co/party-clippy:${BRANCH} .')
+        shell('docker tag r.j3ss.co/party-clippy:${BRANCH} jess/party-clippy:${BRANCH}')
+        shell('docker push --disable-content-trust=false r.j3ss.co/party-clippy:${BRANCH}')
+        shell('docker push --disable-content-trust=false jess/party-clippy:${BRANCH}')
         shell('docker rm $(docker ps --filter status=exited -q 2>/dev/null) 2> /dev/null || true')
         shell('docker rmi $(docker images --filter dangling=true -q 2>/dev/null) 2> /dev/null || true')
     }

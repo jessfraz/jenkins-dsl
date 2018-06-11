@@ -8,6 +8,7 @@ freeStyleJob('upmail') {
         githubProjectUrl('https://github.com/genuinetools/upmail')
         sidebarLinks {
             link('https://hub.docker.com/r/jess/upmail', 'Docker Hub: jess/upmail', 'notepad.png')
+            link('https://r.j3ss.co/upmail', 'Registry: r.j3ss.co/upmail', 'notepad.png')
         }
     }
 
@@ -21,7 +22,7 @@ freeStyleJob('upmail') {
             remote {
                 url('https://github.com/genuinetools/upmail.git')
             }
-branches('*/master')
+branches('*/master', '*/tags/*')
             extensions {
                 wipeOutWorkspace()
                 cleanAfterCheckout()
@@ -38,10 +39,12 @@ branches('*/master')
 
     environmentVariables(DOCKER_CONTENT_TRUST: '1')
     steps {
-        shell('docker build --rm --force-rm -t r.j3ss.co/upmail:latest .')
-        shell('docker tag r.j3ss.co/upmail:latest jess/upmail:latest')
-        shell('docker push --disable-content-trust=false r.j3ss.co/upmail:latest')
-        shell('docker push --disable-content-trust=false jess/upmail:latest')
+        shell('export BRANCH=$(git symbolic-ref -q --short HEAD || git describe --tags --exact-match)')
+        shell('if [[ "$BRANCH" == "master" ]]; then export BRANCH="latest"; endif')
+        shell('docker build --rm --force-rm -t r.j3ss.co/upmail:${BRANCH} .')
+        shell('docker tag r.j3ss.co/upmail:${BRANCH} jess/upmail:${BRANCH}')
+        shell('docker push --disable-content-trust=false r.j3ss.co/upmail:${BRANCH}')
+        shell('docker push --disable-content-trust=false jess/upmail:${BRANCH}')
         shell('docker rm $(docker ps --filter status=exited -q 2>/dev/null) 2> /dev/null || true')
         shell('docker rmi $(docker images --filter dangling=true -q 2>/dev/null) 2> /dev/null || true')
     }

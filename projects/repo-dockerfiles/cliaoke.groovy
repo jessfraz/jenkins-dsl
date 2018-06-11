@@ -8,6 +8,7 @@ freeStyleJob('cliaoke') {
         githubProjectUrl('https://github.com/jessfraz/cliaoke')
         sidebarLinks {
             link('https://hub.docker.com/r/jess/cliaoke', 'Docker Hub: jess/cliaoke', 'notepad.png')
+            link('https://r.j3ss.co/cliaoke', 'Registry: r.j3ss.co/cliaoke', 'notepad.png')
         }
     }
 
@@ -21,7 +22,7 @@ freeStyleJob('cliaoke') {
             remote {
                 url('https://github.com/jessfraz/cliaoke.git')
             }
-branches('*/master')
+branches('*/master', '*/tags/*')
             extensions {
                 wipeOutWorkspace()
                 cleanAfterCheckout()
@@ -38,10 +39,12 @@ branches('*/master')
 
     environmentVariables(DOCKER_CONTENT_TRUST: '1')
     steps {
-        shell('docker build --rm --force-rm -t r.j3ss.co/cliaoke:latest .')
-        shell('docker tag r.j3ss.co/cliaoke:latest jess/cliaoke:latest')
-        shell('docker push --disable-content-trust=false r.j3ss.co/cliaoke:latest')
-        shell('docker push --disable-content-trust=false jess/cliaoke:latest')
+        shell('export BRANCH=$(git symbolic-ref -q --short HEAD || git describe --tags --exact-match)')
+        shell('if [[ "$BRANCH" == "master" ]]; then export BRANCH="latest"; endif')
+        shell('docker build --rm --force-rm -t r.j3ss.co/cliaoke:${BRANCH} .')
+        shell('docker tag r.j3ss.co/cliaoke:${BRANCH} jess/cliaoke:${BRANCH}')
+        shell('docker push --disable-content-trust=false r.j3ss.co/cliaoke:${BRANCH}')
+        shell('docker push --disable-content-trust=false jess/cliaoke:${BRANCH}')
         shell('docker rm $(docker ps --filter status=exited -q 2>/dev/null) 2> /dev/null || true')
         shell('docker rmi $(docker images --filter dangling=true -q 2>/dev/null) 2> /dev/null || true')
     }

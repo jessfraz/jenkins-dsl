@@ -8,6 +8,7 @@ freeStyleJob('netns') {
         githubProjectUrl('https://github.com/genuinetools/netns')
         sidebarLinks {
             link('https://hub.docker.com/r/jess/netns', 'Docker Hub: jess/netns', 'notepad.png')
+            link('https://r.j3ss.co/netns', 'Registry: r.j3ss.co/netns', 'notepad.png')
         }
     }
 
@@ -21,7 +22,7 @@ freeStyleJob('netns') {
             remote {
                 url('https://github.com/genuinetools/netns.git')
             }
-branches('*/master')
+branches('*/master', '*/tags/*')
             extensions {
                 wipeOutWorkspace()
                 cleanAfterCheckout()
@@ -38,10 +39,12 @@ branches('*/master')
 
     environmentVariables(DOCKER_CONTENT_TRUST: '1')
     steps {
-        shell('docker build --rm --force-rm -t r.j3ss.co/netns:latest .')
-        shell('docker tag r.j3ss.co/netns:latest jess/netns:latest')
-        shell('docker push --disable-content-trust=false r.j3ss.co/netns:latest')
-        shell('docker push --disable-content-trust=false jess/netns:latest')
+        shell('export BRANCH=$(git symbolic-ref -q --short HEAD || git describe --tags --exact-match)')
+        shell('if [[ "$BRANCH" == "master" ]]; then export BRANCH="latest"; endif')
+        shell('docker build --rm --force-rm -t r.j3ss.co/netns:${BRANCH} .')
+        shell('docker tag r.j3ss.co/netns:${BRANCH} jess/netns:${BRANCH}')
+        shell('docker push --disable-content-trust=false r.j3ss.co/netns:${BRANCH}')
+        shell('docker push --disable-content-trust=false jess/netns:${BRANCH}')
         shell('docker rm $(docker ps --filter status=exited -q 2>/dev/null) 2> /dev/null || true')
         shell('docker rmi $(docker images --filter dangling=true -q 2>/dev/null) 2> /dev/null || true')
     }

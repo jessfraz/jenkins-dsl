@@ -8,6 +8,7 @@ freeStyleJob('apk_file') {
         githubProjectUrl('https://github.com/genuinetools/apk-file')
         sidebarLinks {
             link('https://hub.docker.com/r/jess/apk-file', 'Docker Hub: jess/apk-file', 'notepad.png')
+            link('https://r.j3ss.co/apk-file', 'Registry: r.j3ss.co/apk-file', 'notepad.png')
         }
     }
 
@@ -21,7 +22,7 @@ freeStyleJob('apk_file') {
             remote {
                 url('https://github.com/genuinetools/apk-file.git')
             }
-branches('*/master')
+branches('*/master', '*/tags/*')
             extensions {
                 wipeOutWorkspace()
                 cleanAfterCheckout()
@@ -38,10 +39,12 @@ branches('*/master')
 
     environmentVariables(DOCKER_CONTENT_TRUST: '1')
     steps {
-        shell('docker build --rm --force-rm -t r.j3ss.co/apk-file:latest .')
-        shell('docker tag r.j3ss.co/apk-file:latest jess/apk-file:latest')
-        shell('docker push --disable-content-trust=false r.j3ss.co/apk-file:latest')
-        shell('docker push --disable-content-trust=false jess/apk-file:latest')
+        shell('export BRANCH=$(git symbolic-ref -q --short HEAD || git describe --tags --exact-match)')
+        shell('if [[ "$BRANCH" == "master" ]]; then export BRANCH="latest"; endif')
+        shell('docker build --rm --force-rm -t r.j3ss.co/apk-file:${BRANCH} .')
+        shell('docker tag r.j3ss.co/apk-file:${BRANCH} jess/apk-file:${BRANCH}')
+        shell('docker push --disable-content-trust=false r.j3ss.co/apk-file:${BRANCH}')
+        shell('docker push --disable-content-trust=false jess/apk-file:${BRANCH}')
         shell('docker rm $(docker ps --filter status=exited -q 2>/dev/null) 2> /dev/null || true')
         shell('docker rmi $(docker images --filter dangling=true -q 2>/dev/null) 2> /dev/null || true')
     }

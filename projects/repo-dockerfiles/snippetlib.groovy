@@ -8,6 +8,7 @@ freeStyleJob('snippetlib') {
         githubProjectUrl('https://github.com/jessfraz/snippetlib')
         sidebarLinks {
             link('https://hub.docker.com/r/jess/snippetlib', 'Docker Hub: jess/snippetlib', 'notepad.png')
+            link('https://r.j3ss.co/snippetlib', 'Registry: r.j3ss.co/snippetlib', 'notepad.png')
         }
     }
 
@@ -21,7 +22,7 @@ freeStyleJob('snippetlib') {
             remote {
                 url('https://github.com/jessfraz/snippetlib.git')
             }
-branches('*/master')
+branches('*/master', '*/tags/*')
             extensions {
                 wipeOutWorkspace()
                 cleanAfterCheckout()
@@ -38,10 +39,12 @@ branches('*/master')
 
     environmentVariables(DOCKER_CONTENT_TRUST: '1')
     steps {
-        shell('docker build --rm --force-rm -t r.j3ss.co/snippetlib:latest .')
-        shell('docker tag r.j3ss.co/snippetlib:latest jess/snippetlib:latest')
-        shell('docker push --disable-content-trust=false r.j3ss.co/snippetlib:latest')
-        shell('docker push --disable-content-trust=false jess/snippetlib:latest')
+        shell('export BRANCH=$(git symbolic-ref -q --short HEAD || git describe --tags --exact-match)')
+        shell('if [[ "$BRANCH" == "master" ]]; then export BRANCH="latest"; endif')
+        shell('docker build --rm --force-rm -t r.j3ss.co/snippetlib:${BRANCH} .')
+        shell('docker tag r.j3ss.co/snippetlib:${BRANCH} jess/snippetlib:${BRANCH}')
+        shell('docker push --disable-content-trust=false r.j3ss.co/snippetlib:${BRANCH}')
+        shell('docker push --disable-content-trust=false jess/snippetlib:${BRANCH}')
         shell('docker rm $(docker ps --filter status=exited -q 2>/dev/null) 2> /dev/null || true')
         shell('docker rmi $(docker images --filter dangling=true -q 2>/dev/null) 2> /dev/null || true')
     }

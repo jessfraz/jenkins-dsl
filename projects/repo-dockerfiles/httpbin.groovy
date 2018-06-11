@@ -8,6 +8,7 @@ freeStyleJob('httpbin') {
         githubProjectUrl('https://github.com/kennethreitz/httpbin')
         sidebarLinks {
             link('https://hub.docker.com/r/jess/httpbin', 'Docker Hub: jess/httpbin', 'notepad.png')
+            link('https://r.j3ss.co/httpbin', 'Registry: r.j3ss.co/httpbin', 'notepad.png')
         }
     }
 
@@ -21,7 +22,7 @@ freeStyleJob('httpbin') {
             remote {
                 url('https://github.com/kennethreitz/httpbin.git')
             }
-branches('*/master')
+branches('*/master', '*/tags/*')
             extensions {
                 wipeOutWorkspace()
                 cleanAfterCheckout()
@@ -38,10 +39,12 @@ branches('*/master')
 
     environmentVariables(DOCKER_CONTENT_TRUST: '1')
     steps {
-        shell('docker build --rm --force-rm -t r.j3ss.co/httpbin:latest .')
-        shell('docker tag r.j3ss.co/httpbin:latest jess/httpbin:latest')
-        shell('docker push --disable-content-trust=false r.j3ss.co/httpbin:latest')
-        shell('docker push --disable-content-trust=false jess/httpbin:latest')
+        shell('export BRANCH=$(git symbolic-ref -q --short HEAD || git describe --tags --exact-match)')
+        shell('if [[ "$BRANCH" == "master" ]]; then export BRANCH="latest"; endif')
+        shell('docker build --rm --force-rm -t r.j3ss.co/httpbin:${BRANCH} .')
+        shell('docker tag r.j3ss.co/httpbin:${BRANCH} jess/httpbin:${BRANCH}')
+        shell('docker push --disable-content-trust=false r.j3ss.co/httpbin:${BRANCH}')
+        shell('docker push --disable-content-trust=false jess/httpbin:${BRANCH}')
         shell('docker rm $(docker ps --filter status=exited -q 2>/dev/null) 2> /dev/null || true')
         shell('docker rmi $(docker images --filter dangling=true -q 2>/dev/null) 2> /dev/null || true')
     }

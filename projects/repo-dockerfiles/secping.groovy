@@ -8,6 +8,7 @@ freeStyleJob('secping') {
         githubProjectUrl('https://github.com/jessfraz/secping')
         sidebarLinks {
             link('https://hub.docker.com/r/jess/secping', 'Docker Hub: jess/secping', 'notepad.png')
+            link('https://r.j3ss.co/secping', 'Registry: r.j3ss.co/secping', 'notepad.png')
         }
     }
 
@@ -21,7 +22,7 @@ freeStyleJob('secping') {
             remote {
                 url('https://github.com/jessfraz/secping.git')
             }
-branches('*/master')
+branches('*/master', '*/tags/*')
             extensions {
                 wipeOutWorkspace()
                 cleanAfterCheckout()
@@ -38,10 +39,12 @@ branches('*/master')
 
     environmentVariables(DOCKER_CONTENT_TRUST: '1')
     steps {
-        shell('docker build --rm --force-rm -t r.j3ss.co/secping:latest .')
-        shell('docker tag r.j3ss.co/secping:latest jess/secping:latest')
-        shell('docker push --disable-content-trust=false r.j3ss.co/secping:latest')
-        shell('docker push --disable-content-trust=false jess/secping:latest')
+        shell('export BRANCH=$(git symbolic-ref -q --short HEAD || git describe --tags --exact-match)')
+        shell('if [[ "$BRANCH" == "master" ]]; then export BRANCH="latest"; endif')
+        shell('docker build --rm --force-rm -t r.j3ss.co/secping:${BRANCH} .')
+        shell('docker tag r.j3ss.co/secping:${BRANCH} jess/secping:${BRANCH}')
+        shell('docker push --disable-content-trust=false r.j3ss.co/secping:${BRANCH}')
+        shell('docker push --disable-content-trust=false jess/secping:${BRANCH}')
         shell('docker rm $(docker ps --filter status=exited -q 2>/dev/null) 2> /dev/null || true')
         shell('docker rmi $(docker images --filter dangling=true -q 2>/dev/null) 2> /dev/null || true')
     }

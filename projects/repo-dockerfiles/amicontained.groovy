@@ -8,6 +8,7 @@ freeStyleJob('amicontained') {
         githubProjectUrl('https://github.com/genuinetools/amicontained')
         sidebarLinks {
             link('https://hub.docker.com/r/jess/amicontained', 'Docker Hub: jess/amicontained', 'notepad.png')
+            link('https://r.j3ss.co/amicontained', 'Registry: r.j3ss.co/amicontained', 'notepad.png')
         }
     }
 
@@ -21,7 +22,7 @@ freeStyleJob('amicontained') {
             remote {
                 url('https://github.com/genuinetools/amicontained.git')
             }
-branches('*/master')
+branches('*/master', '*/tags/*')
             extensions {
                 wipeOutWorkspace()
                 cleanAfterCheckout()
@@ -38,10 +39,12 @@ branches('*/master')
 
     environmentVariables(DOCKER_CONTENT_TRUST: '1')
     steps {
-        shell('docker build --rm --force-rm -t r.j3ss.co/amicontained:latest .')
-        shell('docker tag r.j3ss.co/amicontained:latest jess/amicontained:latest')
-        shell('docker push --disable-content-trust=false r.j3ss.co/amicontained:latest')
-        shell('docker push --disable-content-trust=false jess/amicontained:latest')
+        shell('export BRANCH=$(git symbolic-ref -q --short HEAD || git describe --tags --exact-match)')
+        shell('if [[ "$BRANCH" == "master" ]]; then export BRANCH="latest"; endif')
+        shell('docker build --rm --force-rm -t r.j3ss.co/amicontained:${BRANCH} .')
+        shell('docker tag r.j3ss.co/amicontained:${BRANCH} jess/amicontained:${BRANCH}')
+        shell('docker push --disable-content-trust=false r.j3ss.co/amicontained:${BRANCH}')
+        shell('docker push --disable-content-trust=false jess/amicontained:${BRANCH}')
         shell('docker rm $(docker ps --filter status=exited -q 2>/dev/null) 2> /dev/null || true')
         shell('docker rmi $(docker images --filter dangling=true -q 2>/dev/null) 2> /dev/null || true')
     }

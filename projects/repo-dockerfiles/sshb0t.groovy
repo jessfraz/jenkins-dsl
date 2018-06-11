@@ -8,6 +8,7 @@ freeStyleJob('sshb0t') {
         githubProjectUrl('https://github.com/genuinetools/sshb0t')
         sidebarLinks {
             link('https://hub.docker.com/r/jess/sshb0t', 'Docker Hub: jess/sshb0t', 'notepad.png')
+            link('https://r.j3ss.co/sshb0t', 'Registry: r.j3ss.co/sshb0t', 'notepad.png')
         }
     }
 
@@ -21,7 +22,7 @@ freeStyleJob('sshb0t') {
             remote {
                 url('https://github.com/genuinetools/sshb0t.git')
             }
-branches('*/master')
+branches('*/master', '*/tags/*')
             extensions {
                 wipeOutWorkspace()
                 cleanAfterCheckout()
@@ -38,10 +39,12 @@ branches('*/master')
 
     environmentVariables(DOCKER_CONTENT_TRUST: '1')
     steps {
-        shell('docker build --rm --force-rm -t r.j3ss.co/sshb0t:latest .')
-        shell('docker tag r.j3ss.co/sshb0t:latest jess/sshb0t:latest')
-        shell('docker push --disable-content-trust=false r.j3ss.co/sshb0t:latest')
-        shell('docker push --disable-content-trust=false jess/sshb0t:latest')
+        shell('export BRANCH=$(git symbolic-ref -q --short HEAD || git describe --tags --exact-match)')
+        shell('if [[ "$BRANCH" == "master" ]]; then export BRANCH="latest"; endif')
+        shell('docker build --rm --force-rm -t r.j3ss.co/sshb0t:${BRANCH} .')
+        shell('docker tag r.j3ss.co/sshb0t:${BRANCH} jess/sshb0t:${BRANCH}')
+        shell('docker push --disable-content-trust=false r.j3ss.co/sshb0t:${BRANCH}')
+        shell('docker push --disable-content-trust=false jess/sshb0t:${BRANCH}')
         shell('docker rm $(docker ps --filter status=exited -q 2>/dev/null) 2> /dev/null || true')
         shell('docker rmi $(docker images --filter dangling=true -q 2>/dev/null) 2> /dev/null || true')
     }

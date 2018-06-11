@@ -41,13 +41,13 @@ freeStyleJob('pastebinit') {
     steps {
         shell('export BRANCH=$(git symbolic-ref -q --short HEAD || git describe --tags --exact-match); if [[ "$BRANCH" == "master" ]]; then export BRANCH="latest"; fi; echo "$BRANCH" > .branch')
         shell('docker build --rm --force-rm -t r.j3ss.co/pastebinit:$(cat .branch) .')
-        shell('docker tag r.j3ss.co/pastebinit:${BRANCH} jess/pastebinit:$(cat .branch)')
+shell('docker tag r.j3ss.co/pastebinit:$(cat .branch) jess/pastebinit:$(cat .branch)')
         shell('docker push --disable-content-trust=false r.j3ss.co/pastebinit:$(cat .branch)')
         shell('docker push --disable-content-trust=false jess/pastebinit:$(cat .branch)')
 
         shell('docker build --rm --force-rm -t r.j3ss.co/pastebinit-server:$(cat .branch) server')
-        shell('docker tag r.j3ss.co/pastebinit-server:${BRANCH} jess/pastebinit-server:$(cat .branch)')
-        shell('docker tag r.j3ss.co/pastebinit-server:${BRANCH} jessfraz/pastebinit-server:$(cat .branch)')
+shell('docker tag r.j3ss.co/pastebinit-server:$(cat .branch) jess/pastebinit-server:$(cat .branch)')
+shell('docker tag r.j3ss.co/pastebinit-server:$(cat .branch) jessfraz/pastebinit-server:$(cat .branch)')
         shell('docker push --disable-content-trust=false r.j3ss.co/pastebinit-server:$(cat .branch)')
         shell('docker push --disable-content-trust=false jess/pastebinit-server:$(cat .branch)')
         shell('docker push --disable-content-trust=false jessfraz/pastebinit-server:$(cat .branch)')

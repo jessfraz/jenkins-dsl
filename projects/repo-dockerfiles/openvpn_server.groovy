@@ -41,7 +41,7 @@ freeStyleJob('openvpn_server') {
     steps {
         shell('export BRANCH=$(git symbolic-ref -q --short HEAD || git describe --tags --exact-match); if [[ "$BRANCH" == "master" ]]; then export BRANCH="latest"; fi; echo "$BRANCH" > .branch')
         shell('docker build --rm --force-rm -t r.j3ss.co/openvpn-server:$(cat .branch) .')
-        shell('docker tag r.j3ss.co/openvpn-server:${BRANCH} jess/openvpn-server:$(cat .branch)')
+shell('docker tag r.j3ss.co/openvpn-server:$(cat .branch) jess/openvpn-server:$(cat .branch)')
         shell('docker push --disable-content-trust=false r.j3ss.co/openvpn-server:$(cat .branch)')
         shell('docker push --disable-content-trust=false jess/openvpn-server:$(cat .branch)')
         shell('docker rm $(docker ps --filter status=exited -q 2>/dev/null) 2> /dev/null || true')

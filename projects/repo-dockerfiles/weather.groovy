@@ -41,13 +41,13 @@ freeStyleJob('weather') {
     steps {
         shell('export BRANCH=$(git symbolic-ref -q --short HEAD || git describe --tags --exact-match); if [[ "$BRANCH" == "master" ]]; then export BRANCH="latest"; fi; echo "$BRANCH" > .branch')
         shell('docker build --rm --force-rm -t r.j3ss.co/weather:$(cat .branch) .')
-        shell('docker tag r.j3ss.co/weather:${BRANCH} jess/weather:$(cat .branch)')
+shell('docker tag r.j3ss.co/weather:$(cat .branch) jess/weather:$(cat .branch)')
         shell('docker push --disable-content-trust=false r.j3ss.co/weather:$(cat .branch)')
         shell('docker push --disable-content-trust=false jess/weather:$(cat .branch)')
 
         shell('docker build --rm --force-rm -t r.j3ss.co/weather-server:$(cat .branch) server')
-        shell('docker tag r.j3ss.co/weather-server:${BRANCH} jess/weather-server:$(cat .branch)')
-        shell('docker tag r.j3ss.co/weather-server:${BRANCH} jessfraz/weather-server:$(cat .branch)')
+shell('docker tag r.j3ss.co/weather-server:$(cat .branch) jess/weather-server:$(cat .branch)')
+shell('docker tag r.j3ss.co/weather-server:$(cat .branch) jessfraz/weather-server:$(cat .branch)')
         shell('docker push --disable-content-trust=false r.j3ss.co/weather-server:$(cat .branch)')
         shell('docker push --disable-content-trust=false jess/weather-server:$(cat .branch)')
         shell('docker push --disable-content-trust=false jessfraz/weather-server:$(cat .branch)')

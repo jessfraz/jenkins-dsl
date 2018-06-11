@@ -22,7 +22,7 @@ freeStyleJob('onion') {
             remote {
                 url('https://github.com/jessfraz/onion.git')
             }
-branches('*/master', '*/tags/*')
+            branches('*/master', '*/tags/*')
             extensions {
                 wipeOutWorkspace()
                 cleanAfterCheckout()
@@ -40,7 +40,7 @@ branches('*/master', '*/tags/*')
     environmentVariables(DOCKER_CONTENT_TRUST: '1')
     steps {
         shell('export BRANCH=$(git symbolic-ref -q --short HEAD || git describe --tags --exact-match)')
-        shell('if [[ "$BRANCH" == "master" ]]; then export BRANCH="latest"; endif')
+        shell('if [[ "$BRANCH" == "master" ]]; then export BRANCH="latest"; fi')
         shell('docker build --rm --force-rm -t r.j3ss.co/onion:${BRANCH} .')
         shell('docker tag r.j3ss.co/onion:${BRANCH} jess/onion:${BRANCH}')
         shell('docker push --disable-content-trust=false r.j3ss.co/onion:${BRANCH}')

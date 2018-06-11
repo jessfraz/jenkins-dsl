@@ -54,7 +54,7 @@ freeStyleJob('${rname//./_}') {
             remote {
                 url('https://github.com/${orig}.git')
             }
-			branches('*/master', '*/tags/*')
+            branches('*/master', '*/tags/*')
             extensions {
                 wipeOutWorkspace()
                 cleanAfterCheckout()
@@ -72,7 +72,7 @@ freeStyleJob('${rname//./_}') {
     environmentVariables(DOCKER_CONTENT_TRUST: '1')
     steps {
         shell('export BRANCH=\$(git symbolic-ref -q --short HEAD || git describe --tags --exact-match)')
-        shell('if [[ "\$BRANCH" == "master" ]]; then export BRANCH="latest"; endif')
+        shell('if [[ "\$BRANCH" == "master" ]]; then export BRANCH="latest"; fi')
         shell('docker build --rm --force-rm -t r.j3ss.co/${image}:\${BRANCH} .')
         shell('docker tag r.j3ss.co/${image}:\${BRANCH} jess/${image}:\${BRANCH}')
         shell('docker push --disable-content-trust=false r.j3ss.co/${image}:\${BRANCH}')

@@ -44,6 +44,8 @@ freeStyleJob('netscan') {
 shell('docker tag r.j3ss.co/netscan:$(cat .branch) jess/netscan:$(cat .branch)')
         shell('docker push --disable-content-trust=false r.j3ss.co/netscan:$(cat .branch)')
         shell('docker push --disable-content-trust=false jess/netscan:$(cat .branch)')
+        shell('if [[ "$(cat .branch)" != "latest" ]]; then docker tag r.j3ss.co/netscan:$(cat .branch) r.j3ss.co/netscan:latest; docker push --disable-content-trust=false r.j3ss.co/netscan:latest; fi')
+        shell('if [[ "$(cat .branch)" != "latest" ]]; then docker tag jess/netscan:$(cat .branch) jess/netscan:latest; docker push --disable-content-trust=false jess/netscan:latest; fi')
         shell('docker rm $(docker ps --filter status=exited -q 2>/dev/null) 2> /dev/null || true')
         shell('docker rmi $(docker images --filter dangling=true -q 2>/dev/null) 2> /dev/null || true')
     }

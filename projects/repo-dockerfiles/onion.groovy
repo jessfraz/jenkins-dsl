@@ -44,6 +44,8 @@ freeStyleJob('onion') {
 shell('docker tag r.j3ss.co/onion:$(cat .branch) jess/onion:$(cat .branch)')
         shell('docker push --disable-content-trust=false r.j3ss.co/onion:$(cat .branch)')
         shell('docker push --disable-content-trust=false jess/onion:$(cat .branch)')
+        shell('if [[ "$(cat .branch)" != "latest" ]]; then docker tag r.j3ss.co/onion:$(cat .branch) r.j3ss.co/onion:latest; docker push --disable-content-trust=false r.j3ss.co/onion:latest; fi')
+        shell('if [[ "$(cat .branch)" != "latest" ]]; then docker tag jess/onion:$(cat .branch) jess/onion:latest; docker push --disable-content-trust=false jess/onion:latest; fi')
         shell('docker rm $(docker ps --filter status=exited -q 2>/dev/null) 2> /dev/null || true')
         shell('docker rmi $(docker images --filter dangling=true -q 2>/dev/null) 2> /dev/null || true')
     }

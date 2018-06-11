@@ -44,6 +44,8 @@ freeStyleJob('s3server') {
 shell('docker tag r.j3ss.co/s3server:$(cat .branch) jess/s3server:$(cat .branch)')
         shell('docker push --disable-content-trust=false r.j3ss.co/s3server:$(cat .branch)')
         shell('docker push --disable-content-trust=false jess/s3server:$(cat .branch)')
+        shell('if [[ "$(cat .branch)" != "latest" ]]; then docker tag r.j3ss.co/s3server:$(cat .branch) r.j3ss.co/s3server:latest; docker push --disable-content-trust=false r.j3ss.co/s3server:latest; fi')
+        shell('if [[ "$(cat .branch)" != "latest" ]]; then docker tag jess/s3server:$(cat .branch) jess/s3server:latest; docker push --disable-content-trust=false jess/s3server:latest; fi')
         shell('docker rm $(docker ps --filter status=exited -q 2>/dev/null) 2> /dev/null || true')
         shell('docker rmi $(docker images --filter dangling=true -q 2>/dev/null) 2> /dev/null || true')
     }

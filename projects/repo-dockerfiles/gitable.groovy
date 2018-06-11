@@ -44,6 +44,8 @@ freeStyleJob('gitable') {
 shell('docker tag r.j3ss.co/gitable:$(cat .branch) jess/gitable:$(cat .branch)')
         shell('docker push --disable-content-trust=false r.j3ss.co/gitable:$(cat .branch)')
         shell('docker push --disable-content-trust=false jess/gitable:$(cat .branch)')
+        shell('if [[ "$(cat .branch)" != "latest" ]]; then docker tag r.j3ss.co/gitable:$(cat .branch) r.j3ss.co/gitable:latest; docker push --disable-content-trust=false r.j3ss.co/gitable:latest; fi')
+        shell('if [[ "$(cat .branch)" != "latest" ]]; then docker tag jess/gitable:$(cat .branch) jess/gitable:latest; docker push --disable-content-trust=false jess/gitable:latest; fi')
         shell('docker rm $(docker ps --filter status=exited -q 2>/dev/null) 2> /dev/null || true')
         shell('docker rmi $(docker images --filter dangling=true -q 2>/dev/null) 2> /dev/null || true')
     }

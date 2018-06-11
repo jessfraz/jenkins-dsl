@@ -76,6 +76,8 @@ freeStyleJob('${rname//./_}') {
 		shell('docker tag r.j3ss.co/${image}:\$(cat .branch) jess/${image}:\$(cat .branch)')
         shell('docker push --disable-content-trust=false r.j3ss.co/${image}:\$(cat .branch)')
         shell('docker push --disable-content-trust=false jess/${image}:\$(cat .branch)')
+        shell('if [[ "\$(cat .branch)" != "latest" ]]; then docker tag r.j3ss.co/${image}:\$(cat .branch) r.j3ss.co/${image}:latest; docker push --disable-content-trust=false r.j3ss.co/${image}:latest; fi')
+        shell('if [[ "\$(cat .branch)" != "latest" ]]; then docker tag jess/${image}:\$(cat .branch) jess/${image}:latest; docker push --disable-content-trust=false jess/${image}:latest; fi')
 EOF
 
 	# also push the weather-server & reg-server images
@@ -89,6 +91,8 @@ EOF
         shell('docker push --disable-content-trust=false r.j3ss.co/${image}:\$(cat .branch)')
         shell('docker push --disable-content-trust=false jess/${image}:\$(cat .branch)')
         shell('docker push --disable-content-trust=false jessfraz/${image}:\$(cat .branch)')
+        shell('if [[ "\$(cat .branch)" != "latest" ]]; then docker tag r.j3ss.co/${image}:\$(cat .branch) r.j3ss.co/${image}:latest; docker push --disable-content-trust=false r.j3ss.co/${image}:latest; fi')
+        shell('if [[ "\$(cat .branch)" != "latest" ]]; then docker tag jess/${image}:\$(cat .branch) jess/${image}:latest; docker push --disable-content-trust=false jess/${image}:latest; fi')
 EOF
 	fi
 

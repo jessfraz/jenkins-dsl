@@ -137,6 +137,7 @@ genuinetools/magneto
 genuinetools/netns
 genuinetools/pepper
 genuinetools/reg
+genuinetools/releases
 genuinetools/riddler
 genuinetools/sshb0t
 genuinetools/udict

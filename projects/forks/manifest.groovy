@@ -1,13 +1,13 @@
 freeStyleJob('update_fork_manifest') {
     displayName('update-fork-manifest')
-    description('Rebase the primary branch (null) in jessfraz/manifest fork.')
+    description('Rebase the primary branch (master) in jessfraz/manifest fork.')
 
     checkoutRetryCount(3)
 
     properties {
         githubProjectUrl('https://github.com/jessfraz/manifest')
         sidebarLinks {
-            link('https://github.com/null/manifest', 'UPSTREAM: null/manifest', 'notepad.png')
+            link('https://github.com/coreos/manifest', 'UPSTREAM: coreos/manifest', 'notepad.png')
         }
     }
 
@@ -22,14 +22,14 @@ freeStyleJob('update_fork_manifest') {
                 url('git@github.com:jessfraz/manifest.git')
                 name('origin')
                 credentials('ssh-github-key')
-                refspec('+refs/heads/null:refs/remotes/origin/null')
+                refspec('+refs/heads/master:refs/remotes/origin/master')
             }
             remote {
-                url('https://github.com/null/manifest.git')
+                url('https://github.com/coreos/manifest.git')
                 name('upstream')
-                refspec('+refs/heads/null:refs/remotes/upstream/null')
+                refspec('+refs/heads/master:refs/remotes/upstream/master')
             }
-            branches('null', 'upstream/null')
+            branches('master', 'upstream/master')
             extensions {
                 disableRemotePoll()
                 wipeOutWorkspace()
@@ -45,12 +45,12 @@ freeStyleJob('update_fork_manifest') {
     wrappers { colorizeOutput() }
 
     steps {
-        shell('git rebase upstream/null')
+        shell('git rebase upstream/master')
     }
 
     publishers {
         git {
-            branch('origin', 'null')
+            branch('origin', 'master')
             pushOnlyIfSuccess()
         }
 

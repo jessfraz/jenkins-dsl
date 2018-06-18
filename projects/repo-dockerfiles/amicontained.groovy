@@ -35,6 +35,15 @@ freeStyleJob('amicontained') {
         githubPush()
     }
 
+    parameters {
+        gitParam('GIT_BRANCH_OR_TAG') {
+            description('Git Branch or Tag')
+            type('BRANCH_TAG')
+            defaultValue('origin/master')
+            sortMode('DESCENDING_SMART')
+        }
+    }
+
     wrappers { colorizeOutput() }
 
     environmentVariables(DOCKER_CONTENT_TRUST: '1')

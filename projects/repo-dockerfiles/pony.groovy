@@ -2,6 +2,7 @@ freeStyleJob('pony') {
     displayName('pony')
     description('Build Dockerfiles in jessfraz/pony.')
 
+    concurrentBuild()
     checkoutRetryCount(3)
 
     properties {
@@ -22,7 +23,7 @@ freeStyleJob('pony') {
             remote {
                 url('https://github.com/jessfraz/pony.git')
             }
-            branches('*/master', '*/tags/*')
+branches('*/master', '*/tags/*')
             extensions {
                 wipeOutWorkspace()
                 cleanAfterCheckout()
@@ -33,15 +34,6 @@ freeStyleJob('pony') {
     triggers {
         cron('H H * * *')
         githubPush()
-    }
-
-    parameters {
-        gitParam('GIT_BRANCH_OR_TAG') {
-            description('Git Branch or Tag')
-            type('BRANCH_TAG')
-            defaultValue('origin/master')
-            sortMode('DESCENDING')
-        }
     }
 
     wrappers { colorizeOutput() }

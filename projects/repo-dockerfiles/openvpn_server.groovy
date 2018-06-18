@@ -2,6 +2,7 @@ freeStyleJob('openvpn_server') {
     displayName('openvpn-server')
     description('Build Dockerfiles in kylemanna/docker-openvpn.')
 
+    concurrentBuild()
     checkoutRetryCount(3)
 
     properties {
@@ -22,7 +23,7 @@ freeStyleJob('openvpn_server') {
             remote {
                 url('https://github.com/kylemanna/docker-openvpn.git')
             }
-            branches('*/master', '*/tags/*')
+branches('*/master', '*/tags/*')
             extensions {
                 wipeOutWorkspace()
                 cleanAfterCheckout()
@@ -33,15 +34,6 @@ freeStyleJob('openvpn_server') {
     triggers {
         cron('H H * * *')
         githubPush()
-    }
-
-    parameters {
-        gitParam('GIT_BRANCH_OR_TAG') {
-            description('Git Branch or Tag')
-            type('BRANCH_TAG')
-            defaultValue('origin/master')
-            sortMode('DESCENDING')
-        }
     }
 
     wrappers { colorizeOutput() }

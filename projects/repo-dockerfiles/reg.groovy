@@ -2,6 +2,7 @@ freeStyleJob('reg') {
     displayName('reg')
     description('Build Dockerfiles in genuinetools/reg.')
 
+    concurrentBuild()
     checkoutRetryCount(3)
 
     properties {
@@ -22,7 +23,7 @@ freeStyleJob('reg') {
             remote {
                 url('https://github.com/genuinetools/reg.git')
             }
-            branches('*/master', '*/tags/*')
+branches('*/master', '*/tags/*')
             extensions {
                 wipeOutWorkspace()
                 cleanAfterCheckout()
@@ -33,15 +34,6 @@ freeStyleJob('reg') {
     triggers {
         cron('H H * * *')
         githubPush()
-    }
-
-    parameters {
-        gitParam('GIT_BRANCH_OR_TAG') {
-            description('Git Branch or Tag')
-            type('BRANCH_TAG')
-            defaultValue('origin/master')
-            sortMode('DESCENDING')
-        }
     }
 
     wrappers { colorizeOutput() }

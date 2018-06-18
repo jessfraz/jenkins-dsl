@@ -2,6 +2,7 @@ freeStyleJob('netns') {
     displayName('netns')
     description('Build Dockerfiles in genuinetools/netns.')
 
+    concurrentBuild()
     checkoutRetryCount(3)
 
     properties {
@@ -22,7 +23,7 @@ freeStyleJob('netns') {
             remote {
                 url('https://github.com/genuinetools/netns.git')
             }
-            branches('*/master', '*/tags/*')
+branches('*/master', '*/tags/*')
             extensions {
                 wipeOutWorkspace()
                 cleanAfterCheckout()
@@ -33,15 +34,6 @@ freeStyleJob('netns') {
     triggers {
         cron('H H * * *')
         githubPush()
-    }
-
-    parameters {
-        gitParam('GIT_BRANCH_OR_TAG') {
-            description('Git Branch or Tag')
-            type('BRANCH_TAG')
-            defaultValue('origin/master')
-            sortMode('DESCENDING')
-        }
     }
 
     wrappers { colorizeOutput() }

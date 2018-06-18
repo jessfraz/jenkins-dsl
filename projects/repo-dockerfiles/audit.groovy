@@ -2,6 +2,7 @@ freeStyleJob('audit') {
     displayName('audit')
     description('Build Dockerfiles in genuinetools/audit.')
 
+    concurrentBuild()
     checkoutRetryCount(3)
 
     properties {
@@ -22,7 +23,7 @@ freeStyleJob('audit') {
             remote {
                 url('https://github.com/genuinetools/audit.git')
             }
-            branches('*/master', '*/tags/*')
+branches('*/master', '*/tags/*')
             extensions {
                 wipeOutWorkspace()
                 cleanAfterCheckout()
@@ -33,15 +34,6 @@ freeStyleJob('audit') {
     triggers {
         cron('H H * * *')
         githubPush()
-    }
-
-    parameters {
-        gitParam('GIT_BRANCH_OR_TAG') {
-            description('Git Branch or Tag')
-            type('BRANCH_TAG')
-            defaultValue('origin/master')
-            sortMode('DESCENDING')
-        }
     }
 
     wrappers { colorizeOutput() }

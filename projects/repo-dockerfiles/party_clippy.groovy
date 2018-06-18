@@ -40,7 +40,7 @@ freeStyleJob('party_clippy') {
             description('Git Branch or Tag')
             type('BRANCH_TAG')
             defaultValue('origin/master')
-            sortMode('DESCENDING_SMART')
+            sortMode('DESCENDING')
         }
     }
 

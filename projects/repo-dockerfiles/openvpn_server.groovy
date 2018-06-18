@@ -40,7 +40,7 @@ freeStyleJob('openvpn_server') {
             description('Git Branch or Tag')
             type('BRANCH_TAG')
             defaultValue('origin/master')
-            sortMode('DESCENDING_SMART')
+            sortMode('DESCENDING')
         }
     }
 

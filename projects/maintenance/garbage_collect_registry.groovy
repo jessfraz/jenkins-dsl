@@ -28,11 +28,11 @@ freeStyleJob('maintenance_garbage_collect_registry') {
 
     steps {
         shell("echo 'Running clean registry'")
-        shell('docker run --rm --disable-content-trust=false --name clean-registry -v /home/jessfraz/.gsutil:/root/.gsutil -v /home/jessfraz/.gcloud:/root/.config/gcloud:ro -v /var/jenkins_home/.docker:/root/.docker:ro r.j3ss.co/clean-registry')
+        shell('docker run --rm --disable-content-trust=false --name clean-registry -v /var/jenkins_home/.gsutil:/root/.gsutil -v /var/jenkins_home/.gcloud:/root/.config/gcloud:ro -v /var/jenkins_home/.docker:/root/.docker:ro r.j3ss.co/clean-registry')
         shell("echo 'Running garbage collection'")
         shell('docker run --rm --disable-content-trust=false --name registry-garbage-collect -v /home/jessfraz/volumes/registry:/etc/docker/registry:ro registry garbage-collect /etc/docker/registry/config.yml')
         shell("echo 'Getting new bucket size'")
-        shell('docker run --rm --disable-content-trust=false --name gsutil -v /home/jessfraz/.gsutil:/root/.gsutil -v /home/jessfraz/.gcloud:/root/.config/gcloud:ro --entrypoint gsutil r.j3ss.co/gcloud du -s -h gs://r.j3ss.co')
+        shell('docker run --rm --disable-content-trust=false --name gsutil -v /var/jenkins_home/.gsutil:/root/.gsutil -v /var/jenkins_home/.gcloud:/root/.config/gcloud:ro --entrypoint gsutil r.j3ss.co/gcloud du -s -h gs://r.j3ss.co')
     }
 
     publishers {

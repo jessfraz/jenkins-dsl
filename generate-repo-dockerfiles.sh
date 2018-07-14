@@ -156,6 +156,7 @@ jessfraz/pastebinit
 jessfraz/pony
 jessfraz/s3server
 jessfraz/secping
+jessfraz/ship
 jessfraz/snippetlib
 jessfraz/tdash
 jessfraz/tripitcalb0t

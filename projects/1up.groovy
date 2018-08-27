@@ -1,4 +1,4 @@
-freeStyleJob('1up') {
+freeStyleJob('oneup') {
     displayName('1up')
     description('Build Dockerfiles for 1up.')
 

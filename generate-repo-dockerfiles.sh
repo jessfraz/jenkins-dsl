@@ -110,6 +110,7 @@ EOF
 }
 
 repos=(
+genuinetools/1up
 genuinetools/amicontained
 genuinetools/apk-file
 genuinetools/audit

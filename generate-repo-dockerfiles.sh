@@ -25,6 +25,7 @@ generate_dsl(){
 	local image=${name}
 
 	rname=${name//-/_}
+	rname=${rname//1/one}
 	file="${DIR}/projects/repo-dockerfiles/${rname//./_}.groovy"
 
 	echo "${file} | ${image}"

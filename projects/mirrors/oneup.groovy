@@ -1,4 +1,4 @@
-freeStyleJob('mirror_1up') {
+freeStyleJob('mirror_oneup') {
     displayName('mirror-1up')
     description('Mirror github.com/genuinetools/1up to g.j3ss.co/genuinetools/1up.')
     checkoutRetryCount(3)

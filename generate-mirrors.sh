@@ -43,6 +43,9 @@ generate_dsl(){
 	local name=${orig#*/}
 
 	rname=${name//-/_}
+	if [[ "$rname" != "go_get_issue"* ]]; then
+		rname=${rname//1/one}
+	fi
 	file="${DIR}/projects/mirrors/${rname//./_}.groovy"
 
 	if [[ "$GITHUB_USER" == "$user" ]]; then

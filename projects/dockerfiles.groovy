@@ -44,7 +44,7 @@ freeStyleJob('dockerfiles') {
     }
 
     environmentVariables(DOCKER_CONTENT_TRUST: '1')
-    environmentVariables(JOBS: '5')
+    environmentVariables(JOBS: '10')
     steps {
         shell('./build-all.sh')
         shell('docker rm $(docker ps --filter status=exited -q 2>/dev/null) 2> /dev/null || true')

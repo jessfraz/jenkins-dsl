@@ -44,7 +44,7 @@ freeStyleJob('docker_hub_dockerfiles') {
     }
 
     environmentVariables(DOCKER_CONTENT_TRUST: '1')
-    environmentVariables(JOBS: '10')
+    environmentVariables(JOBS: '15')
     steps {
         shell('REPO_URL=jess ./build-all.sh')
         shell('REPO_URL=jessfraz ./build-all.sh')

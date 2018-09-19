@@ -19,7 +19,7 @@ freeStyleJob('maintenance_garbage_collect_registry') {
         // timeout if there has been no activity for 180 seconds
         // then fail the build and set a build description
         timeout {
-            absolute(minutes = 360)
+            absolute(minutes = 3600)
             noActivity(36000)
             failBuild()
             writeDescription('Build failed due to timeout after {0} minutes')

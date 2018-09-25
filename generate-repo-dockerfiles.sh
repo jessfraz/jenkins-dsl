@@ -116,6 +116,7 @@ genuinetools/amicontained
 genuinetools/apk-file
 genuinetools/audit
 genuinetools/bane
+genuinetools/bpfd
 genuinetools/bpfps
 genuinetools/certok
 genuinetools/ghb0t
@@ -131,7 +132,6 @@ genuinetools/udict
 genuinetools/upmail
 genuinetools/weather
 jessfraz/battery
-jessfraz/bpfd
 jessfraz/cliaoke
 jessfraz/dstats
 jessfraz/dockfmt

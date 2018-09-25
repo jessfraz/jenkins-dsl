@@ -1,12 +1,12 @@
 freeStyleJob('bpfd') {
     displayName('bpfd')
-    description('Build Dockerfiles in jessfraz/bpfd.')
+    description('Build Dockerfiles in genuinetools/bpfd.')
 
     concurrentBuild()
     checkoutRetryCount(3)
 
     properties {
-        githubProjectUrl('https://github.com/jessfraz/bpfd')
+        githubProjectUrl('https://github.com/genuinetools/bpfd')
         sidebarLinks {
             link('https://hub.docker.com/r/jess/bpfd', 'Docker Hub: jess/bpfd', 'notepad.png')
             link('https://r.j3ss.co/repo/bpfd/tags', 'Registry: r.j3ss.co/bpfd', 'notepad.png')
@@ -21,7 +21,7 @@ freeStyleJob('bpfd') {
     scm {
         git {
             remote {
-                url('https://github.com/jessfraz/bpfd.git')
+                url('https://github.com/genuinetools/bpfd.git')
             }
 branches('*/master', '*/tags/*')
             extensions {

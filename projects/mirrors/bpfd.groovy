@@ -1,11 +1,11 @@
 freeStyleJob('mirror_bpfd') {
     displayName('mirror-bpfd')
-    description('Mirror github.com/jessfraz/bpfd to g.j3ss.co/bpfd.')
+    description('Mirror github.com/genuinetools/bpfd to g.j3ss.co/genuinetools/bpfd.')
     checkoutRetryCount(3)
     properties {
-        githubProjectUrl('https://github.com/jessfraz/bpfd')
+        githubProjectUrl('https://github.com/genuinetools/bpfd')
         sidebarLinks {
-            link('https://git.j3ss.co/bpfd', 'git.j3ss.co/bpfd', 'notepad.png')
+            link('https://git.j3ss.co/genuinetools/bpfd', 'git.j3ss.co/genuinetools/bpfd', 'notepad.png')
         }
     }
     logRotator {
@@ -17,8 +17,8 @@ freeStyleJob('mirror_bpfd') {
     }
     wrappers { colorizeOutput() }
     steps {
-        shell('git clone --mirror https://github.com/jessfraz/bpfd.git repo')
-        shell('cd repo && git push --mirror ssh://git@g.j3ss.co:2200/~/bpfd.git')
+        shell('git clone --mirror https://github.com/genuinetools/bpfd.git repo')
+        shell('cd repo && git push --mirror ssh://git@g.j3ss.co:2200/~/genuinetools/bpfd.git')
     }
     publishers {
         extendedEmail {

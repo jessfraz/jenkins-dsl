@@ -137,7 +137,6 @@ jessfraz/dstats
 jessfraz/dockfmt
 jessfraz/gitable
 jessfraz/netscan
-jessfraz/onion
 jessfraz/party-clippy
 jessfraz/pastebinit
 jessfraz/pony

@@ -48,7 +48,7 @@ freeStyleJob('dstats') {
         shell('docker push --disable-content-trust=false jess/dstats:$(cat .branch)')
         shell('if [[ "$(cat .branch)" != "latest" ]]; then docker tag r.j3ss.co/dstats:$(cat .branch) r.j3ss.co/dstats:latest; docker push --disable-content-trust=false r.j3ss.co/dstats:latest; fi')
         shell('if [[ "$(cat .branch)" != "latest" ]]; then docker tag jess/dstats:$(cat .branch) jess/dstats:latest; docker push --disable-content-trust=false jess/dstats:latest; fi')
-        shell('for tag in "$(git tag)"; do git checkout $tag; docker build  --rm --force-rm -t r.j3ss.co/dstats:$tag . || true; docker push --disable-content-trust=false r.j3ss.co/dstats:$tag || true; done')
+        shell('for tag in $(git tag); do git checkout $tag; docker build  --rm --force-rm -t r.j3ss.co/dstats:$tag . || true; docker push --disable-content-trust=false r.j3ss.co/dstats:$tag || true; done')
         shell('docker rm $(docker ps --filter status=exited -q 2>/dev/null) 2> /dev/null || true')
         shell('docker rmi $(docker images --filter dangling=true -q 2>/dev/null) 2> /dev/null || true')
     }

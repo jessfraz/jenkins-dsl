@@ -48,7 +48,7 @@ freeStyleJob('riddler') {
         shell('docker push --disable-content-trust=false jess/riddler:$(cat .branch)')
         shell('if [[ "$(cat .branch)" != "latest" ]]; then docker tag r.j3ss.co/riddler:$(cat .branch) r.j3ss.co/riddler:latest; docker push --disable-content-trust=false r.j3ss.co/riddler:latest; fi')
         shell('if [[ "$(cat .branch)" != "latest" ]]; then docker tag jess/riddler:$(cat .branch) jess/riddler:latest; docker push --disable-content-trust=false jess/riddler:latest; fi')
-        shell('for tag in "$(git tag)"; do git checkout $tag; docker build  --rm --force-rm -t r.j3ss.co/riddler:$tag . || true; docker push --disable-content-trust=false r.j3ss.co/riddler:$tag || true; done')
+        shell('for tag in $(git tag); do git checkout $tag; docker build  --rm --force-rm -t r.j3ss.co/riddler:$tag . || true; docker push --disable-content-trust=false r.j3ss.co/riddler:$tag || true; done')
         shell('docker rm $(docker ps --filter status=exited -q 2>/dev/null) 2> /dev/null || true')
         shell('docker rmi $(docker images --filter dangling=true -q 2>/dev/null) 2> /dev/null || true')
     }

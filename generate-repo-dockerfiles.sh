@@ -81,7 +81,7 @@ freeStyleJob('${rname//./_}') {
         shell('docker push --disable-content-trust=false jess/${image}:\$(cat .branch)')
         shell('if [[ "\$(cat .branch)" != "latest" ]]; then docker tag r.j3ss.co/${image}:\$(cat .branch) r.j3ss.co/${image}:latest; docker push --disable-content-trust=false r.j3ss.co/${image}:latest; fi')
         shell('if [[ "\$(cat .branch)" != "latest" ]]; then docker tag jess/${image}:\$(cat .branch) jess/${image}:latest; docker push --disable-content-trust=false jess/${image}:latest; fi')
-        shell('for tag in "\$(git tag)"; do git checkout \$tag; docker build  --rm --force-rm -t r.j3ss.co/${image}:\$tag . || true; docker push --disable-content-trust=false r.j3ss.co/${image}:\$tag || true; done')
+        shell('for tag in \$(git tag); do git checkout \$tag; docker build  --rm --force-rm -t r.j3ss.co/${image}:\$tag . || true; docker push --disable-content-trust=false r.j3ss.co/${image}:\$tag || true; done')
 EOF
 
 	cat <<-EOF >> $file

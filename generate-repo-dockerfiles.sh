@@ -74,13 +74,12 @@ freeStyleJob('${rname//./_}') {
 
     environmentVariables(DOCKER_CONTENT_TRUST: '1')
     steps {
-        shell('echo latest > .branch')
-        shell('docker build --rm --force-rm -t r.j3ss.co/${image}:\$(cat .branch) .')
-        shell('docker tag r.j3ss.co/${image}:\$(cat .branch) jess/${image}:\$(cat .branch)')
-        shell('docker push --disable-content-trust=false r.j3ss.co/${image}:\$(cat .branch)')
-        shell('docker push --disable-content-trust=false jess/${image}:\$(cat .branch)')
-        shell('if [[ "\$(cat .branch)" != "latest" ]]; then docker tag r.j3ss.co/${image}:\$(cat .branch) r.j3ss.co/${image}:latest; docker push --disable-content-trust=false r.j3ss.co/${image}:latest; fi')
-        shell('if [[ "\$(cat .branch)" != "latest" ]]; then docker tag jess/${image}:\$(cat .branch) jess/${image}:latest; docker push --disable-content-trust=false jess/${image}:latest; fi')
+        shell('docker build --rm --force-rm -t r.j3ss.co/${image}:latest .')
+        shell('docker tag r.j3ss.co/${image}:latest jess/${image}:latest')
+        shell('docker tag r.j3ss.co/${image}:latest jessfraz/${image}:latest')
+        shell('docker push --disable-content-trust=false r.j3ss.co/${image}:latest')
+        shell('docker push --disable-content-trust=false jess/${image}:latest')
+        shell('docker push --disable-content-trust=false jessfraz/${image}:latest')
         shell('for tag in \$(git tag); do git checkout \$tag; docker build  --rm --force-rm -t r.j3ss.co/${image}:\$tag . || true; docker push --disable-content-trust=false r.j3ss.co/${image}:\$tag || true; done')
 EOF
 

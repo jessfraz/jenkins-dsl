@@ -91,6 +91,7 @@ EOF
 
 	if [[ "$image" == "contained" ]]; then
 		cat <<-EOF >> "$file"
+        shell('git checkout master')
         shell('docker build --rm --force-rm -f Dockerfile.dind -t r.j3ss.co/docker:userns .')
         shell('docker tag r.j3ss.co/docker:userns jess/docker:userns')
         shell('docker tag r.j3ss.co/docker:userns jessfraz/docker:userns')

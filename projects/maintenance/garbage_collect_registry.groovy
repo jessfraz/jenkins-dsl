@@ -27,8 +27,6 @@ freeStyleJob('maintenance_garbage_collect_registry') {
     }
 
     steps {
-        shell("echo 'Running clean registry'")
-        shell('docker run --rm --disable-content-trust=false --name clean-registry -v /var/jenkins_home/.docker:/root/.docker:ro r.j3ss.co/clean-registry')
         shell("echo 'Running garbage collection'")
         shell('docker run --rm --disable-content-trust=false --name registry-garbage-collect -v /registry.yaml:/etc/docker/registry/config.yml:ro -v /registry-creds.json:/registry-creds.json:ro registry garbage-collect /etc/docker/registry/config.yml')
         shell("echo 'Getting new bucket size'")

@@ -9,6 +9,7 @@ freeStyleJob('magneto') {
         githubProjectUrl('https://github.com/genuinetools/magneto')
         sidebarLinks {
             link('https://hub.docker.com/r/jess/magneto', 'Docker Hub: jess/magneto', 'notepad.png')
+            link('https://hub.docker.com/r/jessfraz/magneto', 'Docker Hub: jessfraz/magneto', 'notepad.png')
             link('https://r.j3ss.co/repo/magneto/tags', 'Registry: r.j3ss.co/magneto', 'notepad.png')
         }
     }
@@ -23,7 +24,7 @@ freeStyleJob('magneto') {
             remote {
                 url('https://github.com/genuinetools/magneto.git')
             }
-branches('*/master', '*/tags/*')
+            branches('*/master', '*/tags/*')
             extensions {
                 wipeOutWorkspace()
                 cleanAfterCheckout()
@@ -40,13 +41,14 @@ branches('*/master', '*/tags/*')
 
     environmentVariables(DOCKER_CONTENT_TRUST: '1')
     steps {
-        shell('export BRANCH=$(git symbolic-ref -q --short HEAD || git describe --tags --exact-match || echo "master"); if [[ "$BRANCH" == "master" ]]; then export BRANCH="latest"; fi; echo "$BRANCH" > .branch')
+        shell('echo latest > .branch')
         shell('docker build --rm --force-rm -t r.j3ss.co/magneto:$(cat .branch) .')
-shell('docker tag r.j3ss.co/magneto:$(cat .branch) jess/magneto:$(cat .branch)')
+        shell('docker tag r.j3ss.co/magneto:$(cat .branch) jess/magneto:$(cat .branch)')
         shell('docker push --disable-content-trust=false r.j3ss.co/magneto:$(cat .branch)')
         shell('docker push --disable-content-trust=false jess/magneto:$(cat .branch)')
         shell('if [[ "$(cat .branch)" != "latest" ]]; then docker tag r.j3ss.co/magneto:$(cat .branch) r.j3ss.co/magneto:latest; docker push --disable-content-trust=false r.j3ss.co/magneto:latest; fi')
         shell('if [[ "$(cat .branch)" != "latest" ]]; then docker tag jess/magneto:$(cat .branch) jess/magneto:latest; docker push --disable-content-trust=false jess/magneto:latest; fi')
+        shell('for tag in "$(git tag)"; do git checkout $tag; docker build  --rm --force-rm -t r.j3ss.co/magneto:$tag . || true; docker push --disable-content-trust=false r.j3ss.co/magneto:$tag || true; done')
         shell('docker rm $(docker ps --filter status=exited -q 2>/dev/null) 2> /dev/null || true')
         shell('docker rmi $(docker images --filter dangling=true -q 2>/dev/null) 2> /dev/null || true')
     }

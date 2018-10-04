@@ -9,6 +9,7 @@ freeStyleJob('udict') {
         githubProjectUrl('https://github.com/genuinetools/udict')
         sidebarLinks {
             link('https://hub.docker.com/r/jess/udict', 'Docker Hub: jess/udict', 'notepad.png')
+            link('https://hub.docker.com/r/jessfraz/udict', 'Docker Hub: jessfraz/udict', 'notepad.png')
             link('https://r.j3ss.co/repo/udict/tags', 'Registry: r.j3ss.co/udict', 'notepad.png')
         }
     }
@@ -23,7 +24,7 @@ freeStyleJob('udict') {
             remote {
                 url('https://github.com/genuinetools/udict.git')
             }
-branches('*/master', '*/tags/*')
+            branches('*/master', '*/tags/*')
             extensions {
                 wipeOutWorkspace()
                 cleanAfterCheckout()
@@ -40,13 +41,14 @@ branches('*/master', '*/tags/*')
 
     environmentVariables(DOCKER_CONTENT_TRUST: '1')
     steps {
-        shell('export BRANCH=$(git symbolic-ref -q --short HEAD || git describe --tags --exact-match || echo "master"); if [[ "$BRANCH" == "master" ]]; then export BRANCH="latest"; fi; echo "$BRANCH" > .branch')
+        shell('echo latest > .branch')
         shell('docker build --rm --force-rm -t r.j3ss.co/udict:$(cat .branch) .')
-shell('docker tag r.j3ss.co/udict:$(cat .branch) jess/udict:$(cat .branch)')
+        shell('docker tag r.j3ss.co/udict:$(cat .branch) jess/udict:$(cat .branch)')
         shell('docker push --disable-content-trust=false r.j3ss.co/udict:$(cat .branch)')
         shell('docker push --disable-content-trust=false jess/udict:$(cat .branch)')
         shell('if [[ "$(cat .branch)" != "latest" ]]; then docker tag r.j3ss.co/udict:$(cat .branch) r.j3ss.co/udict:latest; docker push --disable-content-trust=false r.j3ss.co/udict:latest; fi')
         shell('if [[ "$(cat .branch)" != "latest" ]]; then docker tag jess/udict:$(cat .branch) jess/udict:latest; docker push --disable-content-trust=false jess/udict:latest; fi')
+        shell('for tag in "$(git tag)"; do git checkout $tag; docker build  --rm --force-rm -t r.j3ss.co/udict:$tag . || true; docker push --disable-content-trust=false r.j3ss.co/udict:$tag || true; done')
         shell('docker rm $(docker ps --filter status=exited -q 2>/dev/null) 2> /dev/null || true')
         shell('docker rmi $(docker images --filter dangling=true -q 2>/dev/null) 2> /dev/null || true')
     }

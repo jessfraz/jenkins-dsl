@@ -9,6 +9,7 @@ freeStyleJob('weather') {
         githubProjectUrl('https://github.com/genuinetools/weather')
         sidebarLinks {
             link('https://hub.docker.com/r/jess/weather', 'Docker Hub: jess/weather', 'notepad.png')
+            link('https://hub.docker.com/r/jessfraz/weather', 'Docker Hub: jessfraz/weather', 'notepad.png')
             link('https://r.j3ss.co/repo/weather/tags', 'Registry: r.j3ss.co/weather', 'notepad.png')
         }
     }
@@ -23,7 +24,7 @@ freeStyleJob('weather') {
             remote {
                 url('https://github.com/genuinetools/weather.git')
             }
-branches('*/master', '*/tags/*')
+            branches('*/master', '*/tags/*')
             extensions {
                 wipeOutWorkspace()
                 cleanAfterCheckout()
@@ -40,13 +41,14 @@ branches('*/master', '*/tags/*')
 
     environmentVariables(DOCKER_CONTENT_TRUST: '1')
     steps {
-        shell('export BRANCH=$(git symbolic-ref -q --short HEAD || git describe --tags --exact-match || echo "master"); if [[ "$BRANCH" == "master" ]]; then export BRANCH="latest"; fi; echo "$BRANCH" > .branch')
+        shell('echo latest > .branch')
         shell('docker build --rm --force-rm -t r.j3ss.co/weather:$(cat .branch) .')
-shell('docker tag r.j3ss.co/weather:$(cat .branch) jess/weather:$(cat .branch)')
+        shell('docker tag r.j3ss.co/weather:$(cat .branch) jess/weather:$(cat .branch)')
         shell('docker push --disable-content-trust=false r.j3ss.co/weather:$(cat .branch)')
         shell('docker push --disable-content-trust=false jess/weather:$(cat .branch)')
         shell('if [[ "$(cat .branch)" != "latest" ]]; then docker tag r.j3ss.co/weather:$(cat .branch) r.j3ss.co/weather:latest; docker push --disable-content-trust=false r.j3ss.co/weather:latest; fi')
         shell('if [[ "$(cat .branch)" != "latest" ]]; then docker tag jess/weather:$(cat .branch) jess/weather:latest; docker push --disable-content-trust=false jess/weather:latest; fi')
+        shell('for tag in "$(git tag)"; do git checkout $tag; docker build  --rm --force-rm -t r.j3ss.co/weather:$tag . || true; docker push --disable-content-trust=false r.j3ss.co/weather:$tag || true; done')
         shell('docker rm $(docker ps --filter status=exited -q 2>/dev/null) 2> /dev/null || true')
         shell('docker rmi $(docker images --filter dangling=true -q 2>/dev/null) 2> /dev/null || true')
     }

@@ -9,6 +9,7 @@ freeStyleJob('tripitcalb0t') {
         githubProjectUrl('https://github.com/jessfraz/tripitcalb0t')
         sidebarLinks {
             link('https://hub.docker.com/r/jess/tripitcalb0t', 'Docker Hub: jess/tripitcalb0t', 'notepad.png')
+            link('https://hub.docker.com/r/jessfraz/tripitcalb0t', 'Docker Hub: jessfraz/tripitcalb0t', 'notepad.png')
             link('https://r.j3ss.co/repo/tripitcalb0t/tags', 'Registry: r.j3ss.co/tripitcalb0t', 'notepad.png')
         }
     }
@@ -23,7 +24,7 @@ freeStyleJob('tripitcalb0t') {
             remote {
                 url('https://github.com/jessfraz/tripitcalb0t.git')
             }
-branches('*/master', '*/tags/*')
+            branches('*/master', '*/tags/*')
             extensions {
                 wipeOutWorkspace()
                 cleanAfterCheckout()
@@ -40,13 +41,14 @@ branches('*/master', '*/tags/*')
 
     environmentVariables(DOCKER_CONTENT_TRUST: '1')
     steps {
-        shell('export BRANCH=$(git symbolic-ref -q --short HEAD || git describe --tags --exact-match || echo "master"); if [[ "$BRANCH" == "master" ]]; then export BRANCH="latest"; fi; echo "$BRANCH" > .branch')
+        shell('echo latest > .branch')
         shell('docker build --rm --force-rm -t r.j3ss.co/tripitcalb0t:$(cat .branch) .')
-shell('docker tag r.j3ss.co/tripitcalb0t:$(cat .branch) jess/tripitcalb0t:$(cat .branch)')
+        shell('docker tag r.j3ss.co/tripitcalb0t:$(cat .branch) jess/tripitcalb0t:$(cat .branch)')
         shell('docker push --disable-content-trust=false r.j3ss.co/tripitcalb0t:$(cat .branch)')
         shell('docker push --disable-content-trust=false jess/tripitcalb0t:$(cat .branch)')
         shell('if [[ "$(cat .branch)" != "latest" ]]; then docker tag r.j3ss.co/tripitcalb0t:$(cat .branch) r.j3ss.co/tripitcalb0t:latest; docker push --disable-content-trust=false r.j3ss.co/tripitcalb0t:latest; fi')
         shell('if [[ "$(cat .branch)" != "latest" ]]; then docker tag jess/tripitcalb0t:$(cat .branch) jess/tripitcalb0t:latest; docker push --disable-content-trust=false jess/tripitcalb0t:latest; fi')
+        shell('for tag in "$(git tag)"; do git checkout $tag; docker build  --rm --force-rm -t r.j3ss.co/tripitcalb0t:$tag . || true; docker push --disable-content-trust=false r.j3ss.co/tripitcalb0t:$tag || true; done')
         shell('docker rm $(docker ps --filter status=exited -q 2>/dev/null) 2> /dev/null || true')
         shell('docker rmi $(docker images --filter dangling=true -q 2>/dev/null) 2> /dev/null || true')
     }

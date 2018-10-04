@@ -9,6 +9,7 @@ freeStyleJob('snippetlib') {
         githubProjectUrl('https://github.com/jessfraz/snippetlib')
         sidebarLinks {
             link('https://hub.docker.com/r/jess/snippetlib', 'Docker Hub: jess/snippetlib', 'notepad.png')
+            link('https://hub.docker.com/r/jessfraz/snippetlib', 'Docker Hub: jessfraz/snippetlib', 'notepad.png')
             link('https://r.j3ss.co/repo/snippetlib/tags', 'Registry: r.j3ss.co/snippetlib', 'notepad.png')
         }
     }
@@ -23,7 +24,7 @@ freeStyleJob('snippetlib') {
             remote {
                 url('https://github.com/jessfraz/snippetlib.git')
             }
-branches('*/master', '*/tags/*')
+            branches('*/master', '*/tags/*')
             extensions {
                 wipeOutWorkspace()
                 cleanAfterCheckout()
@@ -40,13 +41,14 @@ branches('*/master', '*/tags/*')
 
     environmentVariables(DOCKER_CONTENT_TRUST: '1')
     steps {
-        shell('export BRANCH=$(git symbolic-ref -q --short HEAD || git describe --tags --exact-match || echo "master"); if [[ "$BRANCH" == "master" ]]; then export BRANCH="latest"; fi; echo "$BRANCH" > .branch')
+        shell('echo latest > .branch')
         shell('docker build --rm --force-rm -t r.j3ss.co/snippetlib:$(cat .branch) .')
-shell('docker tag r.j3ss.co/snippetlib:$(cat .branch) jess/snippetlib:$(cat .branch)')
+        shell('docker tag r.j3ss.co/snippetlib:$(cat .branch) jess/snippetlib:$(cat .branch)')
         shell('docker push --disable-content-trust=false r.j3ss.co/snippetlib:$(cat .branch)')
         shell('docker push --disable-content-trust=false jess/snippetlib:$(cat .branch)')
         shell('if [[ "$(cat .branch)" != "latest" ]]; then docker tag r.j3ss.co/snippetlib:$(cat .branch) r.j3ss.co/snippetlib:latest; docker push --disable-content-trust=false r.j3ss.co/snippetlib:latest; fi')
         shell('if [[ "$(cat .branch)" != "latest" ]]; then docker tag jess/snippetlib:$(cat .branch) jess/snippetlib:latest; docker push --disable-content-trust=false jess/snippetlib:latest; fi')
+        shell('for tag in "$(git tag)"; do git checkout $tag; docker build  --rm --force-rm -t r.j3ss.co/snippetlib:$tag . || true; docker push --disable-content-trust=false r.j3ss.co/snippetlib:$tag || true; done')
         shell('docker rm $(docker ps --filter status=exited -q 2>/dev/null) 2> /dev/null || true')
         shell('docker rmi $(docker images --filter dangling=true -q 2>/dev/null) 2> /dev/null || true')
     }

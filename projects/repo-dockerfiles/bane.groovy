@@ -9,6 +9,7 @@ freeStyleJob('bane') {
         githubProjectUrl('https://github.com/genuinetools/bane')
         sidebarLinks {
             link('https://hub.docker.com/r/jess/bane', 'Docker Hub: jess/bane', 'notepad.png')
+            link('https://hub.docker.com/r/jessfraz/bane', 'Docker Hub: jessfraz/bane', 'notepad.png')
             link('https://r.j3ss.co/repo/bane/tags', 'Registry: r.j3ss.co/bane', 'notepad.png')
         }
     }
@@ -23,7 +24,7 @@ freeStyleJob('bane') {
             remote {
                 url('https://github.com/genuinetools/bane.git')
             }
-branches('*/master', '*/tags/*')
+            branches('*/master', '*/tags/*')
             extensions {
                 wipeOutWorkspace()
                 cleanAfterCheckout()
@@ -40,13 +41,14 @@ branches('*/master', '*/tags/*')
 
     environmentVariables(DOCKER_CONTENT_TRUST: '1')
     steps {
-        shell('export BRANCH=$(git symbolic-ref -q --short HEAD || git describe --tags --exact-match || echo "master"); if [[ "$BRANCH" == "master" ]]; then export BRANCH="latest"; fi; echo "$BRANCH" > .branch')
+        shell('echo latest > .branch')
         shell('docker build --rm --force-rm -t r.j3ss.co/bane:$(cat .branch) .')
-shell('docker tag r.j3ss.co/bane:$(cat .branch) jess/bane:$(cat .branch)')
+        shell('docker tag r.j3ss.co/bane:$(cat .branch) jess/bane:$(cat .branch)')
         shell('docker push --disable-content-trust=false r.j3ss.co/bane:$(cat .branch)')
         shell('docker push --disable-content-trust=false jess/bane:$(cat .branch)')
         shell('if [[ "$(cat .branch)" != "latest" ]]; then docker tag r.j3ss.co/bane:$(cat .branch) r.j3ss.co/bane:latest; docker push --disable-content-trust=false r.j3ss.co/bane:latest; fi')
         shell('if [[ "$(cat .branch)" != "latest" ]]; then docker tag jess/bane:$(cat .branch) jess/bane:latest; docker push --disable-content-trust=false jess/bane:latest; fi')
+        shell('for tag in "$(git tag)"; do git checkout $tag; docker build  --rm --force-rm -t r.j3ss.co/bane:$tag . || true; docker push --disable-content-trust=false r.j3ss.co/bane:$tag || true; done')
         shell('docker rm $(docker ps --filter status=exited -q 2>/dev/null) 2> /dev/null || true')
         shell('docker rmi $(docker images --filter dangling=true -q 2>/dev/null) 2> /dev/null || true')
     }

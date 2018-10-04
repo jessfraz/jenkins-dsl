@@ -9,6 +9,7 @@ freeStyleJob('reg') {
         githubProjectUrl('https://github.com/genuinetools/reg')
         sidebarLinks {
             link('https://hub.docker.com/r/jess/reg', 'Docker Hub: jess/reg', 'notepad.png')
+            link('https://hub.docker.com/r/jessfraz/reg', 'Docker Hub: jessfraz/reg', 'notepad.png')
             link('https://r.j3ss.co/repo/reg/tags', 'Registry: r.j3ss.co/reg', 'notepad.png')
         }
     }
@@ -23,7 +24,7 @@ freeStyleJob('reg') {
             remote {
                 url('https://github.com/genuinetools/reg.git')
             }
-branches('*/master', '*/tags/*')
+            branches('*/master', '*/tags/*')
             extensions {
                 wipeOutWorkspace()
                 cleanAfterCheckout()
@@ -40,13 +41,14 @@ branches('*/master', '*/tags/*')
 
     environmentVariables(DOCKER_CONTENT_TRUST: '1')
     steps {
-        shell('export BRANCH=$(git symbolic-ref -q --short HEAD || git describe --tags --exact-match || echo "master"); if [[ "$BRANCH" == "master" ]]; then export BRANCH="latest"; fi; echo "$BRANCH" > .branch')
+        shell('echo latest > .branch')
         shell('docker build --rm --force-rm -t r.j3ss.co/reg:$(cat .branch) .')
-shell('docker tag r.j3ss.co/reg:$(cat .branch) jess/reg:$(cat .branch)')
+        shell('docker tag r.j3ss.co/reg:$(cat .branch) jess/reg:$(cat .branch)')
         shell('docker push --disable-content-trust=false r.j3ss.co/reg:$(cat .branch)')
         shell('docker push --disable-content-trust=false jess/reg:$(cat .branch)')
         shell('if [[ "$(cat .branch)" != "latest" ]]; then docker tag r.j3ss.co/reg:$(cat .branch) r.j3ss.co/reg:latest; docker push --disable-content-trust=false r.j3ss.co/reg:latest; fi')
         shell('if [[ "$(cat .branch)" != "latest" ]]; then docker tag jess/reg:$(cat .branch) jess/reg:latest; docker push --disable-content-trust=false jess/reg:latest; fi')
+        shell('for tag in "$(git tag)"; do git checkout $tag; docker build  --rm --force-rm -t r.j3ss.co/reg:$tag . || true; docker push --disable-content-trust=false r.j3ss.co/reg:$tag || true; done')
         shell('docker rm $(docker ps --filter status=exited -q 2>/dev/null) 2> /dev/null || true')
         shell('docker rmi $(docker images --filter dangling=true -q 2>/dev/null) 2> /dev/null || true')
     }

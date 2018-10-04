@@ -9,6 +9,7 @@ freeStyleJob('openvpn_server') {
         githubProjectUrl('https://github.com/kylemanna/docker-openvpn')
         sidebarLinks {
             link('https://hub.docker.com/r/jess/openvpn-server', 'Docker Hub: jess/openvpn-server', 'notepad.png')
+            link('https://hub.docker.com/r/jessfraz/openvpn-server', 'Docker Hub: jessfraz/openvpn-server', 'notepad.png')
             link('https://r.j3ss.co/repo/openvpn-server/tags', 'Registry: r.j3ss.co/openvpn-server', 'notepad.png')
         }
     }
@@ -23,7 +24,7 @@ freeStyleJob('openvpn_server') {
             remote {
                 url('https://github.com/kylemanna/docker-openvpn.git')
             }
-branches('*/master', '*/tags/*')
+            branches('*/master', '*/tags/*')
             extensions {
                 wipeOutWorkspace()
                 cleanAfterCheckout()
@@ -40,13 +41,14 @@ branches('*/master', '*/tags/*')
 
     environmentVariables(DOCKER_CONTENT_TRUST: '1')
     steps {
-        shell('export BRANCH=$(git symbolic-ref -q --short HEAD || git describe --tags --exact-match || echo "master"); if [[ "$BRANCH" == "master" ]]; then export BRANCH="latest"; fi; echo "$BRANCH" > .branch')
+        shell('echo latest > .branch')
         shell('docker build --rm --force-rm -t r.j3ss.co/openvpn-server:$(cat .branch) .')
-shell('docker tag r.j3ss.co/openvpn-server:$(cat .branch) jess/openvpn-server:$(cat .branch)')
+        shell('docker tag r.j3ss.co/openvpn-server:$(cat .branch) jess/openvpn-server:$(cat .branch)')
         shell('docker push --disable-content-trust=false r.j3ss.co/openvpn-server:$(cat .branch)')
         shell('docker push --disable-content-trust=false jess/openvpn-server:$(cat .branch)')
         shell('if [[ "$(cat .branch)" != "latest" ]]; then docker tag r.j3ss.co/openvpn-server:$(cat .branch) r.j3ss.co/openvpn-server:latest; docker push --disable-content-trust=false r.j3ss.co/openvpn-server:latest; fi')
         shell('if [[ "$(cat .branch)" != "latest" ]]; then docker tag jess/openvpn-server:$(cat .branch) jess/openvpn-server:latest; docker push --disable-content-trust=false jess/openvpn-server:latest; fi')
+        shell('for tag in "$(git tag)"; do git checkout $tag; docker build  --rm --force-rm -t r.j3ss.co/openvpn-server:$tag . || true; docker push --disable-content-trust=false r.j3ss.co/openvpn-server:$tag || true; done')
         shell('docker rm $(docker ps --filter status=exited -q 2>/dev/null) 2> /dev/null || true')
         shell('docker rmi $(docker images --filter dangling=true -q 2>/dev/null) 2> /dev/null || true')
     }

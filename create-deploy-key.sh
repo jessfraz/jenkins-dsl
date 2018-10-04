@@ -42,9 +42,9 @@ main(){
 	# create the ssh key
 	ssh-keygen -f "${tmpd}/id_ed25519" -t ed25519 -N ''
 
-	create_deploy_key $repo "$(cat "${tmpd}/id_ed25519.pub")"
+	create_deploy_key "$repo" "$(cat "${tmpd}/id_ed25519.pub")"
 
 	echo "You can find your public and private key in $tmpd."
 }
 
-main $@
+main "$@"

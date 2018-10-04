@@ -47,4 +47,4 @@ main(){
 	create_hook "$repo"
 }
 
-main $@
+main "$@"

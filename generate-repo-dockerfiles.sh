@@ -30,7 +30,7 @@ generate_dsl(){
 
 	echo "${file} | ${image}"
 
-	cat <<-EOF > $file
+	cat <<-EOF > "$file"
 freeStyleJob('${rname//./_}') {
     displayName('${name}')
     description('Build Dockerfiles in ${orig}.')
@@ -84,7 +84,7 @@ freeStyleJob('${rname//./_}') {
         shell('for tag in \$(git tag); do git checkout \$tag; docker build  --rm --force-rm -t r.j3ss.co/${image}:\$tag . || true; docker push --disable-content-trust=false r.j3ss.co/${image}:\$tag || true; done')
 EOF
 
-	cat <<-EOF >> $file
+	cat <<-EOF >> "$file"
         shell('docker rm \$(docker ps --filter status=exited -q 2>/dev/null) 2> /dev/null || true')
         shell('docker rmi \$(docker images --filter dangling=true -q 2>/dev/null) 2> /dev/null || true')
     }
@@ -153,7 +153,8 @@ rroemhild/docker-ejabberd
 )
 
 main(){
-	mkdir -p $DIR/projects/repo-dockerfiles
+	mkdir -p "$DIR/projects/repo-dockerfiles"
+
 	echo "FILE | IMAGE"
 
 	for r in "${repos[@]}"; do

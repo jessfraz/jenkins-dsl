@@ -37,11 +37,12 @@ get_last_page(){
 
 generate_dsl(){
 	local forked_repo=$1
-	local name=$(basename $forked_repo)
+	local name
+	name=$(basename "$forked_repo")
 	local upstream_repo=$2
 	local primary_branch=$3
 
-	if [[ "${ignore_repos[@]}" =~ ${name} ]]; then
+	if [[ "${ignore_repos[*]}" =~ ${name} ]]; then
 		return
 	fi
 
@@ -56,7 +57,7 @@ generate_dsl(){
 
 	echo "${file} | ${forked_repo} | ${upstream_repo}"
 
-	cat <<-EOF > $file
+	cat <<-EOF > "$file"
 freeStyleJob('update_fork_${rname//./_}') {
     displayName('update-fork-${name}')
     description('Rebase the primary branch (${primary_branch}) in ${forked_repo} fork.')
@@ -180,7 +181,8 @@ get_repos(){
 }
 
 main(){
-	mkdir -p $DIR/projects/forks
+	mkdir -p "$DIR/projects/forks"
+
 	echo "FILE | FORK | UPSTREAM"
 
 	local page=1

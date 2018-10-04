@@ -1,4 +1,7 @@
 # jenkins-dsl
+
+[![Travis CI](https://travis-ci.org/jessfraz/jenkins-dsl.svg?branch=master)](https://travis-ci.org/jessfraz/jenkins-dsl)
+
 Jenkins DSLs for my private Jenkins instance, keeps forks up to date, mirrors
 repositories to private git, builds all Dockerfiles and more.
 
@@ -14,6 +17,8 @@ deploy-key                     Create a deploy key for a given repo (ex. REPO=je
 projects/forks                 Generate DSLs to update git forks.
 projects/mirrors               Generate DSLs for git mirrors.
 projects/repo-dockerfiles      Generate DSLs for repos with Dockerfiles.
+shellcheck                     Runs the shellcheck tests on the scripts.
+test                           Runs all the tests on the files in the repository.
 webhook-jenkins-create         Create the jenkins webhook for a given repo (ex. REPO=jessfraz/jenkins-dsl).
 webhook-jenkins-get            Get the jenkins webhook for a given repo (ex. REPO=jessfraz/jenkins-dsl).
 webhook-travis-get             Get a travis webhook for a given repo (ex. REPO=jessfraz/jenkins-dsl).

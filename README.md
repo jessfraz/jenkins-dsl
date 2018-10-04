@@ -1,6 +1,6 @@
 # jenkins-dsl
 
-[![Travis CI](https://travis-ci.org/jessfraz/jenkins-dsl.svg?branch=master)](https://travis-ci.org/jessfraz/jenkins-dsl)
+[![Travis CI](https://img.shields.io/travis/jessfraz/jenkins-dsl.svg?style=for-the-badge)](https://travis-ci.org/jessfraz/jenkins-dsl)
 
 Jenkins DSLs for my private Jenkins instance, keeps forks up to date, mirrors
 repositories to private git, builds all Dockerfiles and more.

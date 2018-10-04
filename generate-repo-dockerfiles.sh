@@ -50,6 +50,17 @@ freeStyleJob('${rname//./_}') {
             link('https://hub.docker.com/r/jess/${image}', 'Docker Hub: jess/${image}', 'notepad.png')
             link('https://hub.docker.com/r/jessfraz/${image}', 'Docker Hub: jessfraz/${image}', 'notepad.png')
             link('https://r.j3ss.co/repo/${image}/tags', 'Registry: r.j3ss.co/${image}', 'notepad.png')
+EOF
+
+	if [[ "$image" == "contained" ]]; then
+		cat <<-EOF >> "$file"
+            link('https://hub.docker.com/r/jess/docker', 'Docker Hub: jess/docker', 'notepad.png')
+            link('https://hub.docker.com/r/jessfraz/docker', 'Docker Hub: jessfraz/docker', 'notepad.png')
+            link('https://r.j3ss.co/repo/docker/tags', 'Registry: r.j3ss.co/docker', 'notepad.png')
+		EOF
+	fi
+
+	cat <<-EOF >> "$file"
         }
     }
 

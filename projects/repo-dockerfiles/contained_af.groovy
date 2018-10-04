@@ -11,6 +11,9 @@ freeStyleJob('contained_af') {
             link('https://hub.docker.com/r/jess/contained', 'Docker Hub: jess/contained', 'notepad.png')
             link('https://hub.docker.com/r/jessfraz/contained', 'Docker Hub: jessfraz/contained', 'notepad.png')
             link('https://r.j3ss.co/repo/contained/tags', 'Registry: r.j3ss.co/contained', 'notepad.png')
+            link('https://hub.docker.com/r/jess/docker', 'Docker Hub: jess/docker', 'notepad.png')
+            link('https://hub.docker.com/r/jessfraz/docker', 'Docker Hub: jessfraz/docker', 'notepad.png')
+            link('https://r.j3ss.co/repo/docker/tags', 'Registry: r.j3ss.co/docker', 'notepad.png')
         }
     }
 

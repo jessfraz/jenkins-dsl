@@ -1,13 +1,13 @@
 freeStyleJob('update_fork_go_cni') {
     displayName('update-fork-go-cni')
-    description('Rebase the primary branch (null) in jessfraz/go-cni fork.')
+    description('Rebase the primary branch (master) in jessfraz/go-cni fork.')
 
     checkoutRetryCount(3)
 
     properties {
         githubProjectUrl('https://github.com/jessfraz/go-cni')
         sidebarLinks {
-            link('https://github.com/null/go-cni', 'UPSTREAM: null/go-cni', 'notepad.png')
+            link('https://github.com/containerd/go-cni', 'UPSTREAM: containerd/go-cni', 'notepad.png')
         }
     }
 
@@ -22,14 +22,14 @@ freeStyleJob('update_fork_go_cni') {
                 url('git@github.com:jessfraz/go-cni.git')
                 name('origin')
                 credentials('ssh-github-key')
-                refspec('+refs/heads/null:refs/remotes/origin/null')
+                refspec('+refs/heads/master:refs/remotes/origin/master')
             }
             remote {
-                url('https://github.com/null/go-cni.git')
+                url('https://github.com/containerd/go-cni.git')
                 name('upstream')
-                refspec('+refs/heads/null:refs/remotes/upstream/null')
+                refspec('+refs/heads/master:refs/remotes/upstream/master')
             }
-            branches('null', 'upstream/null')
+            branches('master', 'upstream/master')
             extensions {
                 disableRemotePoll()
                 wipeOutWorkspace()
@@ -45,12 +45,12 @@ freeStyleJob('update_fork_go_cni') {
     wrappers { colorizeOutput() }
 
     steps {
-        shell('git rebase upstream/null')
+        shell('git rebase upstream/master')
     }
 
     publishers {
         git {
-            branch('origin', 'null')
+            branch('origin', 'master')
             pushOnlyIfSuccess()
         }
 

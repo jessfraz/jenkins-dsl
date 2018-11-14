@@ -47,7 +47,7 @@ freeStyleJob('bane') {
         shell('docker push --disable-content-trust=false r.j3ss.co/bane:latest')
         shell('docker push --disable-content-trust=false jess/bane:latest')
         shell('docker push --disable-content-trust=false jessfraz/bane:latest')
-        shell('for tag in $(git tag); do git checkout $tag; docker build  --rm --force-rm -t r.j3ss.co/bane:$tag . || true; docker push --disable-content-trust=false r.j3ss.co/bane:$tag || true; done')
+        shell('for tag in $(git tag); do git checkout $tag; docker build  --rm --force-rm -t r.j3ss.co/bane:$tag . || true; docker push --disable-content-trust=false r.j3ss.co/bane:$tag || true; docker tag r.j3ss.co/bane:$tag jess/bane:$tag || true; docker push --disable-content-trust=false jess/bane:$tag || true; done')
         shell('docker rm $(docker ps --filter status=exited -q 2>/dev/null) 2> /dev/null || true')
         shell('docker rmi $(docker images --filter dangling=true -q 2>/dev/null) 2> /dev/null || true')
     }

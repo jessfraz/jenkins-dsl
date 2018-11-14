@@ -94,7 +94,7 @@ EOF
         shell('docker push --disable-content-trust=false r.j3ss.co/${image}:latest')
         shell('docker push --disable-content-trust=false jess/${image}:latest')
         shell('docker push --disable-content-trust=false jessfraz/${image}:latest')
-        shell('for tag in \$(git tag); do git checkout \$tag; docker build  --rm --force-rm -t r.j3ss.co/${image}:\$tag . || true; docker push --disable-content-trust=false r.j3ss.co/${image}:\$tag || true; done')
+        shell('for tag in \$(git tag); do git checkout \$tag; docker build  --rm --force-rm -t r.j3ss.co/${image}:\$tag . || true; docker push --disable-content-trust=false r.j3ss.co/${image}:\$tag || true; docker tag r.j3ss.co/${image}:\$tag jess/${image}:\$tag || true; docker push --disable-content-trust=false jess/${image}:\$tag || true; done')
 		EOF
 
 	if [[ "$image" == "contained" ]]; then

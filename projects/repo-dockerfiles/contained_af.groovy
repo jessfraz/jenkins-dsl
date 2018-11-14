@@ -50,7 +50,7 @@ freeStyleJob('contained_af') {
         shell('docker push --disable-content-trust=false r.j3ss.co/contained:latest')
         shell('docker push --disable-content-trust=false jess/contained:latest')
         shell('docker push --disable-content-trust=false jessfraz/contained:latest')
-        shell('for tag in $(git tag); do git checkout $tag; docker build  --rm --force-rm -t r.j3ss.co/contained:$tag . || true; docker push --disable-content-trust=false r.j3ss.co/contained:$tag || true; done')
+        shell('for tag in $(git tag); do git checkout $tag; docker build  --rm --force-rm -t r.j3ss.co/contained:$tag . || true; docker push --disable-content-trust=false r.j3ss.co/contained:$tag || true; docker tag r.j3ss.co/contained:$tag jess/contained:$tag || true; docker push --disable-content-trust=false jess/contained:$tag || true; done')
         shell('git checkout master')
         shell('docker build --rm --force-rm -f Dockerfile.dind -t r.j3ss.co/docker:userns .')
         shell('docker tag r.j3ss.co/docker:userns jess/docker:userns')

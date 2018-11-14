@@ -47,7 +47,7 @@ freeStyleJob('pony') {
         shell('docker push --disable-content-trust=false r.j3ss.co/pony:latest')
         shell('docker push --disable-content-trust=false jess/pony:latest')
         shell('docker push --disable-content-trust=false jessfraz/pony:latest')
-        shell('for tag in $(git tag); do git checkout $tag; docker build  --rm --force-rm -t r.j3ss.co/pony:$tag . || true; docker push --disable-content-trust=false r.j3ss.co/pony:$tag || true; done')
+        shell('for tag in $(git tag); do git checkout $tag; docker build  --rm --force-rm -t r.j3ss.co/pony:$tag . || true; docker push --disable-content-trust=false r.j3ss.co/pony:$tag || true; docker tag r.j3ss.co/pony:$tag jess/pony:$tag || true; docker push --disable-content-trust=false jess/pony:$tag || true; done')
         shell('docker rm $(docker ps --filter status=exited -q 2>/dev/null) 2> /dev/null || true')
         shell('docker rmi $(docker images --filter dangling=true -q 2>/dev/null) 2> /dev/null || true')
     }

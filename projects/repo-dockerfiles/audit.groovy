@@ -47,7 +47,7 @@ freeStyleJob('audit') {
         shell('docker push --disable-content-trust=false r.j3ss.co/audit:latest')
         shell('docker push --disable-content-trust=false jess/audit:latest')
         shell('docker push --disable-content-trust=false jessfraz/audit:latest')
-        shell('for tag in $(git tag); do git checkout $tag; docker build  --rm --force-rm -t r.j3ss.co/audit:$tag . || true; docker push --disable-content-trust=false r.j3ss.co/audit:$tag || true; done')
+        shell('for tag in $(git tag); do git checkout $tag; docker build  --rm --force-rm -t r.j3ss.co/audit:$tag . || true; docker push --disable-content-trust=false r.j3ss.co/audit:$tag || true; docker tag r.j3ss.co/audit:$tag jess/audit:$tag || true; docker push --disable-content-trust=false jess/audit:$tag || true; done')
         shell('docker rm $(docker ps --filter status=exited -q 2>/dev/null) 2> /dev/null || true')
         shell('docker rmi $(docker images --filter dangling=true -q 2>/dev/null) 2> /dev/null || true')
     }

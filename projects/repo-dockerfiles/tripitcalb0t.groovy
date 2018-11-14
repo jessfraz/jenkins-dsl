@@ -47,7 +47,7 @@ freeStyleJob('tripitcalb0t') {
         shell('docker push --disable-content-trust=false r.j3ss.co/tripitcalb0t:latest')
         shell('docker push --disable-content-trust=false jess/tripitcalb0t:latest')
         shell('docker push --disable-content-trust=false jessfraz/tripitcalb0t:latest')
-        shell('for tag in $(git tag); do git checkout $tag; docker build  --rm --force-rm -t r.j3ss.co/tripitcalb0t:$tag . || true; docker push --disable-content-trust=false r.j3ss.co/tripitcalb0t:$tag || true; done')
+        shell('for tag in $(git tag); do git checkout $tag; docker build  --rm --force-rm -t r.j3ss.co/tripitcalb0t:$tag . || true; docker push --disable-content-trust=false r.j3ss.co/tripitcalb0t:$tag || true; docker tag r.j3ss.co/tripitcalb0t:$tag jess/tripitcalb0t:$tag || true; docker push --disable-content-trust=false jess/tripitcalb0t:$tag || true; done')
         shell('docker rm $(docker ps --filter status=exited -q 2>/dev/null) 2> /dev/null || true')
         shell('docker rmi $(docker images --filter dangling=true -q 2>/dev/null) 2> /dev/null || true')
     }

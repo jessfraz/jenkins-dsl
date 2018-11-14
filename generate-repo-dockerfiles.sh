@@ -16,9 +16,6 @@ generate_dsl(){
 		"kylemanna/docker-openvpn")
 			name=openvpn-server
 			;;
-		"rroemhild/docker-ejabberd")
-			name=ejabberd
-			;;
 		*) ;;
 	esac
 
@@ -97,13 +94,8 @@ EOF
         shell('docker push --disable-content-trust=false r.j3ss.co/${image}:latest')
         shell('docker push --disable-content-trust=false jess/${image}:latest')
         shell('docker push --disable-content-trust=false jessfraz/${image}:latest')
-EOF
-
-	if [[ "$image" != "ejabberd" ]]; then
-		cat <<-EOF >> "$file"
         shell('for tag in \$(git tag); do git checkout \$tag; docker build  --rm --force-rm -t r.j3ss.co/${image}:\$tag . || true; docker push --disable-content-trust=false r.j3ss.co/${image}:\$tag || true; done')
 		EOF
-	fi
 
 	if [[ "$image" == "contained" ]]; then
 		cat <<-EOF >> "$file"
@@ -184,7 +176,6 @@ jessfraz/snippetlib
 jessfraz/tdash
 jessfraz/tripitcalb0t
 kylemanna/docker-openvpn
-rroemhild/docker-ejabberd
 )
 
 main(){

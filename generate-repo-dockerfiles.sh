@@ -179,6 +179,7 @@ kylemanna/docker-openvpn
 )
 
 main(){
+	rm -rf "$DIR/projects/repo-dockerfiles"
 	mkdir -p "$DIR/projects/repo-dockerfiles"
 
 	echo "FILE | IMAGE"

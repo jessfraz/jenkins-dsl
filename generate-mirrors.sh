@@ -160,6 +160,7 @@ get_repos(){
 }
 
 main(){
+	rm -rf "$DIR/projects/mirrors"
 	mkdir -p "$DIR/projects/mirrors"
 
 	echo "FILE | REPO"

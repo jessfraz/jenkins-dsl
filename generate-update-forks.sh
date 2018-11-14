@@ -181,6 +181,7 @@ get_repos(){
 }
 
 main(){
+	rm -rf "$DIR/projects/forks"
 	mkdir -p "$DIR/projects/forks"
 
 	echo "FILE | FORK | UPSTREAM"

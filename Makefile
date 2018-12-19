@@ -45,7 +45,7 @@ webhook-jenkins-get: ## Get the jenkins webhook for a given repo (ex. REPO=jessf
 	@curl -sSL \
 		-H "$(GITHUB_AUTH_HEADER)" \
 		-H "$(GITHUB_API_HEADER)" \
-		"$(GITHUB_API_URI)/repos/$(REPO)/hooks" | jq '.[] | select(.name=="jenkins")'
+		"$(GITHUB_API_URI)/repos/$(REPO)/hooks" | jq '.[] | select(.name=="web")'
 
 .PHONY: webhook-travis-get
 webhook-travis-get: ## Get a travis webhook for a given repo (ex. REPO=jessfraz/jenkins-dsl).
@@ -76,4 +76,4 @@ shellcheck: ## Runs the shellcheck tests on the scripts.
 
 .PHONY: help
 help:
-	@grep -E '^[a-zA-Z_-\/]+:.*?## .*$$' $(MAKEFILE_LIST) | sort | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-30s\033[0m %s\n", $$1, $$2}'
+	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | sort | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-30s\033[0m %s\n", $$1, $$2}'

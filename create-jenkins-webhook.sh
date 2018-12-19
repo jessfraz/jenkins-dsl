@@ -24,7 +24,7 @@ create_hook(){
 
 	curl -i -sSL -XPOST -H "${AUTH_HEADER}" -H "${API_HEADER}" --data-binary @- "${URI}/repos/${repo}/hooks" <<-EOF
 	{
-		"name": "jenkins",
+		"name": "web",
 		"active": true,
 		"events": ["push"],
 		"config": {

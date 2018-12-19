@@ -164,6 +164,7 @@ jessfraz/cliaoke
 jessfraz/dstats
 jessfraz/dockfmt
 jessfraz/gitable
+jessfraz/morningpaper2remarkable
 jessfraz/netscan
 jessfraz/party-clippy
 jessfraz/pastebinit

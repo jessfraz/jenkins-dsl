@@ -8,7 +8,15 @@ repositories to private git, builds all Dockerfiles and more.
 The [plugins.txt](plugins.txt) file documents all the extra plugins needed to
 get all the features.
 
-## Using the Makefile
+**Table of Contents**
+
+<!-- toc -->
+
+<!-- tocstop -->
+
+## Contributing
+
+### Using the `Makefile`
 
 ```console
 $ make help

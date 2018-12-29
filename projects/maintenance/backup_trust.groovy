@@ -2,7 +2,7 @@ freeStyleJob('maintenance_backup_trust') {
     displayName('backup-trust')
     description('Backup trust for the docker-registry.')
 
-    weight(4)
+    weight(6)
 
     logRotator {
         numToKeep(100)

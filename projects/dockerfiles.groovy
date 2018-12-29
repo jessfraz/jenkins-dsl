@@ -2,7 +2,7 @@ freeStyleJob('dockerfiles') {
     displayName('dockerfiles')
     description('Build all the Dockerfiles in jessfraz/dockerfiles repo and pushes them to r.j3ss.co.')
 
-    weight(4)
+    weight(6)
 
     checkoutRetryCount(3)
 

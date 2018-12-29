@@ -12,6 +12,9 @@ get all the features.
 
 <!-- toc -->
 
+- [Contributing](#contributing)
+  * [Using the `Makefile`](#using-the-makefile)
+
 <!-- tocstop -->
 
 ## Contributing

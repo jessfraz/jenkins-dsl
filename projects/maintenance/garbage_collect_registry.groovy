@@ -28,7 +28,7 @@ freeStyleJob('maintenance_garbage_collect_registry') {
 
     steps {
         shell("echo 'Running garbage collection'")
-        shell('docker run --rm --disable-content-trust=false --name registry-garbage-collect -v /bin/registry:/bin/registry:ro -v /registry.yaml:/etc/docker/registry/config.yml:ro -v /registry-creds.json:/registry-creds.json:ro registry garbage-collect --delete-untagged /etc/docker/registry/config.yml')
+        shell('docker run --rm --disable-content-trust=false --name registry-garbage-collect -v /registry.yaml:/etc/docker/registry/config.yml:ro -v /registry-creds.json:/registry-creds.json:ro registry garbage-collect --delete-untagged /etc/docker/registry/config.yml')
         shell("echo 'Getting new bucket size'")
         shell('docker run --rm --disable-content-trust=false --name gsutil --entrypoint gsutil r.j3ss.co/gcloud du -s -h gs://r.j3ss.co')
     }

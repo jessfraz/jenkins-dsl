@@ -34,8 +34,6 @@ freeStyleJob('apparmor_docs') {
 
     wrappers { colorizeOutput() }
 
-    // unset trust so we can run the image locally
-    environmentVariables(DOCKER_CONTENT_TRUST: '0')
     steps {
         shell('make')
 

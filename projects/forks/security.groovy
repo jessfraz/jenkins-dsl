@@ -1,13 +1,13 @@
-freeStyleJob('update_fork_cri_o') {
-    displayName('update-fork-cri-o')
-    description('Rebase the primary branch (master) in jessfraz/cri-o fork.')
+freeStyleJob('update_fork_security') {
+    displayName('update-fork-security')
+    description('Rebase the primary branch (master) in jessfraz/security fork.')
 
     checkoutRetryCount(3)
 
     properties {
-        githubProjectUrl('https://github.com/jessfraz/cri-o')
+        githubProjectUrl('https://github.com/jessfraz/security')
         sidebarLinks {
-            link('https://github.com/cri-o/cri-o', 'UPSTREAM: cri-o/cri-o', 'notepad.png')
+            link('https://github.com/kubernetes/security', 'UPSTREAM: kubernetes/security', 'notepad.png')
         }
     }
 
@@ -19,13 +19,13 @@ freeStyleJob('update_fork_cri_o') {
     scm {
         git {
             remote {
-                url('git@github.com:jessfraz/cri-o.git')
+                url('git@github.com:jessfraz/security.git')
                 name('origin')
                 credentials('ssh-github-key')
                 refspec('+refs/heads/master:refs/remotes/origin/master')
             }
             remote {
-                url('https://github.com/cri-o/cri-o.git')
+                url('https://github.com/kubernetes/security.git')
                 name('upstream')
                 refspec('+refs/heads/master:refs/remotes/upstream/master')
             }

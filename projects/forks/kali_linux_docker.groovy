@@ -7,7 +7,7 @@ freeStyleJob('update_fork_kali_linux_docker') {
     properties {
         githubProjectUrl('https://github.com/jessfraz/kali-linux-docker')
         sidebarLinks {
-            link('https://github.com/offensive-security/kali-linux-docker', 'UPSTREAM: offensive-security/kali-linux-docker', 'notepad.png')
+            link('https://github.com/mathiasbynens/kali-linux-docker', 'UPSTREAM: mathiasbynens/kali-linux-docker', 'notepad.png')
         }
     }
 
@@ -25,7 +25,7 @@ freeStyleJob('update_fork_kali_linux_docker') {
                 refspec('+refs/heads/master:refs/remotes/origin/master')
             }
             remote {
-                url('https://github.com/offensive-security/kali-linux-docker.git')
+                url('https://github.com/mathiasbynens/kali-linux-docker.git')
                 name('upstream')
                 refspec('+refs/heads/master:refs/remotes/upstream/master')
             }

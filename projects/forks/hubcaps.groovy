@@ -1,13 +1,13 @@
-freeStyleJob('update_fork_external_dns') {
-    displayName('update-fork-external-dns')
-    description('Rebase the primary branch (master) in jessfraz/external-dns fork.')
+freeStyleJob('update_fork_hubcaps') {
+    displayName('update-fork-hubcaps')
+    description('Rebase the primary branch (master) in jessfraz/hubcaps fork.')
 
     checkoutRetryCount(3)
 
     properties {
-        githubProjectUrl('https://github.com/jessfraz/external-dns')
+        githubProjectUrl('https://github.com/jessfraz/hubcaps')
         sidebarLinks {
-            link('https://github.com/kubernetes-incubator/external-dns', 'UPSTREAM: kubernetes-incubator/external-dns', 'notepad.png')
+            link('https://github.com/softprops/hubcaps', 'UPSTREAM: softprops/hubcaps', 'notepad.png')
         }
     }
 
@@ -19,13 +19,13 @@ freeStyleJob('update_fork_external_dns') {
     scm {
         git {
             remote {
-                url('git@github.com:jessfraz/external-dns.git')
+                url('git@github.com:jessfraz/hubcaps.git')
                 name('origin')
                 credentials('ssh-github-key')
                 refspec('+refs/heads/master:refs/remotes/origin/master')
             }
             remote {
-                url('https://github.com/kubernetes-incubator/external-dns.git')
+                url('https://github.com/softprops/hubcaps.git')
                 name('upstream')
                 refspec('+refs/heads/master:refs/remotes/upstream/master')
             }

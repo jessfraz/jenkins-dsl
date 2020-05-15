@@ -7,7 +7,7 @@ freeStyleJob('update_fork_clair') {
     properties {
         githubProjectUrl('https://github.com/jessfraz/clair')
         sidebarLinks {
-            link('https://github.com/coreos/clair', 'UPSTREAM: coreos/clair', 'notepad.png')
+            link('https://github.com/quay/clair', 'UPSTREAM: quay/clair', 'notepad.png')
         }
     }
 
@@ -25,7 +25,7 @@ freeStyleJob('update_fork_clair') {
                 refspec('+refs/heads/master:refs/remotes/origin/master')
             }
             remote {
-                url('https://github.com/coreos/clair.git')
+                url('https://github.com/quay/clair.git')
                 name('upstream')
                 refspec('+refs/heads/master:refs/remotes/upstream/master')
             }

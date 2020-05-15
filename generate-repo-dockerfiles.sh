@@ -29,7 +29,7 @@ generate_dsl(){
 
 	# Make sure the webhook for jenkins exists.
 	if [[ "${user}" == "jessfraz" ]] || [[ "${user}" == "genuinetools" ]]; then
-		make webhook-jenkins-create REPO="${user}/${name}"
+		make webhook-jenkins-create REPO="${user}/${name}" 1>/dev/null
 	fi
 
 	rname=${name//-/_}

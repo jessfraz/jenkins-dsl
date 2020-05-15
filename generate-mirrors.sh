@@ -42,6 +42,11 @@ generate_dsl(){
 	local user=${orig%/*}
 	local name=${orig#*/}
 
+	# Make sure the webhook for jenkins exists.
+	if [[ "${user}" == "jessfraz" ]] || [[ "${user}" == "genuinetools" ]]; then
+		make webhook-jenkins-create REPO="${user}/${name}" 1>/dev/null
+	fi
+
 	rname=${name//-/_}
 	if [[ "$rname" != "go_get_issue"* ]]; then
 		rname=${rname//1/one}

@@ -170,7 +170,7 @@ main(){
 
 	get_repos "$page"
 
-	if [ ! -z "$LAST_PAGE" ] && [ "$LAST_PAGE" -ge "$page" ]; then
+	if [ -n "$LAST_PAGE" ] && [ "$LAST_PAGE" -ge "$page" ]; then
 		for page in  $(seq $((page + 1)) 1 "${LAST_PAGE}"); do
 			# echo "[debug]: on repo page ${page} of ${LAST_PAGE}"
 			get_repos "${page}"
@@ -183,7 +183,7 @@ main(){
 
 	get_repos "$page" "genuinetools"
 
-	if [ ! -z "$LAST_PAGE" ] && [ "$LAST_PAGE" -ge "$page" ]; then
+	if [ -n "$LAST_PAGE" ] && [ "$LAST_PAGE" -ge "$page" ]; then
 		for page in  $(seq $((page + 1)) 1 "${LAST_PAGE}"); do
 			# echo "[debug]: on repo page ${page} of ${LAST_PAGE}"
 			get_repos "${page}" "genuinetools"

@@ -27,6 +27,11 @@ generate_dsl(){
 			image="present";;
 	esac
 
+	# Make sure the webhook for jenkins exists.
+	if [[ "${user}" == "jessfraz" ]] || [[ "${user}" == "genuinetools" ]]; then
+		make webook-jenkins-create REPO="${user}/${name}"
+	fi
+
 	rname=${name//-/_}
 	rname=${rname//1/one}
 	file="${DIR}/projects/repo-dockerfiles/${rname//./_}.groovy"
